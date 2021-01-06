@@ -1,2 +1,5 @@
 # fyp2020-oss1017
-Laboratory data cluster analysis
+
+Important
+ - .nojekyll file (so it works with sphinx _)
+ - index.html (to redirect to html main index)

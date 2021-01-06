@@ -1,3 +1,15 @@
+# -------------------------------------------------
+# Own ammendments
+# -------------------------------------------------
+# MAC hidden files
+**/*.DS_Store
+# Temporal excel files
+**/~*
+
+# Folders with sensitive data
+
+# -------------------------------------------------
+
 # Pycharm
 .idea/
 
