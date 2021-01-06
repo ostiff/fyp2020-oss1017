@@ -32,6 +32,10 @@ release = '0.0.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',        # docstrings
+    'sphinx.ext.todo',
+    'sphinx.ext.githubpages',     # gh-pages needs a .nojekyll file
+    'sphinx_gallery.gen_gallery'  # example galleries
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -41,6 +45,40 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+# ------------------
+# Napoleon extension
+# ------------------
+# Configuration parameters for napoleon extension
+napoleon_google_docstring = False
+napoleon_use_param = False
+napoleon_use_ivar = True
+
+
+# ------------------
+# Sphinx gallery
+# ------------------
+# Information about the sphinx gallery configuration
+# https://sphinx-gallery.github.io/stable/configuration.html
+
+# Import library
+from sphinx_gallery.sorting import FileNameSortKey
+
+# Configuration for sphinx_gallery
+sphinx_gallery_conf = {
+    # path to your example scripts
+    'examples_dirs': ['../../examples/tsne'],
+    # path to where to save gallery generated output
+    'gallery_dirs': ['../build/_examples/tsne'],
+    # Other
+    'line_numbers': True,
+    'download_all_examples': False,
+    'within_subsection_order': FileNameSortKey}
+
+# ------------------
+# Todo extension
+# ------------------
+todo_include_todos = True
 
 
 # -- Options for HTML output -------------------------------------------------

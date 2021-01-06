@@ -11,6 +11,13 @@ Welcome to fyp2020-oss1017's documentation!
    :caption: Contents:
 
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Example Galleries
+   :hidden:
+
+   _examples/tsne/index
+
 
 Indices and tables
 ==================
