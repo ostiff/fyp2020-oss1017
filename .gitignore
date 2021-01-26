@@ -3,11 +3,24 @@
 # -------------------------------------------------
 # MAC hidden files
 **/*.DS_Store
-# Temporal excel files
+
+# Temporal files
 **/~*
 
-# Folders with sensitive data
-# Or just ignore all .csv, .xls, ...
+# Data files
+**/.csv
+**/.xlsx
+**/.xls
+
+# Log files
+**/*.log
+
+# PyCharm folder
+.idea
+
+# Sphinx documentation
+docs/build
+docs/source/_*
 
 # -------------------------------------------------
 
