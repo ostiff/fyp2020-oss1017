@@ -12,12 +12,12 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../fyp2020-oss1017/'))
+sys.path.insert(0, os.path.abspath('../../pkgname/'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'fyp2020-oss1017'
+project = 'pkgname'
 copyright = '2021, Oliver Stiff'
 author = 'Oliver Stiff'
 
@@ -67,9 +67,11 @@ from sphinx_gallery.sorting import FileNameSortKey
 # Configuration for sphinx_gallery
 sphinx_gallery_conf = {
     # path to your example scripts
-    'examples_dirs': ['../../examples/tsne'],
+    'examples_dirs': ['../../examples/tsne',
+                      '../../examples/widgets'],
     # path to where to save gallery generated output
-    'gallery_dirs': ['../build/_examples/tsne'],
+    'gallery_dirs': ['../source/_examples/tsne',
+                     '../source/_examples/widgets'],
     # Other
     'line_numbers': True,
     'download_all_examples': False,

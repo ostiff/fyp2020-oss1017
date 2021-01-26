@@ -17,6 +17,7 @@ Welcome to fyp2020-oss1017's documentation!
    :hidden:
 
    _examples/tsne/index
+   _examples/widgets/index
 
 
 Indices and tables
