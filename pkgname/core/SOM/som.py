@@ -1,7 +1,6 @@
 import pandas as pd
 import SimpSOM as sps
 from sklearn import preprocessing
-import os.path
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.cluster import KMeans
@@ -50,13 +49,8 @@ plt.scatter(prj.T[0],prj.T[1])
 plt.show()
 
 kmeans = KMeans(n_clusters=4, random_state=0).fit(prj)
-df["y"]=y
-df["clusters"]=kmeans.labels_
+
 plt.scatter(prj[:,0],prj[:,1], c=kmeans.labels_, cmap='rainbow')
 plt.show()
 
-# Project the datapoints on the new 2D network map.
-# net.project(x, labels=list(df.columns.values))
-print(pd.crosstab(df['y'], df['clusters'], dropna=False))
-# Cluster the datapoints according to the Quality Threshold algorithm.
-# net.cluster(x, type='qthresh')
+
