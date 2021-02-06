@@ -25,3 +25,7 @@ help:
 github:
 	@make clean html
 	@cp -a build/html/ ../../gh-pages/docs
+
+clean:
+	rm -rf $(BUILDDIR)/*
+	rm -rf $(SOURCEDIR)/_examples/*

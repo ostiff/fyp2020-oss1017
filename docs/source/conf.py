@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../pkgname/'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 
 # -- Project information -----------------------------------------------------
@@ -68,10 +68,12 @@ from sphinx_gallery.sorting import FileNameSortKey
 sphinx_gallery_conf = {
     # path to your example scripts
     'examples_dirs': ['../../examples/tsne',
-                      '../../examples/widgets'],
+                      '../../examples/widgets',
+                      '../../examples/som'],
     # path to where to save gallery generated output
     'gallery_dirs': ['../source/_examples/tsne',
-                     '../source/_examples/widgets'],
+                     '../source/_examples/widgets',
+                     '../source/_examples/som'],
     # Other
     'line_numbers': True,
     'download_all_examples': False,
