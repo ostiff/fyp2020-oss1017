@@ -8,9 +8,9 @@
 **/~*
 
 # Data files
-**/.csv
-**/.xlsx
-**/.xls
+*.csv
+*.xlsx
+*.xls
 
 # Log files
 **/*.log
