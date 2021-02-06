@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr__examples_widgets_sg_execution_times:
+
+Computation times
+=================
+**00:00.632** total execution time for **_examples_widgets** files:
+
++-------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_widgets_plot_tidy.py` (``plot_tidy.py``) | 00:00.632 | 0.0 MB |
++-------------------------------------------------------------------+-----------+--------+

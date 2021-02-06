@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr__examples_tsne_sg_execution_times:
+
+Computation times
+=================
+**00:00.085** total execution time for **_examples_tsne** files:
+
++--------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_tsne_plot_sample_01.py` (``plot_sample_01.py``) | 00:00.085 | 0.0 MB |
++--------------------------------------------------------------------------+-----------+--------+
