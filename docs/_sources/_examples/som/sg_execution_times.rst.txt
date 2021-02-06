@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr__examples_som_sg_execution_times:
+
+Computation times
+=================
+**02:31.617** total execution time for **_examples_som** files:
+
++---------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``) | 02:31.617 | 0.0 MB |
++---------------------------------------------------------------------------------+-----------+--------+
