@@ -194,14 +194,14 @@ Compare dataset class labels to obtained clusters.
 
  .. code-block:: none
 
-    Cluster    A    B    C    D    E    F
-    Class                                
-    0          0  100    0    0    0    0
-    1          0    0    0  100    0    0
-    2          0    0    0    0  100    0
-    3          0    0    0    0    0  100
-    4        100    0    0    0    0    0
-    5          0    0  100    0    0    0
+    Cluster    A   B    C    D    E    F
+    Class                               
+    0          0   0    0    0    0  100
+    1        100   0    0    0    0    0
+    2          0  99    0    1    0    0
+    3          0   0  100    0    0    0
+    4          0   0    0    0  100    0
+    5          0   0    0  100    0    0
 
 
 
@@ -331,7 +331,7 @@ Display feature maps for all features in the original dataset.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 4 minutes  15.145 seconds)
+   **Total running time of the script:** ( 4 minutes  13.262 seconds)
 
 
 .. _sphx_glr_download__examples_som_plot_som_sample_01.py:

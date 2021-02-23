@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:00.211** total execution time for **_examples_widgets** files:
+**00:00.204** total execution time for **_examples_widgets** files:
 
 +-------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_widgets_plot_tidy.py` (``plot_tidy.py``) | 00:00.211 | 0.0 MB |
+| :ref:`sphx_glr__examples_widgets_plot_tidy.py` (``plot_tidy.py``) | 00:00.204 | 0.0 MB |
 +-------------------------------------------------------------------+-----------+--------+
