@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import RegularPolygon
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib import cm, colorbar
+from matplotlib.lines import Line2D
+
 
 
 def project_hex(som, data):
@@ -57,6 +59,61 @@ def create_hex_plt(som, ax, data):
     ax.plot()
 
 
+def project_labels(som, data, labels, label_names=None, show=False, printout=True, disp_axes=False, dpi=300,
+                   fname='./node_differences.jpg'):
+
+    proj = project_hex(som, data)
+    umatrix = som.distance_map()
+
+    f = plt.figure(figsize=(10, 10))
+    ax = f.add_subplot(111)
+    create_hex_plt(som, ax, umatrix)
+
+    num_labels = len(set(labels))
+    if label_names is None:
+        label_names = range(num_labels)
+    markers = [marker for marker, val in Line2D.markers.items() if val != 'nothing' and val != 'pixel'][:num_labels]
+    colors = ['C%s' % i for i in range(num_labels)]
+
+    for cnt, (wx, wy) in enumerate(proj):
+        plt.plot(wx, wy,
+                 markers[labels[cnt] - 1],
+                 markerfacecolor='None',
+                 markeredgecolor=colors[labels[cnt] - 1],
+                 markersize=12,
+                 markeredgewidth=2)
+
+    if disp_axes:
+        xrange = np.arange(umatrix.shape[0])
+        yrange = np.arange(umatrix.shape[1])
+        plt.xticks(xrange - 0.5, xrange)
+        plt.yticks(yrange * 2 / np.sqrt(3) * 3 / 4, yrange)
+        pad = 0.1
+    else:
+        plt.axis('off')
+        pad = 0
+
+    divider = make_axes_locatable(plt.gca())
+    ax_cb = divider.new_horizontal(size="5%", pad=pad)
+    colorbar.ColorbarBase(ax_cb, cmap=cm.viridis, orientation='vertical')
+
+    plt.suptitle('Distance from neurons in the neighbourhood', fontsize=24)
+    plt.gcf().add_axes(ax_cb)
+
+    legend_elements = [Line2D([0], [0], marker=markers[i], color=colors[i], label=name,
+                              markerfacecolor='w', markersize=14, linestyle='None',
+                              markeredgewidth=2) for i, name in enumerate(label_names) ]
+
+    ax.legend(handles=legend_elements, bbox_to_anchor=(0.1, 1.08), loc='upper left',
+              borderaxespad=0., ncol=min(60//len(max(list(map(str,label_names)), key=len)), num_labels), fontsize=14)
+
+    if printout:
+        plt.savefig(fname, bbox_inches='tight', dpi=dpi)
+    if show:
+        plt.show()
+
+
+
 def diff_graph_hex(som, show=False, printout=True, disp_axes=False, dpi=300,
                    fname='./node_differences.jpg'):
     """Plot a 2D hex map showing weight differences.
@@ -69,8 +126,6 @@ def diff_graph_hex(som, show=False, printout=True, disp_axes=False, dpi=300,
     :param str fname: Path and file name including extension.
     :return:
     """
-
-    plt.clf()
 
     umatrix = som.distance_map()
 
@@ -117,9 +172,7 @@ def feature_map(som, colnum=0, show=False, printout=True, disp_axes=False, dpi=3
     :return:
     """
 
-    plt.clf()
-
-    weights = som.get_weights()[:, :, colnum].T
+    weights = som.get_weights()[:, :, colnum]
 
     f = plt.figure(figsize=(10, 10))
     ax = f.add_subplot(111)
@@ -138,12 +191,13 @@ def feature_map(som, colnum=0, show=False, printout=True, disp_axes=False, dpi=3
         plt.show()
 
 
-def feature_maps(som, cols=1, show=False, printout=True, disp_axes=False, dpi=300,
+def feature_maps(som, feature_names=None, cols=1, show=False, printout=True, disp_axes=False, dpi=300,
                    fname='./feature_maps.jpg'):
     """Plot a 2D map with hexagonal nodes for each feature in the dataset.
 
     :param MiniSom som: MiniSom object.
-    :param cols: Number of subplot columns.
+    :param  feature_names: List of feature names.
+    :param int cols: Number of subplot columns.
     :param bool show: Display the plot.
     :param bool printout: Save the plot to a file.
     :param bool disp_axes: Display plot axes.
@@ -151,8 +205,6 @@ def feature_maps(som, cols=1, show=False, printout=True, disp_axes=False, dpi=30
     :param str fname: Path and file name including extension.
     :return:
     """
-
-    plt.clf()
 
     weights = som.get_weights()
     n_features = weights.shape[2]
@@ -165,8 +217,9 @@ def feature_maps(som, cols=1, show=False, printout=True, disp_axes=False, dpi=30
 
     # Plot feature planes
     for i, f in enumerate(range(n_features)):
-        create_hex_plt(som, axes[i], weights[:, :, f].T)
-        axes[i].set(title='Feature %s' % f, aspect='equal',
+        create_hex_plt(som, axes[i], weights[:, :, f])
+        title = 'Feature %s' % f if feature_names is None else feature_names[i]
+        axes[i].set(title=title, aspect='equal',
             yticks=[], xticks=[])
         if not disp_axes:
             axes[i].axis('off')
@@ -176,7 +229,10 @@ def feature_maps(som, cols=1, show=False, printout=True, disp_axes=False, dpi=30
         axes[i].axis('off')
 
     # Set axes
-    plt.suptitle("Node Grid w Feature #i")
+    if feature_names is None:
+        plt.suptitle("Feature #i map")
+    else:
+        plt.suptitle("Feature maps")
     plt.tight_layout()
 
     if printout:

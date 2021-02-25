@@ -1,12 +1,14 @@
 import pandas as pd
-import SimpSOM as sps
+from minisom import MiniSom
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.cluster import KMeans
 
-path = '../../../data/daily-profile.csv'
+from pkgname.utils.som_utils import *
 
+path = '../../../data/daily-profile.csv'
+SEED = 0
 print("Loading dataset")
 
 GENERAL_COLS = ["_uid", "dateResult", "GenderID", "patient_age", "covid_confirmed"]
@@ -26,31 +28,25 @@ panel_features = [item for item in FBC_features if item not in FBC_remove]
 df = pd.read_csv(path, usecols=panel_features+GENERAL_COLS)
 df = df.dropna()
 df = df.drop_duplicates(subset='_uid', keep="first")
-df = df.drop(columns=["_uid", "dateResult", "covid_confirmed"])
-
+df = df.drop(columns=["_uid", "GenderID", "dateResult", "covid_confirmed"])
 x = df.values #returns a numpy array
 scaler = preprocessing.MinMaxScaler()
 #scaler = preprocessing.StandardScaler()
 x = scaler.fit_transform(x)
 
+som = MiniSom(20, 20, x.shape[1],
+    topology='hexagonal',
+    activation_distance='euclidean',
+    neighborhood_function='gaussian',
+    sigma=5, learning_rate=.05,
+    random_seed=SEED)
 
-net = sps.somNet(20, 20, x, PBC=True)
-net.train(0.01, 20000)
+# Train
+som.pca_weights_init(x)
+som.train_random(x, 10000000, verbose=True)
 
-for i in range(len(df.columns)):
-    net.nodes_graph(colnum=i)
-    plt.show()
 
-net.diff_graph()
-plt.show()
-
-prj=np.array(net.project(x))
-plt.scatter(prj.T[0],prj.T[1])
-plt.show()
-
-kmeans = KMeans(n_clusters=4, random_state=0).fit(prj)
-
-plt.scatter(prj[:,0],prj[:,1], c=kmeans.labels_, cmap='rainbow')
-plt.show()
+diff_graph_hex(som, show=True, printout=False)
+feature_maps(som, cols=3, show=True, printout=False)
 
 
