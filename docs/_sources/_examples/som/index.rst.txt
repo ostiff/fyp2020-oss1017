@@ -93,6 +93,27 @@ Below is a gallery of examples
    :hidden:
 
    /_examples/som/plot_som_sample_02
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="SOM of lab-panels for a single patient over time.">
+
+.. only:: html
+
+ .. figure:: /_examples/som/images/thumb/sphx_glr_plot_som_single_patient_05_thumb.png
+     :alt: SOM using time-series
+
+     :ref:`sphx_glr__examples_som_plot_som_single_patient_05.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/som/plot_som_single_patient_05
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

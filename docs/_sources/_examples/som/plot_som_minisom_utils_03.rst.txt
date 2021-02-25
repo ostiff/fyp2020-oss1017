@@ -43,13 +43,13 @@ Plot Utils for MiniSom
     *
 
       .. image:: /_examples/som/images/sphx_glr_plot_som_minisom_utils_03_003.png
-          :alt: Node Grid w Feature #i, Feature 0, Feature 1, Feature 2, Feature 3, Feature 4, Feature 5, Feature 6, Feature 7, Feature 8, Feature 9, Feature 10, Feature 11, Feature 12, Feature 13, Feature 14, Feature 15
+          :alt: Feature #i map, Feature 0, Feature 1, Feature 2, Feature 3, Feature 4, Feature 5, Feature 6, Feature 7, Feature 8, Feature 9, Feature 10, Feature 11, Feature 12, Feature 13, Feature 14, Feature 15
           :class: sphx-glr-multi-img
 
     *
 
       .. image:: /_examples/som/images/sphx_glr_plot_som_minisom_utils_03_004.png
-          :alt: Node Grid w Feature #i, Feature 0, Feature 1, Feature 2, Feature 3, Feature 4, Feature 5, Feature 6, Feature 7, Feature 8, Feature 9, Feature 10, Feature 11, Feature 12, Feature 13, Feature 14, Feature 15
+          :alt: Feature #i map, Feature 0, Feature 1, Feature 2, Feature 3, Feature 4, Feature 5, Feature 6, Feature 7, Feature 8, Feature 9, Feature 10, Feature 11, Feature 12, Feature 13, Feature 14, Feature 15
           :class: sphx-glr-multi-img
 
 
@@ -140,7 +140,7 @@ Plot Utils for MiniSom
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.817 seconds)
+   **Total running time of the script:** ( 0 minutes  8.800 seconds)
 
 
 .. _sphx_glr_download__examples_som_plot_som_minisom_utils_03.py:
