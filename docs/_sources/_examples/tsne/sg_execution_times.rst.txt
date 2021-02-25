@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:00.084** total execution time for **_examples_tsne** files:
+**00:00.086** total execution time for **_examples_tsne** files:
 
 +--------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_tsne_plot_sample_01.py` (``plot_sample_01.py``) | 00:00.084 | 0.0 MB |
+| :ref:`sphx_glr__examples_tsne_plot_sample_01.py` (``plot_sample_01.py``) | 00:00.086 | 0.0 MB |
 +--------------------------------------------------------------------------+-----------+--------+

@@ -5,12 +5,14 @@
 
 Computation times
 =================
-**02:47.297** total execution time for **_examples_som** files:
+**02:45.489** total execution time for **_examples_som** files:
 
 +-----------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``)               | 02:36.962 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``)               | 02:33.900 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_minisom_utils_01.py` (``plot_som_minisom_utils_01.py``) | 00:09.753 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_minisom_utils_03.py` (``plot_som_minisom_utils_03.py``) | 00:08.817 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_sample_02.py` (``plot_som_sample_02.py``)               | 00:00.583 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_labels_04.py` (``plot_som_labels_04.py``)               | 00:02.189 | 0.0 MB |
++-----------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_som_plot_som_sample_02.py` (``plot_som_sample_02.py``)               | 00:00.584 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------+-----------+--------+
