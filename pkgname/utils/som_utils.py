@@ -156,6 +156,43 @@ def diff_graph_hex(som, show=False, printout=True, disp_axes=False, dpi=300,
     if show:
         plt.show()
 
+    return f
+
+
+def number_samples(som, data, show=False, printout=True, disp_axes=False, dpi=300,
+                   fname='./node_differences.jpg'):
+    umatrix = som.distance_map()
+
+    f = plt.figure(figsize=(10, 10))
+    ax = f.add_subplot(111)
+
+    create_hex_plt(som, ax, umatrix)
+    data = project_hex(som, data)
+    for i, (x, y) in enumerate(data):
+        plt.text(x, y, str(i + 1), color="red", fontsize=15)
+
+    if disp_axes:
+        xrange = np.arange(umatrix.shape[0])
+        yrange = np.arange(umatrix.shape[1])
+        plt.xticks(xrange-0.5, xrange)
+        plt.yticks(yrange * 2 / np.sqrt(3) * 3 / 4, yrange)
+        pad = 0.1
+    else:
+        plt.axis('off')
+        pad = 0
+
+    divider = make_axes_locatable(plt.gca())
+    ax_cb = divider.new_horizontal(size="5%", pad=pad)
+    colorbar.ColorbarBase(ax_cb, cmap=cm.viridis, orientation='vertical')
+
+    plt.suptitle('Distance from neurons in the neighbourhood', fontsize=24)
+    plt.gcf().add_axes(ax_cb)
+
+    if printout:
+        plt.savefig(fname, bbox_inches='tight', dpi=dpi)
+    if show:
+        plt.show()
+
 
 def feature_map(som, colnum=0, show=False, printout=True, disp_axes=False, dpi=300,
                    fname='./node_differences.jpg'):
