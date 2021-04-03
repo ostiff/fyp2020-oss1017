@@ -1,13 +1,14 @@
 #TODO: include scaling?
 
 import pandas as pd
-from definitions import DENGUE_PATH, PATHOLOGY_PATH
 from dataprep.eda import create_report
 
-#TODO: Add a way of excluding columns
-def remove_correlated(data, threshold):
+from definitions import DENGUE_PATH, PATHOLOGY_PATH
+
+
+def remove_correlated(data, threshold, ignore):
     # Removed columns
-    removed = set()
+    removed = set(ignore)
 
     # Pearson correlation matrix
     corr_matrix = data.corr()
@@ -26,20 +27,24 @@ def remove_correlated(data, threshold):
     return data
 
 
-def load_dengue(path=DENGUE_PATH, dropna=True, usecols=None, usedefault=True, removecorr=None):
-    if usecols is None and usedefault:
-        general = ["study_no", "date", "age", "gender"]
+def load_dengue(path=DENGUE_PATH, dropna=False, usecols=None, usedefault=False, removecorr=None):
+    general_cols = ["study_no", "date", "age", "gender", "weight"]
 
-        features = ["bleeding", "plt", "shock", "haematocrit_percent",
-                        "bleeding_gum"]
+    if usedefault:
+        features = ["bleeding", "plt", "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
+                    "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
+        usecols = general_cols + features
+        df = pd.read_csv(path, usecols=usecols, low_memory=False, parse_dates=['date'])
 
-        usecols = general + features
+    else:
+        if usecols and "date" in usecols:
+            df = pd.read_csv(path, usecols=usecols, low_memory=False, parse_dates=['date'])
+        else:
+            df = pd.read_csv(path, usecols=usecols, low_memory=False)
 
-    df = pd.read_csv(path, usecols=usecols, low_memory=False, parse_dates=['date'])
 
-    #TODO: don't remove certain columns
     if removecorr is not None:
-        df = remove_correlated(df, removecorr)
+        df = remove_correlated(df, removecorr, general_cols)
 
     if dropna:
         df = df.dropna()
@@ -47,27 +52,30 @@ def load_dengue(path=DENGUE_PATH, dropna=True, usecols=None, usedefault=True, re
     return df
 
 
-def report_dengue(path=DENGUE_PATH, dropna=True, usecols=None, usedefault=True, removecorr=None):
+def report_dengue(path=DENGUE_PATH, dropna=False, usecols=None, usedefault=False, removecorr=None):
     df = load_dengue(path=path, dropna=dropna, usecols=usecols, usedefault=usedefault, removecorr=removecorr)
     create_report(df).save('dengue_report')
 
 
-def load_pathology(path=PATHOLOGY_PATH, dropna=True, usecols=None, usedefault=True, removecorr=None):
-    if usecols is None and usedefault:
-        GENERAL_COLS = ["_uid", "dateResult", "GenderID", "patient_age", "covid_confirmed"]
+def load_pathology(path=PATHOLOGY_PATH, dropna=False, usecols=None, usedefault=False, removecorr=None):
+    general_cols = ["_uid", "dateResult", "GenderID", "patient_age", "covid_confirmed"]
+
+    if usedefault:
 
         FBC_features = ["EOS", "MONO", "BASO", "NEUT",
                         "RBC", "WBC", "MCHC", "MCV",
                         "LY", "HCT", "RDW", "HGB",
                         "MCH", "PLT", "MPV", "NRBCA"]
 
-        usecols = GENERAL_COLS + FBC_features #[item for item in FBC_features if item not in FBC_remove]
+        usecols = general_cols + FBC_features
 
-    df = pd.read_csv(path, usecols=usecols)
+    if usecols and "dateResult" in usecols:
+        df = pd.read_csv(path, usecols=usecols, low_memory=False, parse_dates=['dateResult'])
+    else:
+        df = pd.read_csv(path, usecols=usecols, low_memory=False)
 
-    #TODO: don't remove certain columns e.g. age/covid_confirmed
     if removecorr is not None:
-        df = remove_correlated(df, removecorr)
+        df = remove_correlated(df, removecorr, general_cols)
 
     if dropna:
         df = df.dropna()
@@ -75,15 +83,13 @@ def load_pathology(path=PATHOLOGY_PATH, dropna=True, usecols=None, usedefault=Tr
     return df
 
 
-def report_pathology(path=PATHOLOGY_PATH, dropna=True, usecols=None, usedefault=True, removecorr=None):
+def report_pathology(path=PATHOLOGY_PATH, dropna=False, usecols=None, usedefault=False, removecorr=None):
     df = load_pathology(path=path, dropna=dropna, usecols=usecols, usedefault=usedefault, removecorr=removecorr)
     create_report(df).save('pathology_report')
 
 
 if __name__ == "__main__":
-    #print(load_pathology())
-    #report_pathology(dropna=True,removecorr=0.9)
-
-    #print(load_dengue(usedefault=True, dropna=False))
-    report_dengue(dropna=True, removecorr=0.9)
+    #report_pathology(usedefault=True, dropna=True, removecorr=0.9)
+    #report_dengue(usedefault=True, dropna=False)
+    df = load_dengue(usedefault=True)
 
