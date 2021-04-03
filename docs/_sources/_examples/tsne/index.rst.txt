@@ -30,6 +30,27 @@ Below is a gallery of examples
    :hidden:
 
    /_examples/tsne/plot_sample_01
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="..............">
+
+.. only:: html
+
+ .. figure:: /_examples/tsne/images/thumb/sphx_glr_plot_tsne_dengue_1_thumb.png
+     :alt: t-SNE: Dengue dataset
+
+     :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_1.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/tsne/plot_tsne_dengue_1
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

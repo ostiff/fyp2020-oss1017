@@ -12,6 +12,27 @@ Below is a gallery of examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip=".................">
+
+.. only:: html
+
+ .. figure:: /_examples/som/images/thumb/sphx_glr_plot_som_day_labels_06_thumb.png
+     :alt: Plot SOM w/ day labels for one patient
+
+     :ref:`sphx_glr__examples_som_plot_som_day_labels_06.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/som/plot_som_day_labels_06
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Project labels onto Node difference map.">
 
 .. only:: html
