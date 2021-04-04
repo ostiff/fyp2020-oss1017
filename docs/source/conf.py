@@ -35,7 +35,8 @@ extensions = [
     'sphinx.ext.napoleon',        # docstrings
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',     # gh-pages needs a .nojekyll file
-    'sphinx_gallery.gen_gallery'  # example galleries
+    'sphinx_gallery.gen_gallery', # example galleries
+    'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -69,11 +70,13 @@ sphinx_gallery_conf = {
     # path to your example scripts
     'examples_dirs': ['../../examples/tsne',
                       '../../examples/widgets',
-                      '../../examples/som'],
+                      '../../examples/som',
+                      '../../examples/vae'],
     # path to where to save gallery generated output
     'gallery_dirs': ['../source/_examples/tsne',
                      '../source/_examples/widgets',
-                     '../source/_examples/som'],
+                     '../source/_examples/som',
+                     '../source/_examples/vae'],
     # Other
     'line_numbers': True,
     'download_all_examples': False,
