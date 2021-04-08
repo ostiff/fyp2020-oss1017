@@ -1,17 +1,12 @@
-# TODO: Install torch and verify functionality
 # TODO: Document code
 
 import numpy as np
-import pandas as pd
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
+
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from sklearn.model_selection import train_test_split
-from sklearn import preprocessing
-from sklearn.cluster import KMeans
 
 
 class VAE(nn.Module):
@@ -25,7 +20,9 @@ class VAE(nn.Module):
 
         self.encoder = nn.Sequential(
             nn.Linear(input_size, h_dim),
-            nn.ReLU(),
+            #nn.ReLU(),
+
+            nn.LeakyReLU(0.2),
             nn.Linear(h_dim, 2 * latent_dim)
         )
 
@@ -96,15 +93,15 @@ def train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta):
             data = data.to(model.device).float()
 
             out, mu, logvar = model(data)
-            loss, recon, KLD = model.loss_function_VAE(out, data, mu, logvar, beta)
+            loss, recon, KLD = model.loss_fn(out, data, mu, logvar, beta)
 
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
             train_loss += loss.item()
-            recon_loss += recon
-            KL_loss += KLD
+            recon_loss += recon.item()
+            KL_loss += KLD.item()
 
         # DISPLAY/SAVE TRAINING LOSSES
         print("TRAIN: \tEpoch {0:2}, Total loss:{1:8.4f}, Recon loss:{2:8.4f}, KL loss:{3:8.4f}".format(
@@ -126,11 +123,11 @@ def train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta):
                 data = data.to(model.device).float()
 
                 out, mu, logvar = model(data)
-                total, recon, KLD = model.loss_function_VAE(out, data, mu, logvar, beta)
+                total, recon, KLD = model.loss_fn(out, data, mu, logvar, beta)
 
-                test_loss += total
-                test_KL_loss += KLD
-                test_recon_loss += recon
+                test_loss += total.item()
+                test_KL_loss += KLD.item()
+                test_recon_loss += recon.item()
 
             print("TEST: \tEpoch {0:2}, Total loss:{1:8.4f}, Recon loss:{2:8.4f}, KL loss:{3:8.4f}".format(
                 epoch,
@@ -160,27 +157,27 @@ def plot_vae_loss(losses, show=False, printout=True, dpi=300, fname='./vae_losse
 
     f1_ax11 = fig1.add_subplot(spec1[0, 0])
     f1_ax11.set_title('Train Total Loss')
-    f1_ax11.plot(range(num_epochs), losses['train_loss'])
+    f1_ax11.plot(num_epochs, losses['train_loss'])
 
     f1_ax12 = fig1.add_subplot(spec1[0, 1])
     f1_ax12.set_title('Train Recon Loss')
-    f1_ax12.plot(range(num_epochs), losses['train_recon'])
+    f1_ax12.plot(num_epochs, losses['train_recon'])
 
     f1_ax13 = fig1.add_subplot(spec1[0, 2])
     f1_ax13.set_title('Train KL Loss')
-    f1_ax13.plot(range(num_epochs), losses['train_kld'])
+    f1_ax13.plot(num_epochs, losses['train_kld'])
 
     f1_ax21 = fig1.add_subplot(spec1[1, 0])
     f1_ax21.set_title('Test Total Loss')
-    f1_ax21.plot(range(num_epochs), losses['test_loss'])
+    f1_ax21.plot(num_epochs, losses['test_loss'])
 
     f1_ax22 = fig1.add_subplot(spec1[1, 1])
     f1_ax22.set_title('Test Recon Loss')
-    f1_ax22.plot(range(num_epochs), losses['test_recon'])
+    f1_ax22.plot(num_epochs, losses['test_recon'])
 
     f1_ax23 = fig1.add_subplot(spec1[1, 2])
     f1_ax23.set_title('Test KL Loss')
-    f1_ax23.plot(range(num_epochs), losses['test_kld'])
+    f1_ax23.plot(num_epochs, losses['test_kld'])
 
     if printout:
         plt.savefig(fname, bbox_inches='tight', dpi=dpi)
@@ -207,55 +204,3 @@ def set_seed(seed=0):
 
     torch.manual_seed(seed)
     np.random.seed(seed)
-
-
-# TODO: Move to VAE gallery
-if __name__ == "__main__":
-    SEED = 0
-
-    # Set seed
-    set_seed(SEED)
-
-    # Get device
-    device = get_device()
-
-    # Hyperparameters
-    num_epochs = 50
-    learning_rate = 0.0001
-    batch_size = 16
-    latent_dim = 2
-    beta = 0.2
-
-    # Additional parameters
-    input_size = 10
-    h_dim = 5
-
-    # Load data
-    # TODO: Load data
-
-    loader_train = None
-    loader_test = None
-
-    # Model
-    model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, h_dim=h_dim).to(device)
-
-    # Optimizer
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-    # Train
-    losses = train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta)
-
-    # Plot losses
-    plot_vae_loss(losses, show=True, printout=False)
-
-    # Encode test set and plot in 2D (assumes latent_dim = 2)
-    encoded_test = model.encode_inputs(loader_test)
-
-    plt.scatter(encoded_test[:, 0], encoded_test[:, 1])
-    plt.show()
-
-    # Perform clustering on encoded inputs
-    cluster = KMeans(n_clusters=3, random_state=SEED).fit_predict(encoded_test)
-
-    plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=cluster)
-    plt.show()
