@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>TidyWidget &mdash; pkgname 0.0.1 documentation</title>
@@ -36,7 +37,6 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -88,7 +88,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Example Galleries</span></p>
+              <p><span class="caption-text">Example Galleries</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../tsne/index.html">The manifold TSNE gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../som/index.html">The self-organising map gallery</a></li>
@@ -166,36 +166,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="sphx-glr-download-link-note admonition note">
+  <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-widgets-plot-tidy-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="tidywidget">
+<section class="sphx-glr-example-title" id="tidywidget">
 <span id="sphx-glr-examples-widgets-plot-tidy-py"></span><h1>TidyWidget<a class="headerlink" href="#tidywidget" title="Permalink to this headline">¶</a></h1>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Stacked:
@@ -244,18 +220,30 @@ id       date       column
                     vomiting               True
 
 Tidy (all):
-         id        date   age     bt  gender pcr_dengue_serotype  pregnant  vomiting   wbc
-0  32dx-001  2020/12/05    32   37.2    Male       DENV-1,DENV-2     False      &lt;NA&gt;  &lt;NA&gt;
-1  32dx-002  2020/12/05  &lt;NA&gt;  38.95  Female       DENV-3,DENV-4      True      &lt;NA&gt;  16.5
-2  32dx-003  2020/12/05  &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;     False  &lt;NA&gt;
-3  32dx-004  2020/12/05  &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;      True  &lt;NA&gt;
+         id        date   age     bt  gender pcr_dengue_serotype  pregnant  \
+0  32dx-001  2020/12/05    32   37.2    Male       DENV-1,DENV-2     False
+1  32dx-002  2020/12/05  &lt;NA&gt;  38.95  Female       DENV-3,DENV-4      True
+2  32dx-003  2020/12/05  &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+3  32dx-004  2020/12/05  &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+
+   vomiting   wbc
+0      &lt;NA&gt;  &lt;NA&gt;
+1      &lt;NA&gt;  16.5
+2     False  &lt;NA&gt;
+3      True  &lt;NA&gt;
 
 Tidy (first):
-         id        date   age    bt  gender pcr_dengue_serotype  pregnant  vomiting   wbc
-0  32dx-001  2020/12/05    32  37.2    Male              DENV-1     False      &lt;NA&gt;  &lt;NA&gt;
-1  32dx-002  2020/12/05  &lt;NA&gt;  38.2  Female              DENV-3      True      &lt;NA&gt;    15
-2  32dx-003  2020/12/05  &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;     False  &lt;NA&gt;
-3  32dx-004  2020/12/05  &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;     False  &lt;NA&gt;
+         id        date   age    bt  gender pcr_dengue_serotype  pregnant  \
+0  32dx-001  2020/12/05    32  37.2    Male              DENV-1     False
+1  32dx-002  2020/12/05  &lt;NA&gt;  38.2  Female              DENV-3      True
+2  32dx-003  2020/12/05  &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+3  32dx-004  2020/12/05  &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+
+   vomiting   wbc
+0      &lt;NA&gt;  &lt;NA&gt;
+1      &lt;NA&gt;    15
+2     False  &lt;NA&gt;
+3     False  &lt;NA&gt;
 
 Dtypes:
 id                      string
@@ -410,7 +398,7 @@ dtype: object
  <span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.403 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.039 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-widgets-plot-tidy-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/afa3fb37d7816eafdd10e109488782f2/plot_tidy.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tidy.py</span></code></a></p>
@@ -420,7 +408,7 @@ dtype: object
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
+</section>
 
 
            </div>

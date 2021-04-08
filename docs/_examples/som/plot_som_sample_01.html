@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>SOM Dimensionality Reduction &mdash; pkgname 0.0.1 documentation</title>
@@ -36,7 +37,6 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -89,7 +89,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Example Galleries</span></p>
+              <p><span class="caption-text">Example Galleries</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../tsne/index.html">The manifold TSNE gallery</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">The self-organising map gallery</a><ul class="current">
@@ -179,36 +179,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="sphx-glr-download-link-note admonition note">
+  <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-som-plot-som-sample-01-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="som-dimensionality-reduction">
+<section class="sphx-glr-example-title" id="som-dimensionality-reduction">
 <span id="sphx-glr-examples-som-plot-som-sample-01-py"></span><h1>SOM Dimensionality Reduction<a class="headerlink" href="#som-dimensionality-reduction" title="Permalink to this headline">¶</a></h1>
 <p>Use <code class="docutils literal notranslate"><span class="pre">SimpSOM</span></code> to reduce the dimensionality of a synthetic dataset.</p>
 <p>Clustering performed using k-means.</p>
@@ -243,7 +219,7 @@ to download the full example code</p>
  <span class="n">SEED</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </td></tr></table></div>
-<div class="section" id="synthetic-dataset">
+<section id="synthetic-dataset">
 <h2>Synthetic Dataset<a class="headerlink" href="#synthetic-dataset" title="Permalink to this headline">¶</a></h2>
 <p>Dataset created using <code class="docutils literal notranslate"><span class="pre">sklearn.datasets.make_blobs</span></code>.</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">33</span>
@@ -281,8 +257,8 @@ to download the full example code</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>The dataset has 16 dimensions and 6 clusters.
 </pre></div>
 </div>
-</div>
-<div class="section" id="self-organising-map">
+</section>
+<section id="self-organising-map">
 <h2>Self Organising Map<a class="headerlink" href="#self-organising-map" title="Permalink to this headline">¶</a></h2>
 <p>Initialise and train model using the synthetic dataset.
 Display node weight difference graph.</p>
@@ -298,8 +274,8 @@ Display node weight difference graph.</p>
 </pre></div>
 </td></tr></table></div>
 <img alt="Nodes Grid w Weights Difference" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_som_sample_01_001.png" />
-</div>
-<div class="section" id="k-means-clustering">
+</section>
+<section id="k-means-clustering">
 <h2>k-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this headline">¶</a></h2>
 <p>Project datapoints onto the map and extract their coordinates
 to use them in 2D k-Means clustering.</p>
@@ -317,8 +293,8 @@ to use them in 2D k-Means clustering.</p>
 </pre></div>
 </td></tr></table></div>
 <img alt="plot som sample 01" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_som_sample_01_002.png" />
-</div>
-<div class="section" id="clustering-results">
+</section>
+<section id="clustering-results">
 <h2>Clustering Results<a class="headerlink" href="#clustering-results" title="Permalink to this headline">¶</a></h2>
 <p>Compare dataset class labels to obtained clusters.</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">87</span>
@@ -329,18 +305,18 @@ to use them in 2D k-Means clustering.</p>
 </pre></div>
 </td></tr></table></div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Cluster    A    B    C    D    E    F
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Cluster    A    B    C   D    E    F
 Class
-0          0    0    0  100    0    0
-1        100    0    0    0    0    0
-2          0    0  100    0    0    0
-3          0    0    0    0    0  100
-4          0  100    0    0    0    0
-5          0    0    0    0  100    0
+0          0    0    0   0  100    0
+1          0    0  100   0    0    0
+2          0  100    0   0    0    0
+3          1    0    0  99    0    0
+4        100    0    0   0    0    0
+5          0    0    0   0    0  100
 </pre></div>
 </div>
-</div>
-<div class="section" id="som-individual-feature-maps">
+</section>
+<section id="som-individual-feature-maps">
 <h2>SOM individual feature maps<a class="headerlink" href="#som-individual-feature-maps" title="Permalink to this headline">¶</a></h2>
 <p>Display feature maps for all features in the original dataset.</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 99</span>
@@ -382,7 +358,7 @@ Class
 <li><img alt="Node Grid w Feature #15" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_som_sample_01_018.png" />
 </li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  34.953 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 1 minutes  51.426 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-som-plot-som-sample-01-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/666f6e244e8fc3968d40d8fbafd5c2e5/plot_som_sample_01.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_som_sample_01.py</span></code></a></p>
@@ -392,8 +368,8 @@ Class
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

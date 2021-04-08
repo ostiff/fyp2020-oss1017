@@ -5,18 +5,18 @@
 
 Computation times
 =================
-**02:02.622** total execution time for **_examples_som** files:
+**04:11.159** total execution time for **_examples_som** files:
 
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_day_labels_06.py` (``plot_som_day_labels_06.py``)         | 02:02.622 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_day_labels_06.py` (``plot_som_day_labels_06.py``)         | 02:07.258 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_labels_04.py` (``plot_som_labels_04.py``)                 | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``)                 | 01:51.426 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_minisom_utils_03.py` (``plot_som_minisom_utils_03.py``)   | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_minisom_utils_03.py` (``plot_som_minisom_utils_03.py``)   | 00:09.308 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``)                 | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_single_patient_05.py` (``plot_som_single_patient_05.py``) | 00:01.303 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_sample_02.py` (``plot_som_sample_02.py``)                 | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_labels_04.py` (``plot_som_labels_04.py``)                 | 00:01.238 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_single_patient_05.py` (``plot_som_single_patient_05.py``) | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_sample_02.py` (``plot_som_sample_02.py``)                 | 00:00.626 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+

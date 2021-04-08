@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>t-SNE: Dengue dataset &mdash; pkgname 0.0.1 documentation</title>
@@ -36,7 +37,6 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -89,7 +89,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Example Galleries</span></p>
+              <p><span class="caption-text">Example Galleries</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">The manifold TSNE gallery</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="plot_sample_01.html">Plotting a gaussian</a></li>
@@ -174,36 +174,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="sphx-glr-download-link-note admonition note">
+  <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a class="reference internal" href="#sphx-glr-download-examples-tsne-plot-tsne-dengue-1-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="t-sne-dengue-dataset">
+<section class="sphx-glr-example-title" id="t-sne-dengue-dataset">
 <span id="sphx-glr-examples-tsne-plot-tsne-dengue-1-py"></span><h1>t-SNE: Dengue dataset<a class="headerlink" href="#t-sne-dengue-dataset" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 8</span>
@@ -235,7 +211,7 @@ to download the full example code</p>
  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<div class="section" id="dataset">
+<section id="dataset">
 <h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
 <p>Load dengue dataset. Perform forward and backwards fill after grouping by patient.
 Does not make use of the <cite>d001</cite> dataset because it does not contain: <cite>abdominal_pain</cite>,
@@ -308,8 +284,8 @@ To reduce computation time aggregate patient data to only have one tuple per pat
  <span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-<div class="section" id="t-sne">
+</section>
+<section id="t-sne">
 <h2>t-SNE<a class="headerlink" href="#t-sne" title="Permalink to this headline">¶</a></h2>
 <p>Use t-SNE on the z-score scaled data.</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">72</span>
@@ -331,15 +307,15 @@ To reduce computation time aggregate patient data to only have one tuple per pat
  <span class="n">X_embedded</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">perplexity</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-<div class="section" id="dbscan">
+</section>
+<section id="dbscan">
 <h2>DBSCAN<a class="headerlink" href="#dbscan" title="Permalink to this headline">¶</a></h2>
 <p>Identify clusters using DBSCAN</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">88</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">clustering</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_embedded</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-<div class="section" id="plotting">
+</section>
+<section id="plotting">
 <h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 94</span>
 <span class="normal"> 95</span>
@@ -420,22 +396,26 @@ To reduce computation time aggregate patient data to only have one tuple per pat
 </ul>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:98: SettingWithCopyWarning:
+
+
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  info[&#39;cluster&#39;] = clustering.labels_
+
               age    gender     weight
 cluster
 0        9.821014  1.559322  31.989296
 1        6.119868  1.572725  23.599402
 2        7.431330  1.590129  26.703076
 /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:115: SettingWithCopyWarning:
+
+
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  data[&#39;cluster&#39;] = clustering.labels_
+
 bleeding
 plt
 shock
@@ -448,7 +428,7 @@ bleeding_skin
 body_temperature
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  21.069 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 4 minutes  12.391 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-tsne-plot-tsne-dengue-1-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/c929bdd1e220decc312db32896e9c901/plot_tsne_dengue_1.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tsne_dengue_1.py</span></code></a></p>
@@ -458,8 +438,8 @@ body_temperature
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -79,18 +79,30 @@ TidyWidget
                         vomiting               True
 
     Tidy (all):
-             id        date   age     bt  gender pcr_dengue_serotype  pregnant  vomiting   wbc
-    0  32dx-001  2020/12/05    32   37.2    Male       DENV-1,DENV-2     False      <NA>  <NA>
-    1  32dx-002  2020/12/05  <NA>  38.95  Female       DENV-3,DENV-4      True      <NA>  16.5
-    2  32dx-003  2020/12/05  <NA>   <NA>    <NA>                <NA>      <NA>     False  <NA>
-    3  32dx-004  2020/12/05  <NA>   <NA>    <NA>                <NA>      <NA>      True  <NA>
+             id        date   age     bt  gender pcr_dengue_serotype  pregnant  \
+    0  32dx-001  2020/12/05    32   37.2    Male       DENV-1,DENV-2     False   
+    1  32dx-002  2020/12/05  <NA>  38.95  Female       DENV-3,DENV-4      True   
+    2  32dx-003  2020/12/05  <NA>   <NA>    <NA>                <NA>      <NA>   
+    3  32dx-004  2020/12/05  <NA>   <NA>    <NA>                <NA>      <NA>   
+
+       vomiting   wbc  
+    0      <NA>  <NA>  
+    1      <NA>  16.5  
+    2     False  <NA>  
+    3      True  <NA>  
 
     Tidy (first):
-             id        date   age    bt  gender pcr_dengue_serotype  pregnant  vomiting   wbc
-    0  32dx-001  2020/12/05    32  37.2    Male              DENV-1     False      <NA>  <NA>
-    1  32dx-002  2020/12/05  <NA>  38.2  Female              DENV-3      True      <NA>    15
-    2  32dx-003  2020/12/05  <NA>  <NA>    <NA>                <NA>      <NA>     False  <NA>
-    3  32dx-004  2020/12/05  <NA>  <NA>    <NA>                <NA>      <NA>     False  <NA>
+             id        date   age    bt  gender pcr_dengue_serotype  pregnant  \
+    0  32dx-001  2020/12/05    32  37.2    Male              DENV-1     False   
+    1  32dx-002  2020/12/05  <NA>  38.2  Female              DENV-3      True   
+    2  32dx-003  2020/12/05  <NA>  <NA>    <NA>                <NA>      <NA>   
+    3  32dx-004  2020/12/05  <NA>  <NA>    <NA>                <NA>      <NA>   
+
+       vomiting   wbc  
+    0      <NA>  <NA>  
+    1      <NA>    15  
+    2     False  <NA>  
+    3     False  <NA>  
 
     Dtypes:
     id                      string
@@ -185,7 +197,7 @@ TidyWidget
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.403 seconds)
+   **Total running time of the script:** ( 0 minutes  0.039 seconds)
 
 
 .. _sphx_glr_download__examples_widgets_plot_tidy.py:

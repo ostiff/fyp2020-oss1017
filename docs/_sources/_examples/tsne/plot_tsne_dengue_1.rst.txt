@@ -235,23 +235,27 @@ Plotting
 
  .. code-block:: none
 
-    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:98: SettingWithCopyWarning: 
+    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:98: SettingWithCopyWarning:
+
+
     A value is trying to be set on a copy of a slice from a DataFrame.
     Try using .loc[row_indexer,col_indexer] = value instead
 
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      info['cluster'] = clustering.labels_
+
                   age    gender     weight
     cluster                               
     0        9.821014  1.559322  31.989296
     1        6.119868  1.572725  23.599402
     2        7.431330  1.590129  26.703076
-    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:115: SettingWithCopyWarning: 
+    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:115: SettingWithCopyWarning:
+
+
     A value is trying to be set on a copy of a slice from a DataFrame.
     Try using .loc[row_indexer,col_indexer] = value instead
 
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      data['cluster'] = clustering.labels_
+
     bleeding
     plt
     shock
@@ -269,7 +273,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  21.069 seconds)
+   **Total running time of the script:** ( 4 minutes  12.391 seconds)
 
 
 .. _sphx_glr_download__examples_tsne_plot_tsne_dengue_1.py:
