@@ -36,7 +36,6 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',     # gh-pages needs a .nojekyll file
     'sphinx_gallery.gen_gallery', # example galleries
-    'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -55,6 +54,12 @@ napoleon_google_docstring = False
 napoleon_use_param = False
 napoleon_use_ivar = True
 
+# ------------------
+# Plotly module
+# ------------------
+# Configuration parameters for Plotly.
+import plotly.io as pio
+pio.renderers.default = 'sphinx_gallery'
 
 # ------------------
 # Sphinx gallery
@@ -67,6 +72,8 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 # Configuration for sphinx_gallery
 sphinx_gallery_conf = {
+    'doc_module': ('plotly',),
+
     # path to your example scripts
     'examples_dirs': ['../../examples/tsne',
                       '../../examples/widgets',
@@ -80,7 +87,10 @@ sphinx_gallery_conf = {
     # Other
     'line_numbers': True,
     'download_all_examples': False,
-    'within_subsection_order': FileNameSortKey}
+    'within_subsection_order': FileNameSortKey,
+
+    'capture_repr': ('_repr_html_', '__repr__'),
+}
 
 # ------------------
 # Todo extension

@@ -8,3 +8,6 @@ sphinx-gallery
 sphinx-rtd-theme
 MiniSom
 dataprep
+torch
+SimpSOM
+dash
