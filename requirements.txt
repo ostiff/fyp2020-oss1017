@@ -6,7 +6,6 @@ scikit-learn
 Sphinx
 sphinx-gallery
 sphinx-rtd-theme
-nbsphinx
 MiniSom
 dataprep
 torch
