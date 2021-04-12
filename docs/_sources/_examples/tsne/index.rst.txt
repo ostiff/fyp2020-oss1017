@@ -33,12 +33,12 @@ Below is a gallery of examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="..............">
+    <div class="sphx-glr-thumbcontainer" tooltip="Training attributes: bleeding, plt, shock, haematocrit_percent,  bleeding_gum, abdominal_pain, ...">
 
 .. only:: html
 
  .. figure:: /_examples/tsne/images/thumb/sphx_glr_plot_tsne_dengue_1_thumb.png
-     :alt: t-SNE: Dengue dataset
+     :alt: t-SNE: Dengue dataset 1
 
      :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_1.py`
 
@@ -51,6 +51,27 @@ Below is a gallery of examples
    :hidden:
 
    /_examples/tsne/plot_tsne_dengue_1
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Training attributes: age, gender, weight, plt, haematocrit_percent,   body_temperature.">
+
+.. only:: html
+
+ .. figure:: /_examples/tsne/images/thumb/sphx_glr_plot_tsne_dengue_2_thumb.png
+     :alt: t-SNE: Dengue dataset 2
+
+     :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_2.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/tsne/plot_tsne_dengue_2
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

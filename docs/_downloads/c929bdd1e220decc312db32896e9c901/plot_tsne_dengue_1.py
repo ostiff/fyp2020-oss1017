@@ -1,8 +1,12 @@
 """
-t-SNE: Dengue dataset
+t-SNE: Dengue dataset 1
 ============================
 
-..............
+Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
+ `bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
+  `bleeding_skin`, `body_temperature`.
+
+Attributes used in cluster comparison: `age`, `gender`, `weight`.
 
 """
 # Libraries
@@ -40,11 +44,11 @@ features = ["date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
-for feat in features:
-    df[feat] = df.groupby('study_no')[feat].ffill().bfill()
+# for feat in features:
+#     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
 
 df = df.loc[df['age'] <= 18]
-df = df.dropna()
+#df = df.dropna()
 
 df = df.groupby(by="study_no", dropna=False).agg(
     date=pd.NamedAgg(column="date", aggfunc="last"),
@@ -98,18 +102,10 @@ plt.show()
 info['cluster'] = clustering.labels_
 
 _, ax0 = plt.subplots(3, 1, figsize=(5, 15))
-info.boxplot('age','cluster', ax=ax0[0])
-info.boxplot('gender','cluster', ax=ax0[1])
-info.boxplot('weight','cluster', ax=ax0[2])
+info.boxplot('age','cluster', ax=ax0[0], showmeans=True)
+info.boxplot('gender','cluster', ax=ax0[1], showmeans=True)
+info.boxplot('weight','cluster', ax=ax0[2], showmeans=True)
 plt.show()
-
-stats = info.groupby(by="cluster", dropna=False).agg(
-    age=pd.NamedAgg(column="age", aggfunc=np.mean),
-    gender=pd.NamedAgg(column="gender", aggfunc=np.mean),
-    weight=pd.NamedAgg(column="weight", aggfunc=np.mean),
-)
-
-print(stats)
 
 
 data['cluster'] = clustering.labels_
@@ -121,7 +117,6 @@ features = ["bleeding", "plt", "shock", "haematocrit_percent", "bleeding_gum",
             "body_temperature"]
 
 for i, feat in enumerate(features):
-    print(feat)
-    data.boxplot(feat,'cluster', ax=ax1[i])
+    data.boxplot(feat,'cluster', ax=ax1[i], showmeans=True)
 
 plt.show()

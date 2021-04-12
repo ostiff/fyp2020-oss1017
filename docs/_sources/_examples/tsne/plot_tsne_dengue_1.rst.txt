@@ -18,15 +18,19 @@
 .. _sphx_glr__examples_tsne_plot_tsne_dengue_1.py:
 
 
-t-SNE: Dengue dataset
+t-SNE: Dengue dataset 1
 ============================
 
-..............
+Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
+ `bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
+  `bleeding_skin`, `body_temperature`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-23
+Attributes used in cluster comparison: `age`, `gender`, `weight`.
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-27
 
 .. code-block:: default
-   :lineno-start: 8
+   :lineno-start: 12
 
     # Libraries
     import pandas as pd
@@ -50,7 +54,7 @@ t-SNE: Dengue dataset
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-31
+.. GENERATED FROM PYTHON SOURCE LINES 28-35
 
 Dataset
 --------
@@ -60,10 +64,10 @@ Does not make use of the `d001` dataset because it does not contain: `abdominal_
 `bleeding_mucosal`, `bleeding_skin`, `body_temperature`.
 To reduce computation time aggregate patient data to only have one tuple per patient.
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-66
+.. GENERATED FROM PYTHON SOURCE LINES 35-70
 
 .. code-block:: default
-   :lineno-start: 32
+   :lineno-start: 36
 
 
     df = load_dengue(usedefault=True)
@@ -77,11 +81,11 @@ To reduce computation time aggregate patient data to only have one tuple per pat
                 "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
                 "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
-    for feat in features:
-        df[feat] = df.groupby('study_no')[feat].ffill().bfill()
+    # for feat in features:
+    #     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
 
     df = df.loc[df['age'] <= 18]
-    df = df.dropna()
+    #df = df.dropna()
 
     df = df.groupby(by="study_no", dropna=False).agg(
         date=pd.NamedAgg(column="date", aggfunc="last"),
@@ -107,17 +111,17 @@ To reduce computation time aggregate patient data to only have one tuple per pat
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-71
+.. GENERATED FROM PYTHON SOURCE LINES 71-75
 
 t-SNE
 --------
 
 Use t-SNE on the z-score scaled data.
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-82
+.. GENERATED FROM PYTHON SOURCE LINES 75-86
 
 .. code-block:: default
-   :lineno-start: 72
+   :lineno-start: 76
 
 
     info = df[["date", "age", "gender", "weight"]]
@@ -137,17 +141,17 @@ Use t-SNE on the z-score scaled data.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-87
+.. GENERATED FROM PYTHON SOURCE LINES 87-91
 
 DBSCAN
 --------
 
 Identify clusters using DBSCAN
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-90
+.. GENERATED FROM PYTHON SOURCE LINES 91-94
 
 .. code-block:: default
-   :lineno-start: 88
+   :lineno-start: 92
 
 
     clustering = DBSCAN(eps=10, min_samples=5).fit(X_embedded)
@@ -159,15 +163,15 @@ Identify clusters using DBSCAN
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-93
+.. GENERATED FROM PYTHON SOURCE LINES 95-97
 
 Plotting
 --------
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-128
+.. GENERATED FROM PYTHON SOURCE LINES 97-123
 
 .. code-block:: default
-   :lineno-start: 94
+   :lineno-start: 98
 
 
     plt.scatter(X_embedded[:,0], X_embedded[:,1], c=clustering.labels_)
@@ -177,18 +181,10 @@ Plotting
     info['cluster'] = clustering.labels_
 
     _, ax0 = plt.subplots(3, 1, figsize=(5, 15))
-    info.boxplot('age','cluster', ax=ax0[0])
-    info.boxplot('gender','cluster', ax=ax0[1])
-    info.boxplot('weight','cluster', ax=ax0[2])
+    info.boxplot('age','cluster', ax=ax0[0], showmeans=True)
+    info.boxplot('gender','cluster', ax=ax0[1], showmeans=True)
+    info.boxplot('weight','cluster', ax=ax0[2], showmeans=True)
     plt.show()
-
-    stats = info.groupby(by="cluster", dropna=False).agg(
-        age=pd.NamedAgg(column="age", aggfunc=np.mean),
-        gender=pd.NamedAgg(column="gender", aggfunc=np.mean),
-        weight=pd.NamedAgg(column="weight", aggfunc=np.mean),
-    )
-
-    print(stats)
 
 
     data['cluster'] = clustering.labels_
@@ -200,8 +196,7 @@ Plotting
                 "body_temperature"]
 
     for i, feat in enumerate(features):
-        print(feat)
-        data.boxplot(feat,'cluster', ax=ax1[i])
+        data.boxplot(feat,'cluster', ax=ax1[i], showmeans=True)
 
     plt.show()
 
@@ -235,7 +230,7 @@ Plotting
 
  .. code-block:: none
 
-    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:98: SettingWithCopyWarning:
+    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:102: SettingWithCopyWarning:
 
 
     A value is trying to be set on a copy of a slice from a DataFrame.
@@ -243,12 +238,7 @@ Plotting
 
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 
-                  age    gender     weight
-    cluster                               
-    0        9.821014  1.559322  31.989296
-    1        6.119868  1.572725  23.599402
-    2        7.431330  1.590129  26.703076
-    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:115: SettingWithCopyWarning:
+    /homes/oss1017/Documents/fyp/fyp2020-oss1017/examples/tsne/plot_tsne_dengue_1.py:111: SettingWithCopyWarning:
 
 
     A value is trying to be set on a copy of a slice from a DataFrame.
@@ -256,16 +246,6 @@ Plotting
 
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 
-    bleeding
-    plt
-    shock
-    haematocrit_percent
-    bleeding_gum
-    abdominal_pain
-    ascites
-    bleeding_mucosal
-    bleeding_skin
-    body_temperature
 
 
 
@@ -273,7 +253,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 4 minutes  12.391 seconds)
+   **Total running time of the script:** ( 0 minutes  19.867 seconds)
 
 
 .. _sphx_glr_download__examples_tsne_plot_tsne_dengue_1.py:
