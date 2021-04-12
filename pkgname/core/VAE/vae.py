@@ -3,14 +3,14 @@
 import numpy as np
 import torch
 import torch.nn as nn
-
 import torch.nn.functional as F
+
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 
 class VAE(nn.Module):
-    def __init__(self, device="cpu", latent_dim=2, input_size=10, h_dim=5):
+    def __init__(self, device="cpu", latent_dim=2, input_size=10, h_dim=5, layers=None):
         super(VAE, self).__init__()
 
         self.device=device
@@ -18,20 +18,41 @@ class VAE(nn.Module):
         self.input_size = input_size
         self.latent_dim = latent_dim
 
-        self.encoder = nn.Sequential(
-            nn.Linear(input_size, h_dim),
-            #nn.ReLU(),
+        if layers:
+            enc = []
+            prev = input_size
+            for i in range(len(layers)):
+                enc.append(nn.Linear(prev, prev:=layers[i]))
+                enc.append(nn.ReLU())
+            enc.append(nn.Linear(prev, 2 * latent_dim))
+            enc.append(nn.ReLU())
 
-            nn.LeakyReLU(0.2),
-            nn.Linear(h_dim, 2 * latent_dim)
-        )
+            self.encoder = nn.Sequential(*enc)
 
-        self.decoder = nn.Sequential(
-            nn.Linear(latent_dim, h_dim),
-            nn.ReLU(),
-            nn.Linear(h_dim, input_size),
-            nn.Sigmoid()
-        )
+            dec = []
+            prev = latent_dim
+            for i in range(len(layers)-1, -1, -1):
+                dec.append(nn.Linear(prev, prev:=layers[i]))
+                dec.append(nn.ReLU())
+
+            dec.append(nn.Linear(prev, input_size))
+            dec.append(nn.Sigmoid())
+
+            self.decoder = nn.Sequential(*dec)
+
+        else:
+            self.encoder = nn.Sequential(
+                nn.Linear(input_size, h_dim),
+                nn.LeakyReLU(0.2),
+                nn.Linear(h_dim, 2 * latent_dim)
+            )
+
+            self.decoder = nn.Sequential(
+                nn.Linear(latent_dim, h_dim),
+                nn.ReLU(),
+                nn.Linear(h_dim, input_size),
+                nn.Sigmoid()
+            )
 
 
     def encode(self, x):
