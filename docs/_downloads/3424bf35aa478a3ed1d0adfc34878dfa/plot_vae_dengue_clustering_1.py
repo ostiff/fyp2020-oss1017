@@ -142,7 +142,7 @@ with warnings.catch_warnings():
         fig.update_yaxes(title_text=feat, row=(i // cols) + 1, col=(i % cols) + 1)
 
     fig.update_xaxes(showticklabels=False)
-    fig.update_layout(height=477*rows, title_text="Attributes not used in training", showlegend=False)
+    fig.update_layout(height=477*rows//2, title_text="Attributes not used in training", showlegend=False)
 fig
 
 #%%

@@ -44,11 +44,11 @@ features = ["date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
-# for feat in features:
-#     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
+for feat in features:
+    df[feat] = df.groupby('study_no')[feat].ffill().bfill()
 
 df = df.loc[df['age'] <= 18]
-#df = df.dropna()
+df = df.dropna()
 
 df = df.groupby(by="study_no", dropna=False).agg(
     date=pd.NamedAgg(column="date", aggfunc="last"),

@@ -81,11 +81,11 @@ To reduce computation time aggregate patient data to only have one tuple per pat
                 "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
                 "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
-    # for feat in features:
-    #     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
+    for feat in features:
+        df[feat] = df.groupby('study_no')[feat].ffill().bfill()
 
     df = df.loc[df['age'] <= 18]
-    #df = df.dropna()
+    df = df.dropna()
 
     df = df.groupby(by="study_no", dropna=False).agg(
         date=pd.NamedAgg(column="date", aggfunc="last"),
@@ -253,7 +253,7 @@ Plotting
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  19.867 seconds)
+   **Total running time of the script:** ( 2 minutes  19.470 seconds)
 
 
 .. _sphx_glr_download__examples_tsne_plot_tsne_dengue_1.py:

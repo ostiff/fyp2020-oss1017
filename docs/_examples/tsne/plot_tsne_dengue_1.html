@@ -268,11 +268,11 @@ To reduce computation time aggregate patient data to only have one tuple per pat
              <span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span>
              <span class="s2">&quot;ascites&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
 
- <span class="c1"># for feat in features:</span>
- <span class="c1">#     df[feat] = df.groupby(&#39;study_no&#39;)[feat].ffill().bfill()</span>
+ <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+     <span class="n">df</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">)[</span><span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
 
  <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">]</span>
- <span class="c1">#df = df.dropna()</span>
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
  <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;study_no&quot;</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
      <span class="n">date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">),</span>
@@ -402,7 +402,7 @@ Try using .loc[row_indexer,col_indexer] = value instead
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  19.867 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  19.470 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-tsne-plot-tsne-dengue-1-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/c929bdd1e220decc312db32896e9c901/plot_tsne_dengue_1.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tsne_dengue_1.py</span></code></a></p>
