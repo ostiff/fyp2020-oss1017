@@ -16,8 +16,11 @@ from sklearn.manifold import TSNE
 from sklearn.cluster import DBSCAN
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 from pkgname.utils.data_loader import load_dengue
+from pkgname.utils.plot_utils import plotBox
+
 pd.set_option('display.max_columns', None)
 
 
@@ -35,10 +38,8 @@ np.random.seed(SEED)
 
 df = load_dengue(usedefault=True)
 
-mapping = {'Female': 1, 'Male': 2, True: 1, False: 0}
-df = df.replace({'gender': mapping, 'bleeding': mapping, 'shock': mapping,
-                 'bleeding_gum': mapping, 'abdominal_pain': mapping, 'ascites': mapping,
-                 'bleeding_mucosal': mapping, 'bleeding_skin': mapping})
+mapping = {'Female': 1, 'Male': 2}
+df = df.replace({'gender': mapping})
 
 features = ["date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
@@ -73,15 +74,19 @@ df = df.groupby(by="study_no", dropna=False).agg(
 #
 # Use t-SNE on the z-score scaled data.
 
-info = df[["date", "age", "gender", "weight"]]
-data = df[["bleeding", "plt",
+info_feat = ["date", "age", "gender", "weight"]
+data_feat = ["bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
-            "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]]
+            "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
+
+info = df[info_feat]
+data = df[data_feat]
 
 scaler = preprocessing.StandardScaler()
 x = scaler.fit_transform(data.values)
 
-X_embedded = TSNE(n_components=2, perplexity=500, random_state=SEED).fit_transform(x)
+X_embedded = TSNE(n_components=2, perplexity=500,
+                  random_state=SEED, n_jobs=-1).fit_transform(x)
 
 # %%
 # DBSCAN
@@ -90,33 +95,54 @@ X_embedded = TSNE(n_components=2, perplexity=500, random_state=SEED).fit_transfo
 # Identify clusters using DBSCAN
 
 clustering = DBSCAN(eps=10, min_samples=5).fit(X_embedded)
+outliers = -1 in clustering.labels_
+clusters = [x+1 for x in clustering.labels_] if outliers else clustering.labels_
 
 # %%
 # Plotting
 # --------
 
-plt.scatter(X_embedded[:,0], X_embedded[:,1], c=clustering.labels_)
+N_CLUSTERS = len(set(clusters))
+
+colours = ["red", "blue", "limegreen", "orangered", "yellow",
+           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+
+scatter = plt.scatter(X_embedded[:,0], X_embedded[:,1], c=clusters, cmap=ListedColormap(colours))
+
+if outliers:
+    labels = ["Outliers"] + [f"Cluster {i}" for i in range(N_CLUSTERS-1)]
+else:
+    labels= [f"Cluster {i}" for i in range(N_CLUSTERS)]
+
+plt.legend(handles=scatter.legend_elements()[0], labels=[f"Cluster {i}" for i in range(N_CLUSTERS)])
 plt.title('t-SNE + DBSCAN')
 plt.show()
 
-info['cluster'] = clustering.labels_
 
-_, ax0 = plt.subplots(3, 1, figsize=(5, 15))
-info.boxplot('age','cluster', ax=ax0[0], showmeans=True)
-info.boxplot('gender','cluster', ax=ax0[1], showmeans=True)
-info.boxplot('weight','cluster', ax=ax0[2], showmeans=True)
-plt.show()
+# %%
+# Cluster analysis
+# ----------------
+#
+# These attributes were not used to train the model.
 
+fig = plotBox(data=info,
+              features=info_feat,
+              clusters=clusters,
+              colours=colours,
+              title="Attributes not used in training",
+              #path="a.html"
+              )
+fig
 
-data['cluster'] = clustering.labels_
+#%%
+# The following attributes were used to train the model.
 
-_, ax1 = plt.subplots(10, 1, figsize=(5, 50))
+fig = plotBox(data=data,
+              features=data_feat,
+              clusters=clusters,
+              colours=colours,
+              title="Attributes used in training",
+              #path="b.html"
+              )
+fig
 
-features = ["bleeding", "plt", "shock", "haematocrit_percent", "bleeding_gum",
-            "abdominal_pain", "ascites", "bleeding_mucosal", "bleeding_skin",
-            "body_temperature"]
-
-for i, feat in enumerate(features):
-    data.boxplot(feat,'cluster', ax=ax1[i], showmeans=True)
-
-plt.show()

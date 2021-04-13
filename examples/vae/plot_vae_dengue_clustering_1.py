@@ -23,11 +23,10 @@ from sklearn import preprocessing
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
 
 from definitions import DATA_DIR
 from pkgname.core.VAE.vae import VAE, train_vae, plot_vae_loss, get_device, set_seed
+from pkgname.utils.plot_utils import plotBox
 
 SEED = 0
 N_CLUSTERS = 3
@@ -120,55 +119,24 @@ plt.show()
 # ----------------
 #
 # These attributes were not used to train the model.
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
 
-    test_info['cluster'] = cluster
-
-    cols = 2
-    rows = (len(info_feat) + 1) // 2
-    fig = make_subplots(rows=rows, cols=cols, vertical_spacing=0.05)
-
-    for i, feat in enumerate(info_feat):
-        for j in range(N_CLUSTERS):
-            fig.add_trace(
-                go.Box(
-                    y=test_info[test_info['cluster'] == j][feat].values,
-                    boxpoints='outliers', boxmean=True, name=f"Cluster {j}",
-                    marker=dict(color=colours[j]),
-                ),
-                row = (i // cols) + 1, col = (i % cols) + 1
-            )
-        fig.update_yaxes(title_text=feat, row=(i // cols) + 1, col=(i % cols) + 1)
-
-    fig.update_xaxes(showticklabels=False)
-    fig.update_layout(height=477*rows//2, title_text="Attributes not used in training", showlegend=False)
+fig = plotBox(data=test_info,
+              features=info_feat,
+              clusters=cluster,
+              colours=colours,
+              title="Attributes not used in training",
+              #path="a.html"
+              )
 fig
 
 #%%
 # The following attributes were used to train the model.
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
 
-    test_data['cluster'] = cluster
-
-    cols = 2
-    rows =  (len(data_feat) + 1) // 2
-    fig = make_subplots(rows=rows, cols=cols, vertical_spacing=0.05, horizontal_spacing= 0.2)
-
-    for i, feat in enumerate(data_feat):
-        for j in range(N_CLUSTERS):
-            fig.add_trace(
-                go.Box(
-                    y=test_data[test_data['cluster'] == j][feat].values,
-                    boxpoints='outliers', boxmean=True, name=f"Cluster {j}",
-                    marker=dict(color=colours[j]),
-                ),
-                row = (i // cols) + 1, col = (i % cols) + 1
-            )
-        fig.update_yaxes(title_text=feat, row=(i // cols) + 1, col=(i % cols) + 1)
-
-    fig.update_xaxes(showticklabels=False)
-    fig.update_layout(height=477*rows, title_text="Attributes used in training", showlegend=False)
-
+fig = plotBox(data=test_data,
+              features=data_feat,
+              clusters=cluster,
+              colours=colours,
+              title="Attributes used in training",
+              #path="b.html"
+              )
 fig
