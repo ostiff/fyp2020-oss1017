@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:24.477** total execution time for **_examples_vae** files:
+**00:29.612** total execution time for **_examples_vae** files:
 
 +-----------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_vae_plot_vae_dengue_clustering_1.py` (``plot_vae_dengue_clustering_1.py``) | 00:24.477 | 0.0 MB |
+| :ref:`sphx_glr__examples_vae_plot_vae_dengue_clustering_1.py` (``plot_vae_dengue_clustering_1.py``) | 00:29.612 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------+-----------+--------+

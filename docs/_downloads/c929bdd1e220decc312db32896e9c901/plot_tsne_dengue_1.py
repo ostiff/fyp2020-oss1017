@@ -12,14 +12,16 @@ Attributes used in cluster comparison: `age`, `gender`, `weight`.
 # Libraries
 import pandas as pd
 import numpy as np
+import warnings
 from sklearn.manifold import TSNE
 from sklearn.cluster import DBSCAN
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+from tableone import TableOne
 
 from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox
+from pkgname.utils.plot_utils import plotBox, formatTable
 
 pd.set_option('display.max_columns', None)
 
@@ -37,9 +39,6 @@ np.random.seed(SEED)
 # To reduce computation time aggregate patient data to only have one tuple per patient.
 
 df = load_dengue(usedefault=True)
-
-mapping = {'Female': 1, 'Male': 2}
-df = df.replace({'gender': mapping})
 
 features = ["date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
@@ -68,13 +67,17 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
+mapping = {'Female': 0, 'Male': 1}
+before_mapping = df
+df = df.replace({'gender': mapping})
+
 # %%
 # t-SNE
 # --------
 #
 # Use t-SNE on the z-score scaled data.
 
-info_feat = ["date", "age", "gender", "weight"]
+info_feat = ["age", "gender", "weight"]
 data_feat = ["bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
@@ -114,7 +117,7 @@ if outliers:
 else:
     labels= [f"Cluster {i}" for i in range(N_CLUSTERS)]
 
-plt.legend(handles=scatter.legend_elements()[0], labels=[f"Cluster {i}" for i in range(N_CLUSTERS)])
+plt.legend(handles=scatter.legend_elements()[0], labels=labels)
 plt.title('t-SNE + DBSCAN')
 plt.show()
 
@@ -123,12 +126,36 @@ plt.show()
 # Cluster analysis
 # ----------------
 #
+# Table
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+
+    before_mapping['cluster'] = clusters
+
+columns = info_feat+data_feat
+nonnormal = list(before_mapping[columns].select_dtypes(include='number').columns)
+categorical = list(set(columns).difference(set(nonnormal)))
+columns = sorted(categorical) + sorted(nonnormal)
+
+rename = {'haematocrit_percent': 'hct',
+          'body_temperature': 'temperature'}
+
+table = TableOne(before_mapping, columns=columns, categorical=categorical, nonnormal=nonnormal,
+                 groupby='cluster', rename=rename, missing=False)
+
+html = formatTable(table, colours, labels)
+html
+
+
+# %%
 # These attributes were not used to train the model.
 
 fig = plotBox(data=info,
               features=info_feat,
               clusters=clusters,
               colours=colours,
+              labels=labels,
               title="Attributes not used in training",
               #path="a.html"
               )
@@ -141,6 +168,7 @@ fig = plotBox(data=data,
               features=data_feat,
               clusters=clusters,
               colours=colours,
+              labels=labels,
               title="Attributes used in training",
               #path="b.html"
               )
