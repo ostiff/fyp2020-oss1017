@@ -4,11 +4,14 @@ import numpy as np
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
-def plotBox(data, features, clusters, colours, title="Box plots" , path=None, disp=False):
+def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , path=None, disp=False):
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
 
         clusters = np.array(clusters)
+
+        if not labels:
+            labels = [f"Cluster {i}" for i in range(len(colours))]
 
         cols = 2
         rows = (len(features) + 1) // 2
@@ -19,7 +22,7 @@ def plotBox(data, features, clusters, colours, title="Box plots" , path=None, di
                 fig.add_trace(
                     go.Box(
                         y=data[clusters == j][feat].values,
-                        boxpoints='outliers', boxmean=True, name=f"Cluster {j}",
+                        boxpoints='outliers', boxmean=True, name=labels[j],
                         marker=dict(color=colours[j]),
                     ),
                     row=(i // cols) + 1, col=(i % cols) + 1
@@ -35,3 +38,28 @@ def plotBox(data, features, clusters, colours, title="Box plots" , path=None, di
         fig.write_html(path)
 
     return fig
+
+
+def formatTable(table, colours, labels):
+    table_df = table.tableone
+
+    # Drop 'Group by' index level created by TableOne
+    table_df.columns = table_df.columns.droplevel()
+
+    # Rename groupby columns
+    table_df = table_df.rename(columns=dict(zip([str(i) for i in range(len(labels))], labels)))
+
+    styles = [
+        dict(selector="th.col_heading", props=[("font-size", "130%"),
+                                               ("text-align", "right")]),
+    ]
+
+    html = (table_df.style.set_table_styles(styles))
+
+    th_format = {}
+    for i, l in enumerate(labels):
+        th_format[l] = [dict(selector='th', props=[('color', colours[i])])]
+
+    html = html.set_table_styles(th_format, overwrite=False)
+
+    return html

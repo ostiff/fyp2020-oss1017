@@ -11,3 +11,4 @@ dataprep
 torch
 SimpSOM
 dash
+tableone
