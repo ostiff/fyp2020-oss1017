@@ -1,26 +1,19 @@
 """
-Beta-VAE used for clustering 1
+Beta-VAE used for clustering 2
 ==============================
 
 Type of Variational Auto-Encoder where the KL divergence term in the loss
 function is weighted by a parameter `beta`.
 
-Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
-`bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
-`bleeding_skin`, `body_temperature`.
 
-Attributes used in cluster comparison: `age`, `gender`, `weight`.
+Training attributes: `age`, `weight`, `plt`, `haematocrit_percent`,
+`body_temperature`.
 
+Attributes used in cluster comparison: `bleeding`, `shock`, `bleeding_gum`,
+`abdominal_pain`, `ascites`, `bleeding_mucosal`, `bleeding_skin`.
 
 """
 
-# %%
-# Imports and reproducibility
-# ---------------------------
-#
-# Set seed for reproducibility.
-
-import os
 import warnings
 import pandas as pd
 import numpy as np
@@ -47,23 +40,12 @@ set_seed(SEED)
 # Get device
 device = get_device(False)
 
-# %%
-# Hyperparameters
-# ---------------
-
-num_epochs = 20
+num_epochs = 30
 learning_rate = 0.0001
 batch_size = 16
 latent_dim = 2
-beta = 0.2
+beta = 0.1
 
-
-# %%
-# Load data
-# ---------
-#
-# ``dengue.csv`` is a pre-processed version of the main dataset.
-#
 
 features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
@@ -98,10 +80,9 @@ df = df.groupby(by="study_no", dropna=False).agg(
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
 
-info_feat = ["dsource", "age", "gender", "weight"]
-data_feat = ["bleeding", "plt", "shock", "haematocrit_percent", "bleeding_gum",
-             "abdominal_pain", "ascites", "bleeding_mucosal", "bleeding_skin",
-             "body_temperature"]
+info_feat = ["dsource", "shock", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
+           "bleeding_mucosal", "bleeding_skin", "gender"]
+data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
 
 train, test = train_test_split(df, test_size=0.2, random_state=SEED)
 
@@ -119,13 +100,10 @@ loader_train = DataLoader(train_scaled, batch_size, shuffle=True)
 loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
 
 
-# %%
-# Beta-VAE
-# --------
-
 # Additional parameters
-input_size = len(train_data.columns)
-model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, h_dim=5).to(device)
+input_size = len(data_feat)
+layers=[8,5]
+model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, layers=layers).to(device)
 
 # Optimizer
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -137,8 +115,7 @@ losses = train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta
 plot_vae_loss(losses, show=True, printout=False)
 
 # %%
-# Clustering
-# ----------
+#
 
 colours = ["red", "blue", "limegreen", "orangered", "yellow",
            "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
@@ -157,11 +134,9 @@ scatter = plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=cluster, cmap=Li
 plt.legend(handles=scatter.legend_elements()[0], labels=labels)
 plt.show()
 
-
 # %%
-# Cluster analysis
-# ----------------
 #
+
 # Table
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
@@ -186,7 +161,7 @@ html = formatTable(table, colours, labels)
 html
 
 # %%
-# These attributes were not used to train the model.
+#
 
 fig = plotBox(data=test_info,
               features=info_feat,
@@ -197,9 +172,8 @@ fig = plotBox(data=test_info,
               )
 fig
 
-
-#%%
-# The following attributes were used to train the model.
+# %%
+#
 
 fig = plotBox(data=test_data,
               features=data_feat,

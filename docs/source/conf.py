@@ -15,6 +15,14 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 
 
+# -- Suppress Warnings --------------------------------------------------------
+
+# Suppress all warnings when building documentation
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
 # -- Project information -----------------------------------------------------
 
 project = 'pkgname'

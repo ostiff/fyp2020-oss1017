@@ -1,14 +1,15 @@
 """
-t-SNE: Dengue dataset 1
-=======================
+t-SNE: Dengue dataset 2
+============================
 
-Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
-`bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
-`bleeding_skin`, `body_temperature`.
+Training attributes: `age`, `weight`, `plt`, `haematocrit_percent`,
+`body_temperature`.
 
-Attributes used in cluster comparison: `age`, `gender`, `weight`.
+Attributes used in cluster comparison: `bleeding`, `shock`, `bleeding_gum`,
+`abdominal_pain`, `ascites`, `bleeding_mucosal`, `bleeding_skin`, `gender`.
 
 """
+
 # Libraries
 import pandas as pd
 import numpy as np
@@ -28,16 +29,6 @@ pd.set_option('display.max_columns', None)
 
 SEED = 0
 np.random.seed(SEED)
-
-# %%
-# Dataset
-# --------
-#
-# Load dengue dataset. Perform forward and backwards fill after grouping by patient.
-# Does not make use of the `d001` dataset because it does not contain: `abdominal_pain`,
-# `bleeding_mucosal`, `bleeding_skin`, `body_temperature`.
-# To reduce computation time aggregate patient data to only have one tuple per patient.
-
 
 features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
@@ -69,20 +60,14 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-before_mapping = df
 mapping = {'Female': 0, 'Male': 1}
+before_mapping = df
+
 df = df.replace({'gender': mapping})
 
-# %%
-# t-SNE
-# --------
-#
-# Use t-SNE on the z-score scaled data.
-
-info_feat = ["dsource", "age", "gender", "weight"]
-data_feat = ["bleeding", "plt",
-            "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
-            "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
+info_feat = ["shock", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
+           "bleeding_mucosal", "bleeding_skin", "gender"]
+data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
 
 info = df[info_feat]
 data = df[data_feat]
@@ -90,14 +75,8 @@ data = df[data_feat]
 scaler = preprocessing.StandardScaler()
 x = scaler.fit_transform(data.values)
 
-X_embedded = TSNE(n_components=2, perplexity=500,
+X_embedded = TSNE(n_components=2, perplexity=50,
                   random_state=SEED, n_jobs=-1).fit_transform(x)
-
-# %%
-# DBSCAN
-# --------
-#
-# Identify clusters using DBSCAN
 
 clustering = DBSCAN(eps=10, min_samples=5).fit(X_embedded)
 outliers = -1 in clustering.labels_
@@ -137,7 +116,7 @@ with warnings.catch_warnings():
 
 columns = info_feat+data_feat
 nonnormal = list(before_mapping[columns].select_dtypes(include='number').columns)
-categorical = list(set(columns).difference(set(nonnormal)))
+categorical = list(set(columns).difference(set(nonnormal))) + ['dsource']
 columns = sorted(categorical) + sorted(nonnormal)
 
 rename = {'haematocrit_percent': 'hct',
@@ -154,7 +133,7 @@ html
 # These attributes were not used to train the model.
 
 fig = plotBox(data=info,
-              features=['age','gender','weight'],
+              features=info_feat,
               clusters=clusters,
               colours=colours,
               labels=labels,

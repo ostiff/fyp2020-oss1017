@@ -26,6 +26,11 @@ github:
 	@make clean html
 	@cp -a build/html/. ../../gh-pages/docs
 
+# Move documentation from the build directory to the documentation
+# branch without re-generating.
+copy:
+	@cp -a build/html/. ../../gh-pages/docs
+
 clean:
 	rm -rf $(BUILDDIR)/*
 	rm -rf $(SOURCEDIR)/_examples/*
