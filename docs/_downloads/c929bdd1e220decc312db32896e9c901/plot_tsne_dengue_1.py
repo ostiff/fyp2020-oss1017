@@ -1,10 +1,10 @@
 """
 t-SNE: Dengue dataset 1
-============================
+=======================
 
 Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
- `bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
-  `bleeding_skin`, `body_temperature`.
+`bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
+`bleeding_skin`, `body_temperature`.
 
 Attributes used in cluster comparison: `age`, `gender`, `weight`.
 
@@ -38,11 +38,12 @@ np.random.seed(SEED)
 # `bleeding_mucosal`, `bleeding_skin`, `body_temperature`.
 # To reduce computation time aggregate patient data to only have one tuple per patient.
 
-df = load_dengue(usedefault=True)
 
-features = ["date", "age", "gender", "weight", "bleeding", "plt",
+features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
+
+df = load_dengue(usecols=['study_no']+features)
 
 for feat in features:
     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
@@ -51,6 +52,7 @@ df = df.loc[df['age'] <= 18]
 df = df.dropna()
 
 df = df.groupby(by="study_no", dropna=False).agg(
+    dsource=pd.NamedAgg(column="dsource", aggfunc="last"),
     date=pd.NamedAgg(column="date", aggfunc="last"),
     age=pd.NamedAgg(column="age", aggfunc="max"),
     gender=pd.NamedAgg(column="gender", aggfunc="first"),
@@ -67,8 +69,8 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-mapping = {'Female': 0, 'Male': 1}
 before_mapping = df
+mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
 
 # %%
@@ -77,7 +79,7 @@ df = df.replace({'gender': mapping})
 #
 # Use t-SNE on the z-score scaled data.
 
-info_feat = ["age", "gender", "weight"]
+info_feat = ["dsource", "age", "gender", "weight"]
 data_feat = ["bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
@@ -152,7 +154,7 @@ html
 # These attributes were not used to train the model.
 
 fig = plotBox(data=info,
-              features=info_feat,
+              features=['age','gender','weight'],
               clusters=clusters,
               colours=colours,
               labels=labels,
@@ -173,4 +175,3 @@ fig = plotBox(data=data,
               #path="b.html"
               )
 fig
-

@@ -1,9 +1,16 @@
 """
-Beta-VAE used for clustering
-============================
+Beta-VAE used for clustering 1
+==============================
 
 Type of Variational Auto-Encoder where the KL divergence term in the loss
 function is weighted by a parameter `beta`.
+
+Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
+`bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
+`bleeding_skin`, `body_temperature`.
+
+Attributes used in cluster comparison: `age`, `gender`, `weight`.
+
 
 """
 
@@ -48,7 +55,7 @@ num_epochs = 20
 learning_rate = 0.0001
 batch_size = 16
 latent_dim = 2
-beta = 0
+beta = 0.2
 
 
 # %%
@@ -58,11 +65,11 @@ beta = 0
 # ``dengue.csv`` is a pre-processed version of the main dataset.
 #
 
-df = load_dengue(usedefault=True)
-
-features = ["date", "age", "gender", "weight", "bleeding", "plt",
+features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
+
+df = load_dengue(usecols=['study_no']+features)
 
 for feat in features:
     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
@@ -71,6 +78,7 @@ df = df.loc[df['age'] <= 18]
 df = df.dropna()
 
 df = df.groupby(by="study_no", dropna=False).agg(
+    dsource=pd.NamedAgg(column="dsource", aggfunc="last"),
     date=pd.NamedAgg(column="date", aggfunc="last"),
     age=pd.NamedAgg(column="age", aggfunc="max"),
     gender=pd.NamedAgg(column="gender", aggfunc="first"),
@@ -90,10 +98,10 @@ df = df.groupby(by="study_no", dropna=False).agg(
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
 
-info_feat = ["shock", "gender", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
-           "bleeding_mucosal", "bleeding_skin", ]
-
-data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
+info_feat = ["dsource", "age", "gender", "weight"]
+data_feat = ["bleeding", "plt", "shock", "haematocrit_percent", "bleeding_gum",
+             "abdominal_pain", "ascites", "bleeding_mucosal", "bleeding_skin",
+             "body_temperature"]
 
 train, test = train_test_split(df, test_size=0.2, random_state=SEED)
 
@@ -117,8 +125,7 @@ loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
 
 # Additional parameters
 input_size = len(train_data.columns)
-layers=[15,10,5]
-model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, layers=layers).to(device)
+model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, h_dim=5).to(device)
 
 # Optimizer
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)

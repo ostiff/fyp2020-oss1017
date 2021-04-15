@@ -18,7 +18,7 @@ Below is a gallery of examples
 .. only:: html
 
  .. figure:: /_examples/vae/images/thumb/sphx_glr_plot_vae_dengue_clustering_1_thumb.png
-     :alt: Beta-VAE used for clustering
+     :alt: Beta-VAE used for clustering 1
 
      :ref:`sphx_glr__examples_vae_plot_vae_dengue_clustering_1.py`
 
@@ -31,6 +31,27 @@ Below is a gallery of examples
    :hidden:
 
    /_examples/vae/plot_vae_dengue_clustering_1
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Type of Variational Auto-Encoder where the KL divergence term in the loss function is weighted ...">
+
+.. only:: html
+
+ .. figure:: /_examples/vae/images/thumb/sphx_glr_plot_vae_dengue_clustering_2_thumb.png
+     :alt: Beta-VAE used for clustering 2
+
+     :ref:`sphx_glr__examples_vae_plot_vae_dengue_clustering_2.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/vae/plot_vae_dengue_clustering_2
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
