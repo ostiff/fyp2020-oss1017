@@ -66,7 +66,7 @@ df = df.groupby(by="study_no", dropna=False).agg(
     gender=pd.NamedAgg(column="gender", aggfunc="first"),
     weight=pd.NamedAgg(column="weight", aggfunc=np.mean),
     bleeding=pd.NamedAgg(column="bleeding", aggfunc="max"),
-    plt=pd.NamedAgg(column="plt", aggfunc="max"),
+    plt=pd.NamedAgg(column="plt", aggfunc="min"),
     shock=pd.NamedAgg(column="shock", aggfunc="max"),
     haematocrit_percent=pd.NamedAgg(column="haematocrit_percent", aggfunc="max"),
     bleeding_gum=pd.NamedAgg(column="bleeding_gum", aggfunc="max"),
