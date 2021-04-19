@@ -1,5 +1,3 @@
-# TODO: Add method to zip log on destructor call
-
 # Libraries
 import os
 import time
@@ -9,6 +7,7 @@ from pathlib import Path
 import pickle
 import json
 import matplotlib.pyplot as plt
+import shutil
 
 from definitions import LOG_PATH, TEMPLATES_PATH
 
@@ -17,7 +16,7 @@ class Logger:
     _report = []
     _figcount = 0
 
-    def __init__(self, log_type, compress=False , enable=True):
+    def __init__(self, log_type, compress=True , enable=True):
         self.enable = enable \
                        and os.path.exists(LOG_PATH) \
                        and os.path.isdir(LOG_PATH)
@@ -51,7 +50,9 @@ class Logger:
                 self._path.rmdir()
             else:
                 if self.compress:
-                    pass
+                    shutil.make_archive(self._path, 'zip', self._path)
+                    shutil.rmtree(self._path)
+
 
     @_log_enable
     @property
