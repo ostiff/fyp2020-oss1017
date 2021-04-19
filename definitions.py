@@ -11,3 +11,4 @@ PATHOLOGY_PATH = os.path.join(DATA_DIR, 'daily-profile.csv')
 
 # Logs
 LOG_PATH = '/vol/bitbucket/oss1017/logs'
+TEMPLATES_PATH = os.path.join(ROOT_DIR, 'pkgname', 'utils', 'templates')

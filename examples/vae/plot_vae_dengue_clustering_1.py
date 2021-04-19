@@ -20,7 +20,6 @@ Attributes used in cluster comparison: `age`, `gender`, `weight`.
 #
 # Set seed for reproducibility.
 
-import os
 import warnings
 import pandas as pd
 import numpy as np
@@ -33,10 +32,12 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
-from definitions import DATA_DIR
 from pkgname.core.VAE.vae import VAE, train_vae, plot_vae_loss, get_device, set_seed
 from pkgname.utils.data_loader import load_dengue
 from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.log_utils import Logger
+
+logger = Logger('VAE_Dengue')
 
 SEED = 0
 N_CLUSTERS = 3
@@ -125,13 +126,17 @@ loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
 
 # Additional parameters
 input_size = len(train_data.columns)
-model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, h_dim=5).to(device)
+h_dim=5
+model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, h_dim=h_dim).to(device)
 
 # Optimizer
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # Train
 losses = train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta)
+
+# Save model
+logger.save_object(model)
 
 # Plot losses
 plot_vae_loss(losses, show=True, printout=False)
@@ -183,29 +188,53 @@ table = TableOne(table_df, columns=columns, categorical=categorical, nonnormal=n
                  groupby='cluster', rename=rename, missing=False)
 
 html = formatTable(table, colours, labels)
+logger.append_html(html.render())
 html
 
 # %%
 # These attributes were not used to train the model.
 
-fig = plotBox(data=test_info,
-              features=info_feat,
-              clusters=cluster,
-              colours=colours,
-              title="Attributes not used in training",
-              #path="a.html"
-              )
+fig, html = plotBox(data=test_info,
+                    features=info_feat,
+                    clusters=cluster,
+                    colours=colours,
+                    title="Attributes not used in training",
+                    #path="a.html"
+                    )
+logger.append_html(html)
 fig
 
 
 #%%
 # The following attributes were used to train the model.
 
-fig = plotBox(data=test_data,
-              features=data_feat,
-              clusters=cluster,
-              colours=colours,
-              title="Attributes used in training",
-              #path="b.html"
-              )
+fig, html = plotBox(data=test_data,
+                    features=data_feat,
+                    clusters=cluster,
+                    colours=colours,
+                    title="Attributes used in training",
+                    #path="b.html"
+                    )
+logger.append_html(html)
 fig
+
+# Log parameters
+logger.save_parameters(
+    {
+        'SEED': SEED,
+        'N_CLUSTERS': N_CLUSTERS,
+        'device': str(device),
+        'num_epochs': num_epochs,
+        'learning_rate': learning_rate,
+        'batch_size': batch_size,
+        'latent_dim': latent_dim,
+        'beta': beta,
+        'input_size':input_size,
+        'h_dim':h_dim,
+        'features': features,
+        'info_feat': info_feat,
+        'data_feat': data_feat
+    }
+)
+
+logger.create_report()

@@ -22,9 +22,9 @@ from tableone import TableOne
 
 from pkgname.utils.data_loader import load_dengue
 from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.log_utils import Logger
 
-pd.set_option('display.max_columns', None)
-
+logger = Logger('TSNE_Dengue')
 
 SEED = 0
 np.random.seed(SEED)
@@ -90,8 +90,14 @@ data = df[data_feat]
 scaler = preprocessing.StandardScaler()
 x = scaler.fit_transform(data.values)
 
-X_embedded = TSNE(n_components=2, perplexity=500,
+TSNE_n_components = 2
+TSNE_perplexity = 500
+
+X_embedded = TSNE(n_components=TSNE_n_components, perplexity=TSNE_perplexity,
                   random_state=SEED, n_jobs=-1).fit_transform(x)
+
+logger.save_object(X_embedded, "X_embedded")
+
 
 # %%
 # DBSCAN
@@ -99,7 +105,10 @@ X_embedded = TSNE(n_components=2, perplexity=500,
 #
 # Identify clusters using DBSCAN
 
-clustering = DBSCAN(eps=10, min_samples=5).fit(X_embedded)
+DBSCAN_eps = 10
+DBSCAN_min_samples = 5
+
+clustering = DBSCAN(eps=DBSCAN_eps, min_samples=DBSCAN_min_samples).fit(X_embedded)
 outliers = -1 in clustering.labels_
 clusters = [x+1 for x in clustering.labels_] if outliers else clustering.labels_
 
@@ -147,31 +156,51 @@ table = TableOne(before_mapping, columns=columns, categorical=categorical, nonno
                  groupby='cluster', rename=rename, missing=False)
 
 html = formatTable(table, colours, labels)
+logger.append_html(html.render())
 html
 
 
 # %%
 # These attributes were not used to train the model.
 
-fig = plotBox(data=info,
-              features=['age','gender','weight'],
-              clusters=clusters,
-              colours=colours,
-              labels=labels,
-              title="Attributes not used in training",
-              #path="a.html"
-              )
+fig, html = plotBox(data=info,
+                    features=info_feat,
+                    clusters=clusters,
+                    colours=colours,
+                    labels=labels,
+                    title="Attributes not used in training",
+                    #path="a.html"
+                    )
+logger.append_html(html)
 fig
 
 #%%
 # The following attributes were used to train the model.
 
-fig = plotBox(data=data,
-              features=data_feat,
-              clusters=clusters,
-              colours=colours,
-              labels=labels,
-              title="Attributes used in training",
-              #path="b.html"
-              )
+fig, html = plotBox(data=data,
+                    features=data_feat,
+                    clusters=clusters,
+                    colours=colours,
+                    labels=labels,
+                    title="Attributes used in training",
+                    #path="b.html"
+                    )
+logger.append_html(html)
 fig
+
+
+# Log parameters
+logger.save_parameters(
+    {
+        'SEED': SEED,
+        'TSNE_n_components': TSNE_n_components,
+        'TSNE_perplexity': TSNE_perplexity,
+        'DBSCAN_eps': DBSCAN_eps,
+        'DBSCAN_min_samples': DBSCAN_min_samples,
+        'features': features,
+        'info_feat': info_feat,
+        'data_feat': data_feat
+    }
+)
+
+logger.create_report()

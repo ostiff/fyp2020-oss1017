@@ -2,6 +2,7 @@ import warnings
 import pandas as pd
 import numpy as np
 from plotly.subplots import make_subplots
+from plotly.io import to_html
 import plotly.graph_objects as go
 
 def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , path=None, disp=False):
@@ -37,7 +38,7 @@ def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , 
     if path:
         fig.write_html(path)
 
-    return fig
+    return fig, to_html(fig)
 
 
 def formatTable(table, colours, labels):
