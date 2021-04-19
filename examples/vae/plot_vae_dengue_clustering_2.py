@@ -117,7 +117,8 @@ losses = train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta
 logger.save_object(model)
 
 # Plot losses
-plot_vae_loss(losses, show=True, printout=False)
+plot = plot_vae_loss(losses, show=True, printout=False)
+logger.add_plt(plot)
 
 # %%
 #
@@ -128,7 +129,9 @@ colours = ["red", "blue", "limegreen", "orangered", "yellow",
 # Encode test set and plot in 2D (assumes latent_dim = 2)
 encoded_test = model.encode_inputs(loader_test)
 plt.scatter(encoded_test[:, 0], encoded_test[:, 1])
+logger.add_plt(plt.gcf())
 plt.show()
+
 
 # Perform clustering on encoded inputs
 cluster = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_test)
@@ -137,6 +140,7 @@ labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
 
 scatter = plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=cluster, cmap=ListedColormap(colours))
 plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+logger.add_plt(plt.gcf())
 plt.show()
 
 # %%

@@ -200,12 +200,15 @@ def plot_vae_loss(losses, show=False, printout=True, dpi=300, fname='./vae_losse
     f1_ax23.set_title('Test KL Loss')
     f1_ax23.plot(num_epochs, losses['test_kld'])
 
+    plot = plt.gcf()
+
     if printout:
         plt.savefig(fname, bbox_inches='tight', dpi=dpi)
 
     if show:
         plt.show()
 
+    return plot
 
 def get_device(usegpu=True):
     if usegpu:

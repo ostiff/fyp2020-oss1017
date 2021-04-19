@@ -108,6 +108,7 @@ else:
 
 plt.legend(handles=scatter.legend_elements()[0], labels=labels)
 plt.title('t-SNE + DBSCAN')
+logger.add_plt(plt.gcf())
 plt.show()
 
 
