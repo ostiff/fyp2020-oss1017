@@ -16,6 +16,7 @@ Welcome to fyp2020-oss1017's documentation!
    :caption: Example Galleries
    :hidden:
 
+   _examples/data_analysis/index
    _examples/tsne/index
    _examples/som/index
    _examples/vae/index
