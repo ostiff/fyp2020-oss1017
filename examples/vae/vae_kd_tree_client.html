@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VAE - KDTree</title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+    <style>
+
+        html, body, .grid-container {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+            overflow: auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-template-areas:
+                    "left right"
+                    "left right"
+                    "left right";
+        }
+        .left {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1.5fr 0.5fr;
+            gap: 0px 0px;
+            grid-template-areas:
+                    "."
+                    "slider-grid";
+            grid-area: left;
+        }
+        .slider-grid { grid-area: slider-grid;}
+        .right { grid-area: right; }
+
+        .slider {
+            -webkit-appearance: none;
+            margin-left: 40px;
+            margin-right: 40px;
+            width: -moz-calc(100% - 80px);
+            width: -webkit-calc(100% - 80px);
+            width: -o-calc(100% - 80px);
+            width: calc(100% - 80px);
+            height: 25px;
+            background: #bababa;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #1f77b4;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #1f77b4;
+            cursor: pointer;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 90%;
+        }
+
+        td, #parameters th {
+            border: thin solid black;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        ul {
+            width: 100%;
+        }
+        ul li {
+            width: 49%;
+            display: inline-block;
+        }
+
+        ul li > * {
+            width: 80%;
+        }
+    </style>
+
+    <script>
+
+        const data_url = "http://127.0.0.1:5000/get_data";
+        const KDTree_url = "http://127.0.0.1:5000/get_k_nearest"
+        const encPatient_url = "http://127.0.0.1:5000/enc_patient"
+
+
+
+        let N = 0;
+
+        async function getData(url) {
+            let response = await fetch(url);
+            return await response.json();
+        }
+
+        function updatePage(url) {
+            let tableSummary = document.getElementById("tableSummary");
+            getData(url).then((data) => {
+                let colours = Array(N).fill('#1f77b4');
+                for(let i=0; i < data.idx[0].length; i++){
+                    colours[data.idx[0][i]] = '#ff7f0e';
+                }
+
+                let update = {'marker':{color: colours}};
+                Plotly.restyle('scatterPlot', update, 0);
+
+                tableSummary.innerHTML = data.table;
+            });
+        }
+
+        function encPatient() {
+            let form = document.getElementById("patientForm");
+            let query_url = new URL(encPatient_url);
+            query_url.searchParams.append('k', document.getElementById("selectK").value);
+
+            let params = ["age", "weight", "plt", "hct", "b_temp"];
+
+            for (let i = 0; i < form.length - 1 ;i++) {
+                query_url.searchParams.append(params[i], form.elements[i].value);
+            }
+
+            updatePage(query_url);
+        }
+
+        async function main() {
+
+            const scatter_data = await getData(data_url)
+            N = scatter_data.x.length;
+
+            let data = {
+                x: scatter_data.x,
+                y: scatter_data.y,
+                mode: 'markers',
+                type: 'scatter',
+                marker: {
+                    color: '#1f77b4'
+                }
+            };
+
+            let layout = {
+                hovermode:'closest',
+                title:'VAE - Latent dimension',
+                // yaxis: {
+                //     automargin: true,
+                //     scaleanchor: "x",
+                // },
+                margin: {
+                    t: 50,
+                    l: 50,
+                    r: 50,
+                    b: 50
+                }
+            };
+
+            Plotly.newPlot('scatterPlot', [data], layout);
+
+            let slider = document.getElementById("selectK");
+            let scatterPlot = document.getElementById('scatterPlot');
+            let dispK = document.getElementById("dispK");
+            let k = slider.value;
+            slider.max = N - 1;
+            dispK.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                k = this.value;
+                dispK.innerHTML = this.value;
+            }
+
+            scatterPlot.on('plotly_click', function(data){
+                let id = data.points[0].pointIndex;
+                let query_url = new URL(KDTree_url);
+                query_url.searchParams.append('id', id);
+                query_url.searchParams.append('k', k);
+
+                updatePage(query_url);
+            });
+        }
+
+        main();
+
+    </script>
+
+</head>
+<body>
+<div class="grid-container">
+    <div class="left">
+        <div id='scatterPlot'></div>
+        <div class="slider-grid">
+            <input type="range" min="1" max="1000" value="100" class="slider" id="selectK">
+            <p style="margin-left: 40px">K nearest points: <span id="dispK"></span></p>
+
+            <form id="patientForm" action="javascript:encPatient()">
+                <ul>
+                    <li>
+                        <label>Age:</label><br>
+                        <input type="number" step="0.01" name="form_age" value="">
+                    </li>
+                    <li>
+                        <label>Weight:</label><br>
+                        <input type="number" step="0.01" name="form_weight" value="">
+                    </li>
+                    <li>
+                        <label>Plt:</label><br>
+                        <input type="number" step="0.01" name="form_plt" value="">
+                    </li>
+                    <li>
+                        <label>Hct %:</label><br>
+                        <input type="number" step="0.01" name="form_hct" value="">
+                    </li>
+                    <li>
+                        <label>Body temperature:</label><br>
+                        <input type="number" step="0.01" name="form_bt" value="">
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="right">
+        <div id='tableSummary'></div>
+    </div>
+</div>
+</body>
+</html>
