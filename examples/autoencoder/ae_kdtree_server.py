@@ -65,7 +65,8 @@ def makeTable(idx):
     c = [1 if (i in idx) else 0 for i in range(len(encoded_test))]
     table_df['cluster'] = c
     table = TableOne(table_df, columns=columns, categorical=categorical, nonnormal=nonnormal,
-                     groupby='cluster', rename=rename, missing=False, overall=False)
+                     groupby='cluster', rename=rename, missing=False, overall=False,
+                     pval=True)
     html = formatTable(table, ["#1f77b4", "#ff7f0e"], ["Not selected", "Selected"])
     return html.render()
 
