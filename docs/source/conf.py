@@ -86,13 +86,13 @@ sphinx_gallery_conf = {
     'examples_dirs': ['../../examples/tsne',
                       '../../examples/widgets',
                       '../../examples/som',
-                      '../../examples/vae',
+                      '../../examples/autoencoder',
                       '../../examples/data_analysis'],
     # path to where to save gallery generated output
     'gallery_dirs': ['../source/_examples/tsne',
                      '../source/_examples/widgets',
                      '../source/_examples/som',
-                     '../source/_examples/vae',
+                     '../source/_examples/autoencoder',
                      '../source/_examples/data_analysis'],
     # Other
     'line_numbers': True,

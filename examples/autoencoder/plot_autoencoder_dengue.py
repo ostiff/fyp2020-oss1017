@@ -1,10 +1,6 @@
 """
-Beta-VAE used for clustering 2
-==============================
-
-Type of Variational Auto-Encoder where the KL divergence term in the loss
-function is weighted by a parameter `beta`.
-
+Simple autoencoder for dengue clustering
+========================================
 
 Training attributes: `age`, `weight`, `plt`, `haematocrit_percent`,
 `body_temperature`.
@@ -26,12 +22,12 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
-from pkgname.core.VAE.vae import VAE, train_vae, plot_vae_loss, get_device, set_seed
+from pkgname.core.AE.autoencoder import Autoencoder, train_autoencoder, plot_autoencoder_loss, get_device, set_seed
 from pkgname.utils.data_loader import load_dengue
 from pkgname.utils.plot_utils import plotBox, formatTable
 from pkgname.utils.log_utils import Logger
 
-logger = Logger('VAE_Dengue')
+logger = Logger('AE_Dengue')
 
 SEED = 0
 N_CLUSTERS = 3
@@ -40,19 +36,19 @@ N_CLUSTERS = 3
 set_seed(SEED)
 
 # Get device
-device = get_device(False)
+device = get_device(usegpu=False)
 
-num_epochs = 5
-learning_rate = 0.0001
+num_epochs = 500
+learning_rate = 0.00005
 batch_size = 16
 latent_dim = 2
-beta = 0.1
 
 features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
 df = load_dengue(usecols=['study_no']+features)
+df = df.loc[df['dsource'] != 'md']
 
 for feat in features:
     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
@@ -104,20 +100,23 @@ loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
 
 # Additional parameters
 input_size = len(data_feat)
-layers=[8,5]
-model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, layers=layers).to(device)
+layers=[5]
+model = Autoencoder(input_size=input_size,
+                    layers=layers,
+                    latent_dim=latent_dim,
+                    device=device).to(device)
 
 # Optimizer
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # Train
-losses = train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta)
+losses = train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs)
 
 # Save model
 logger.save_object(model)
 
 # Plot losses
-plot = plot_vae_loss(losses, show=True, printout=False)
+plot = plot_autoencoder_loss(losses, show=True, printout=False)
 logger.add_plt(plot)
 
 # %%
@@ -128,7 +127,7 @@ colours = ["red", "blue", "limegreen", "orangered", "yellow",
 
 # Encode test set and plot in 2D (assumes latent_dim = 2)
 encoded_test = model.encode_inputs(loader_test)
-plt.scatter(encoded_test[:, 0], encoded_test[:, 1])
+plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=test_info['shock'])
 logger.add_plt(plt.gcf())
 plt.show()
 
@@ -178,7 +177,6 @@ fig, html = plotBox(data=test_info,
                     clusters=cluster,
                     colours=colours,
                     title="Attributes not used in training",
-                    #path="a.html"
                     )
 logger.append_html(html)
 fig
@@ -191,11 +189,13 @@ fig, html = plotBox(data=test_data,
                     clusters=cluster,
                     colours=colours,
                     title="Attributes used in training",
-                    #path="b.html"
                     )
 logger.append_html(html)
 fig
 
+# %%
+# Logging
+# -------
 
 # Log parameters
 logger.save_parameters(
@@ -207,7 +207,6 @@ logger.save_parameters(
         'learning_rate': learning_rate,
         'batch_size': batch_size,
         'latent_dim': latent_dim,
-        'beta': beta,
         'input_size':input_size,
         'layers':layers,
         'features': features,

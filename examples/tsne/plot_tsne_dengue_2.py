@@ -28,6 +28,13 @@ from pkgname.utils.log_utils import Logger
 logger = Logger('TSNE_Dengue')
 
 SEED = 0
+TSNE_n_components = 2
+TSNE_perplexity = 15
+TSNE_early_exaggeration = 70
+TSNE_learning_rate = 500
+DBSCAN_eps = 5
+DBSCAN_min_samples = 5
+
 np.random.seed(SEED)
 
 features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
@@ -75,16 +82,15 @@ data = df[data_feat]
 scaler = preprocessing.StandardScaler()
 x = scaler.fit_transform(data.values)
 
-TSNE_n_components = 2
-TSNE_perplexity = 50
 
-X_embedded = TSNE(n_components=TSNE_n_components, perplexity=TSNE_perplexity,
+X_embedded = TSNE(n_components=TSNE_n_components,
+                  perplexity=TSNE_perplexity,
+                  early_exaggeration=TSNE_early_exaggeration,
+                  learning_rate=TSNE_learning_rate,
                   random_state=SEED, n_jobs=-1).fit_transform(x)
 
 logger.save_object(X_embedded, "X_embedded")
 
-DBSCAN_eps = 10
-DBSCAN_min_samples = 5
 
 clustering = DBSCAN(eps=DBSCAN_eps, min_samples=DBSCAN_min_samples).fit(X_embedded)
 outliers = -1 in clustering.labels_
@@ -167,6 +173,9 @@ fig, html = plotBox(data=data,
 logger.append_html(html)
 fig
 
+# %%
+# Logging
+# -------
 
 # Log parameters
 logger.save_parameters(
@@ -174,6 +183,8 @@ logger.save_parameters(
         'SEED': SEED,
         'TSNE_n_components': TSNE_n_components,
         'TSNE_perplexity': TSNE_perplexity,
+        'TSNE_early_exaggeration': TSNE_early_exaggeration,
+        'TSNE_learning_rate': TSNE_learning_rate,
         'DBSCAN_eps': DBSCAN_eps,
         'DBSCAN_min_samples': DBSCAN_min_samples,
         'features': features,

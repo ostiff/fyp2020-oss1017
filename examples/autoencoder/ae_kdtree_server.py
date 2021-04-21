@@ -1,26 +1,52 @@
-from flask import Flask, request, jsonify, Response
+"""
+Auto-encoder interactive example (Code)
+=======================================
+
+Interactive example to visualise dengue data encoded by an auto encoder.
+
+Features:
+
+    - Get information about the k points closest to the selected one.
+    - Input data corresponding to an unseen patient to get information about the k
+      patients which are closest in the latent space.
+
+
+With the virtual environment active:
+``$ python examples/vae/vae_kdtree_server.py``
+
+The server will be started locally on: http://127.0.0.1:5000/
+
+The example can be accessed on http://127.0.0.1:5000/ or by opening
+``examples/vae/templates/vae_kd_tree_client.html`` in a browser.
+"""
+
+
+from flask import Flask, request, jsonify, render_template
 
 import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
+
 import pandas as pd
 import numpy as np
 import pickle
 from torch.utils.data import DataLoader
-from torch import FloatTensor
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 from sklearn.neighbors import KDTree
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
-from pkgname.core.VAE.vae import get_device, set_seed
+from pkgname.core.AE.autoencoder import get_device, set_seed
 from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
-from pkgname.utils.log_utils import Logger
+from pkgname.utils.plot_utils import formatTable
 from definitions import ROOT_DIR
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'templates'))
+
+@app.route('/')
+def home():
+    return render_template('ae_kd_tree_client.html')
 
 @app.route('/get_data', methods=['GET'])
 def get_data():
@@ -91,7 +117,7 @@ if __name__ == "__main__":
 
     SEED = 0
     batch_size = 16
-    MODEL_PATH = os.path.join(ROOT_DIR, 'examples', 'vae', 'model')
+    MODEL_PATH = os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'model')
     LEAF_SIZE = 40
 
     # Set seed

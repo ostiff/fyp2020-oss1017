@@ -105,7 +105,7 @@ logger.save_object(X_embedded, "X_embedded")
 #
 # Identify clusters using DBSCAN
 
-DBSCAN_eps = 10
+DBSCAN_eps = 5
 DBSCAN_min_samples = 5
 
 clustering = DBSCAN(eps=DBSCAN_eps, min_samples=DBSCAN_min_samples).fit(X_embedded)
@@ -189,6 +189,9 @@ fig, html = plotBox(data=data,
 logger.append_html(html)
 fig
 
+# %%
+# Logging
+# -------
 
 # Log parameters
 logger.save_parameters(

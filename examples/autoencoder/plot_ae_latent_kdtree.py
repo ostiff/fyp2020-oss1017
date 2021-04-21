@@ -1,70 +1,44 @@
 """
-Beta-VAE used for clustering 1
-==============================
+KDTree for fast retrieval of nearest neighbours
+===============================================
 
-Type of Variational Auto-Encoder where the KL divergence term in the loss
-function is weighted by a parameter `beta`.
+Model: Simple auto-encoder.
 
-Training attributes: `bleeding`, `plt`, `shock`, `haematocrit_percent`,
-`bleeding_gum`, `abdominal_pain`, `ascites`, `bleeding_mucosal`,
-`bleeding_skin`, `body_temperature`.
-
-Attributes used in cluster comparison: `age`, `gender`, `weight`.
-
+.. todo:: Document example
 
 """
 
-# %%
-# Imports and reproducibility
-# ---------------------------
-#
-# Set seed for reproducibility.
-
-import warnings
+import os
 import pandas as pd
 import numpy as np
-import torch
+import pickle
 from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
-from sklearn.cluster import KMeans
+from sklearn.neighbors import KDTree
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
-from pkgname.core.VAE.vae import VAE, train_vae, plot_vae_loss, get_device, set_seed
+from pkgname.core.AE.vae import get_device, set_seed
 from pkgname.utils.data_loader import load_dengue
 from pkgname.utils.plot_utils import plotBox, formatTable
 from pkgname.utils.log_utils import Logger
+from definitions import ROOT_DIR
 
-logger = Logger('VAE_Dengue')
+logger = Logger('KDTree_VAE_Dengue', enable=True)
 
 SEED = 0
-N_CLUSTERS = 3
+batch_size = 16
+MODEL_PATH = os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'model')
+LEAF_SIZE = 40
+
 
 # Set seed
 set_seed(SEED)
 
 # Get device
 device = get_device(False)
-
-# %%
-# Hyperparameters
-# ---------------
-
-num_epochs = 20
-learning_rate = 0.0001
-batch_size = 16
-latent_dim = 2
-beta = 0.2
-
-
-# %%
-# Load data
-# ---------
-#
-# ``dengue.csv`` is a pre-processed version of the main dataset.
-#
 
 features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
@@ -99,10 +73,10 @@ df = df.groupby(by="study_no", dropna=False).agg(
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
 
-info_feat = ["dsource", "age", "gender", "weight"]
-data_feat = ["bleeding", "plt", "shock", "haematocrit_percent", "bleeding_gum",
-             "abdominal_pain", "ascites", "bleeding_mucosal", "bleeding_skin",
-             "body_temperature"]
+info_feat = ["dsource", "shock", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
+           "bleeding_mucosal", "bleeding_skin", "gender"]
+data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
+
 
 train, test = train_test_split(df, test_size=0.2, random_state=SEED)
 
@@ -121,63 +95,44 @@ loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
 
 
 # %%
-# Beta-VAE
-# --------
+# Encode test inputs
+# ------------------
+#
 
-# Additional parameters
-input_size = len(train_data.columns)
-h_dim=5
-model = VAE(device=device, latent_dim=latent_dim, input_size=input_size, h_dim=h_dim).to(device)
 
-# Optimizer
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-# Train
-losses = train_vae(model, optimizer, loader_train, loader_test, num_epochs, beta)
-
-# Save model
-logger.save_object(model)
-
-# Plot losses
-plot = plot_vae_loss(losses, show=True, printout=False)
-logger.add_plt(plot)
-
-# %%
-# Clustering
-# ----------
-
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
-
-# Encode test set and plot in 2D (assumes latent_dim = 2)
+model = pickle.load(open(MODEL_PATH, 'rb'))
 encoded_test = model.encode_inputs(loader_test)
 plt.scatter(encoded_test[:, 0], encoded_test[:, 1])
+plt.title("Encoded testset")
 logger.add_plt(plt.gcf())
 plt.show()
 
-# Perform clustering on encoded inputs
-cluster = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_test)
+# %%
+# KDTree
+# ------
+# Highlighted: k points closest to selected point.
 
-labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
 
-scatter = plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=cluster, cmap=ListedColormap(colours))
-plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+tree = KDTree(encoded_test, leaf_size=LEAF_SIZE)
+idx = tree.query(encoded_test[:1], k=100, return_distance=False)
+
+c = [1 if (i in idx) else 0 for i in range(len(encoded_test))]
+
+plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=c)
+plt.title("Encoded testset")
 logger.add_plt(plt.gcf())
 plt.show()
 
 
 # %%
-# Cluster analysis
-# ----------------
 #
+
 # Table
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
 
-    mapping = {0: 'Female', 1: 'Male'}
-    table_df = test.replace({'gender': mapping})
+mapping = {0: 'Female', 1: 'Male'}
+table_df = test.replace({'gender': mapping})
 
-    table_df['cluster'] = cluster
+table_df['cluster'] = c
 
 columns = info_feat+data_feat
 nonnormal = list(table_df[columns].select_dtypes(include='number').columns)
@@ -190,50 +145,22 @@ rename = {'haematocrit_percent': 'hct',
 table = TableOne(table_df, columns=columns, categorical=categorical, nonnormal=nonnormal,
                  groupby='cluster', rename=rename, missing=False)
 
-html = formatTable(table, colours, labels)
+html = formatTable(table, ["red", "blue"], ["Not selected", "Selected"])
 logger.append_html(html.render())
 html
 
 # %%
-# These attributes were not used to train the model.
-
-fig, html = plotBox(data=test_info,
-                    features=info_feat,
-                    clusters=cluster,
-                    colours=colours,
-                    title="Attributes not used in training",
-                    #path="a.html"
-                    )
-logger.append_html(html)
-fig
-
-
-#%%
-# The following attributes were used to train the model.
-
-fig, html = plotBox(data=test_data,
-                    features=data_feat,
-                    clusters=cluster,
-                    colours=colours,
-                    title="Attributes used in training",
-                    #path="b.html"
-                    )
-logger.append_html(html)
-fig
+# Logging
+# -------
 
 # Log parameters
 logger.save_parameters(
     {
         'SEED': SEED,
-        'N_CLUSTERS': N_CLUSTERS,
+        'model_path': MODEL_PATH,
+        'leaf_size': LEAF_SIZE,
         'device': str(device),
-        'num_epochs': num_epochs,
-        'learning_rate': learning_rate,
         'batch_size': batch_size,
-        'latent_dim': latent_dim,
-        'beta': beta,
-        'input_size':input_size,
-        'h_dim':h_dim,
         'features': features,
         'info_feat': info_feat,
         'data_feat': data_feat
