@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SOM: Dengue dataset &mdash; pkgname 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Plot SOM w/ Labelling" href="plot_som_labels_04.html" />
+    <link rel="prev" title="Plot SOM w/ day labels for one patient" href="plot_som_day_labels_06.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pkgname
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Example Galleries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../data_analysis/index.html">Dataset analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tsne/index.html">The manifold TSNE gallery</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The self-organising map gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_som_day_labels_06.html">Plot SOM w/ day labels for one patient</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SOM: Dengue dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_som_labels_04.html">Plot SOM w/ Labelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_som_minisom_utils_03.html">Plot Utils for MiniSom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_som_sample_01.html">SOM Dimensionality Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_som_sample_02.html">SOM Dimensionality Reduction (II)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_som_single_patient_05.html">SOM using time-series</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoencoder/index.html">Auto-encoders for dimensionality reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">The Widgets’ gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pkgname</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The self-organising map gallery</a> &raquo;</li>
+        
+      <li>SOM: Dengue dataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/_examples/som/plot_som_dengue_clustering.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-som-plot-som-dengue-clustering-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="som-dengue-dataset">
+<span id="sphx-glr-examples-som-plot-som-dengue-clustering-py"></span><h1>SOM: Dengue dataset<a class="headerlink" href="#som-dengue-dataset" title="Permalink to this headline">¶</a></h1>
+<p>..TODO: Add description</p>
+<p>Training attributes: <cite>age</cite>, <cite>weight</cite>, <cite>plt</cite>, <cite>haematocrit_percent</cite>,
+<cite>body_temperature</cite>.</p>
+<p>Attributes used in cluster comparison: <cite>bleeding</cite>, <cite>shock</cite>, <cite>bleeding_gum</cite>,
+<cite>abdominal_pain</cite>, <cite>ascites</cite>, <cite>bleeding_mucosal</cite>, <cite>bleeding_skin</cite>.</p>
+<ul class="sphx-glr-horizontal">
+<li><img alt="Distance from neurons in the neighbourhood" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_som_dengue_clustering_001.png" />
+</li>
+<li><img alt="Feature maps, age, weight, plt, haematocrit_percent, body_temperature" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_som_dengue_clustering_002.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span> quantization error: 0.49001230631996234
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             |        | Overall            | 0                   | 1                  | 2                  |
++=============================+========+====================+=====================+====================+====================+
+| n                           |        | 15036              | 6020                | 4653               | 4363               |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| abdominal_pain, n (%)       | False  | 10356 (68.9)       | 4896 (81.3)         | 3441 (74.0)        | 2019 (46.3)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 4680 (31.1)        | 1124 (18.7)         | 1212 (26.0)        | 2344 (53.7)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| ascites, n (%)              | False  | 12705 (84.5)       | 5465 (90.8)         | 3865 (83.1)        | 3375 (77.4)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 2331 (15.5)        | 555 (9.2)           | 788 (16.9)         | 988 (22.6)         |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| bleeding, n (%)             | False  | 11197 (74.5)       | 5336 (88.6)         | 3201 (68.8)        | 2660 (61.0)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 3839 (25.5)        | 684 (11.4)          | 1452 (31.2)        | 1703 (39.0)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| bleeding_gum, n (%)         | False  | 13445 (89.4)       | 5264 (87.4)         | 4181 (89.9)        | 4000 (91.7)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 1591 (10.6)        | 756 (12.6)          | 472 (10.1)         | 363 (8.3)          |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| bleeding_mucosal, n (%)     | False  | 12348 (82.1)       | 5769 (95.8)         | 4031 (86.6)        | 2548 (58.4)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 2688 (17.9)        | 251 (4.2)           | 622 (13.4)         | 1815 (41.6)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| bleeding_skin, n (%)        | False  | 7864 (52.3)        | 4351 (72.3)         | 1550 (33.3)        | 1963 (45.0)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 7172 (47.7)        | 1669 (27.7)         | 3103 (66.7)        | 2400 (55.0)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| dsource, n (%)              | 01nva  | 47 (0.3)           |                     | 12 (0.3)           | 35 (0.8)           |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | 06dx   | 312 (2.1)          | 22 (0.4)            | 272 (5.8)          | 18 (0.4)           |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | 13dx   | 8108 (53.9)        | 4563 (75.8)         | 1501 (32.3)        | 2044 (46.8)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | 32dx   | 10 (0.1)           | 1 (0.0)             | 7 (0.2)            | 2 (0.0)            |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | 42dx   | 16 (0.1)           |                     | 16 (0.3)           |                    |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | d001   | 48 (0.3)           |                     | 19 (0.4)           | 29 (0.7)           |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | df     | 1719 (11.4)        | 26 (0.4)            | 90 (1.9)           | 1603 (36.7)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | dr     | 1542 (10.3)        | 481 (8.0)           | 666 (14.3)         | 395 (9.1)          |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | fl     | 215 (1.4)          |                     | 123 (2.6)          | 92 (2.1)           |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | md     | 3019 (20.1)        | 927 (15.4)          | 1947 (41.8)        | 145 (3.3)          |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| gender, n (%)               | Female | 6518 (43.3)        | 2701 (44.9)         | 1858 (39.9)        | 1959 (44.9)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | Male   | 8518 (56.7)        | 3319 (55.1)         | 2795 (60.1)        | 2404 (55.1)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| shock, n (%)                | False  | 14320 (95.2)       | 5977 (99.3)         | 4384 (94.2)        | 3959 (90.7)        |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+|                             | True   | 716 (4.8)          | 43 (0.7)            | 269 (5.8)          | 404 (9.3)          |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| age, median [Q1,Q3]         |        | 9.0 [5.0,12.0]     | 5.0 [3.0,8.0]       | 12.0 [11.0,13.0]   | 8.0 [6.0,11.0]     |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| temperature, median [Q1,Q3] |        | 37.6 [37.2,38.5]   | 37.6 [37.3,38.3]    | 38.5 [37.9,39.0]   | 37.1 [37.0,37.5]   |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| hct, median [Q1,Q3]         |        | 40.5 [37.3,45.0]   | 37.2 [35.1,39.8]    | 42.5 [39.6,46.0]   | 44.0 [40.3,49.0]   |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| plt, median [Q1,Q3]         |        | 175.0 [74.0,251.0] | 233.0 [171.0,299.0] | 102.0 [54.0,185.0] | 133.0 [43.0,231.0] |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+| weight, median [Q1,Q3]      |        | 26.5 [19.0,37.0]   | 19.0 [14.0,25.0]    | 39.0 [31.0,46.0]   | 26.0 [20.0,35.5]   |
++-----------------------------+--------+--------------------+---------------------+--------------------+--------------------+
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">warnings</span>
+ <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+ <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+ <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+ <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+ <span class="kn">from</span> <span class="nn">minisom</span> <span class="kn">import</span> <span class="n">MiniSom</span>
+ <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+ <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+ <span class="kn">from</span> <span class="nn">tableone</span> <span class="kn">import</span> <span class="n">TableOne</span>
+
+ <span class="c1"># Utils</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.som_utils</span> <span class="kn">import</span> <span class="n">diff_graph_hex</span><span class="p">,</span> <span class="n">feature_maps</span><span class="p">,</span> <span class="n">project_hex</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.data_loader</span> <span class="kn">import</span> <span class="n">load_dengue</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.plot_utils</span> <span class="kn">import</span> <span class="n">plotBox</span><span class="p">,</span> <span class="n">formatTable</span>
+
+ <span class="c1"># Configuration</span>
+ <span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+
+ <span class="n">N_CLUSTERS</span> <span class="o">=</span> <span class="mi">3</span>
+ <span class="n">SEED</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+
+ <span class="c1"># %-----------</span>
+ <span class="c1"># Load dataset</span>
+ <span class="c1"># ------------</span>
+
+ <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;ascites&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">load_dengue</span><span class="p">(</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;study_no&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">features</span><span class="p">)</span>
+
+ <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+     <span class="n">df</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">)[</span><span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">]</span>
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;study_no&quot;</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+     <span class="n">dsource</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">),</span>
+     <span class="n">age</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">gender</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">),</span>
+     <span class="n">weight</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">),</span>
+     <span class="n">bleeding</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">plt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;plt&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">),</span>
+     <span class="n">shock</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">haematocrit_percent</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">bleeding_gum</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">abdominal_pain</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">ascites</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;ascites&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">bleeding_mucosal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">bleeding_skin</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">body_temperature</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;body_temperature&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">),</span>
+ <span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+ <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Female&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+ <span class="n">before_mapping</span> <span class="o">=</span> <span class="n">df</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">})</span>
+
+ <span class="n">info_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span> <span class="s2">&quot;ascites&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">]</span>
+ <span class="n">data_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
+
+ <span class="n">info</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">info_feat</span><span class="p">]</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">data_feat</span><span class="p">]</span>
+
+ <span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span>
+ <span class="n">x</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+ <span class="c1"># ----------------------</span>
+ <span class="c1"># Train SOM</span>
+ <span class="c1"># ----------------------</span>
+ <span class="c1"># Create SOM</span>
+ <span class="n">som</span> <span class="o">=</span> <span class="n">MiniSom</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+     <span class="n">topology</span><span class="o">=</span><span class="s1">&#39;hexagonal&#39;</span><span class="p">,</span>
+     <span class="n">activation_distance</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">,</span>
+     <span class="n">neighborhood_function</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span>
+     <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+     <span class="n">random_seed</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+
+ <span class="c1"># Train</span>
+ <span class="n">som</span><span class="o">.</span><span class="n">pca_weights_init</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+ <span class="n">som</span><span class="o">.</span><span class="n">train_random</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10000000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="n">diff_graph_hex</span><span class="p">(</span><span class="n">som</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">printout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+ <span class="n">feature_maps</span><span class="p">(</span><span class="n">som</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">data_feat</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">printout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+ <span class="c1"># ----------</span>
+ <span class="c1"># Clustering</span>
+ <span class="c1"># ----------</span>
+
+ <span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;limegreen&quot;</span><span class="p">,</span> <span class="s2">&quot;orangered&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;violet&quot;</span><span class="p">,</span> <span class="s2">&quot;salmon&quot;</span><span class="p">,</span> <span class="s2">&quot;slategrey&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;crimson&quot;</span><span class="p">][:</span><span class="n">N_CLUSTERS</span><span class="p">]</span>
+
+ <span class="n">proj</span> <span class="o">=</span> <span class="n">project_hex</span><span class="p">(</span><span class="n">som</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+ <span class="c1"># Perform clustering on encoded inputs</span>
+ <span class="n">cluster</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">N_CLUSTERS</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+
+ <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">)]</span>
+
+ <span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">proj</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">proj</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">cluster</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">colours</span><span class="p">))</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">scatter</span><span class="o">.</span><span class="n">legend_elements</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+ <span class="c1"># ----------------</span>
+ <span class="c1"># Cluster analysis</span>
+ <span class="c1"># ----------------</span>
+ <span class="c1">#</span>
+ <span class="c1"># Table</span>
+ <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+     <span class="n">before_mapping</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster</span>
+
+ <span class="n">nonnormal</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">before_mapping</span><span class="p">[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+ <span class="n">categorical</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nonnormal</span><span class="p">)))</span>
+ <span class="n">columns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">categorical</span><span class="p">)</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nonnormal</span><span class="p">)</span>
+
+ <span class="n">rename</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;haematocrit_percent&#39;</span><span class="p">:</span> <span class="s1">&#39;hct&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;body_temperature&#39;</span><span class="p">:</span> <span class="s1">&#39;temperature&#39;</span><span class="p">}</span>
+
+ <span class="n">table</span> <span class="o">=</span> <span class="n">TableOne</span><span class="p">(</span><span class="n">before_mapping</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="n">categorical</span><span class="p">,</span> <span class="n">nonnormal</span><span class="o">=</span><span class="n">nonnormal</span><span class="p">,</span>
+                  <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">rename</span><span class="o">=</span><span class="n">rename</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;grid&quot;</span><span class="p">))</span>
+ <span class="c1"># html = formatTable(table, colours, labels)</span>
+ <span class="c1"># html</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 16 minutes  36.633 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-som-plot-som-dengue-clustering-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/28251404cc8ad34667d60d4be1a8c73d/plot_som_dengue_clustering.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_som_dengue_clustering.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/f2473035d62b0f107b60aab23d673a2e/plot_som_dengue_clustering.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_som_dengue_clustering.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_som_labels_04.html" class="btn btn-neutral float-right" title="Plot SOM w/ Labelling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_som_day_labels_06.html" class="btn btn-neutral float-left" title="Plot SOM w/ day labels for one patient" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Oliver Stiff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+
+:orphan:
+
+.. _sphx_glr__examples_autoencoder_sg_execution_times:
+
+Computation times
+=================
+**03:58.153** total execution time for **_examples_autoencoder** files:
+
++-------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_autoencoder_plot_autoencoder_dengue.py` (``plot_autoencoder_dengue.py``)           | 03:09.847 | 0.0 MB |
++-------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_autoencoder_plot_vae_dengue_clustering_2.py` (``plot_vae_dengue_clustering_2.py``) | 00:28.109 | 0.0 MB |
++-------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_autoencoder_plot_vae_dengue_clustering_1.py` (``plot_vae_dengue_clustering_1.py``) | 00:17.073 | 0.0 MB |
++-------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_autoencoder_plot_ae_latent_kdtree.py` (``plot_ae_latent_kdtree.py``)               | 00:03.124 | 0.0 MB |
++-------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_autoencoder_ae_kdtree_server.py` (``ae_kdtree_server.py``)                         | 00:00.000 | 0.0 MB |
++-------------------------------------------------------------------------------------------------------------+-----------+--------+

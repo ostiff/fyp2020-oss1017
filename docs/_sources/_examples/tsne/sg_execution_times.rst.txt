@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**04:05.031** total execution time for **_examples_tsne** files:
+**02:53.387** total execution time for **_examples_tsne** files:
 
 +----------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_1.py` (``plot_tsne_dengue_1.py``) | 04:05.031 | 0.0 MB |
+| :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_1.py` (``plot_tsne_dengue_1.py``) | 02:18.203 | 0.0 MB |
 +----------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_2.py` (``plot_tsne_dengue_2.py``) | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr__examples_tsne_plot_tsne_dengue_2.py` (``plot_tsne_dengue_2.py``) | 00:35.184 | 0.0 MB |
 +----------------------------------------------------------------------------------+-----------+--------+

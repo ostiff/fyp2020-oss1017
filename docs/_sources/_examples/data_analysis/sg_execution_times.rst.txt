@@ -1,0 +1,16 @@
+
+:orphan:
+
+.. _sphx_glr__examples_data_analysis_sg_execution_times:
+
+Computation times
+=================
+**00:13.389** total execution time for **_examples_data_analysis** files:
+
++-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_data_analysis_plot_data_summary_dengue_grouped.py` (``plot_data_summary_dengue_grouped.py``) | 00:05.352 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_data_analysis_plot_data_summary_dengue_raw.py` (``plot_data_summary_dengue_raw.py``)         | 00:04.795 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_data_analysis_plot_dengue_correlation.py` (``plot_dengue_correlation.py``)                   | 00:03.242 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
