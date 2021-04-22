@@ -44,9 +44,27 @@ from definitions import ROOT_DIR
 
 app = Flask(__name__, template_folder=os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'templates'))
 
+# ------------
+# Render Pages
+# ------------
+
+
 @app.route('/')
 def home():
+    return render_template('home.html')
+
+@app.route('/knn')
+def knn():
     return render_template('ae_kd_tree_client.html')
+
+@app.route('/trace')
+def trace():
+    return render_template('ae_patient_trace.html')
+
+
+# --------
+# API
+# --------
 
 @app.route('/get_data', methods=['GET'])
 def get_data():
@@ -110,6 +128,36 @@ def enc_patient():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
+@app.route('/get_trace', methods=['GET'])
+def get_trace():
+    study_no = request.args.get('study_no', before_fill['study_no'].sample().values[0])
+    patient_data = before_fill.loc[before_fill['study_no'] == study_no]
+
+    if df.empty:
+        return "study_no not found", 400
+
+    scaled = scaler.transform(patient_data[data_feat].to_numpy())
+    inp = DataLoader(scaled, 1, shuffle=False)
+    enc = model.encode_inputs(inp)
+    patient_data['x'] = enc[:,0]
+    patient_data['y'] = enc[:,1]
+    patient_data = patient_data.drop_duplicates(subset=['x', 'y'])
+
+    data = patient_data.sort_values('date', ignore_index=True)
+
+    resp = {
+        'study_no': study_no,
+        'x': data['x'].tolist(),
+        'y': data['y'].tolist(),
+        'date': data['date'].tolist()
+    }
+
+    response = jsonify(resp)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 if __name__ == "__main__":
 
     # --------------
@@ -130,13 +178,20 @@ if __name__ == "__main__":
     features = ["dsource", "date", "age", "gender", "weight", "bleeding", "plt",
                 "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
                 "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
+    info_feat = ["dsource", "shock", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
+                 "bleeding_mucosal", "bleeding_skin", "gender"]
+    data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
 
-    df = load_dengue(usecols=['study_no'] + features)
+    before_fill = load_dengue(usecols=['study_no'] + features)
+    before_fill = before_fill.loc[before_fill['age'] <= 18]
+
+    df = before_fill.copy()
+
+    before_fill = before_fill.dropna(subset=data_feat + ['date'])
 
     for feat in features:
-        df[feat] = df.groupby('study_no')[feat].ffill().bfill()
+        df[feat] = before_fill.groupby('study_no')[feat].ffill().bfill()
 
-    df = df.loc[df['age'] <= 18]
     df = df.dropna()
 
     df = df.groupby(by="study_no", dropna=False).agg(
@@ -159,10 +214,6 @@ if __name__ == "__main__":
 
     mapping = {'Female': 0, 'Male': 1}
     df = df.replace({'gender': mapping})
-
-    info_feat = ["dsource", "shock", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
-                 "bleeding_mucosal", "bleeding_skin", "gender"]
-    data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
 
     train, test = train_test_split(df, test_size=0.2, random_state=SEED)
 
