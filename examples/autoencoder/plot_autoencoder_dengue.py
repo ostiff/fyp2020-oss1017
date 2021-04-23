@@ -49,6 +49,7 @@ features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
 
 df = load_dengue(usecols=['study_no']+features)
 df = df.loc[df['dsource'] != 'md']
+df = df.loc[df['plt'] < 5000]
 
 for feat in features:
     df[feat] = df.groupby('study_no')[feat].ffill().bfill()

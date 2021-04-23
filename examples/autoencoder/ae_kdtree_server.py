@@ -134,7 +134,7 @@ def get_trace():
     study_no = request.args.get('study_no', before_fill['study_no'].sample().values[0])
     patient_data = before_fill.loc[before_fill['study_no'] == study_no]
 
-    if df.empty:
+    if patient_data.empty:
         return "study_no not found", 400
 
     scaled = scaler.transform(patient_data[data_feat].to_numpy())
@@ -184,6 +184,8 @@ if __name__ == "__main__":
 
     before_fill = load_dengue(usecols=['study_no'] + features)
     before_fill = before_fill.loc[before_fill['age'] <= 18]
+    before_fill = before_fill.loc[before_fill['dsource'] != 'md']
+    before_fill = before_fill.loc[before_fill['plt'] < 5000]
 
     df = before_fill.copy()
 
