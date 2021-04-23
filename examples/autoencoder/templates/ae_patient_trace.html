@@ -5,6 +5,7 @@
     <title>Patient trace</title>
 
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         html, body, .grid-container {
@@ -85,11 +86,6 @@
             transition-duration: 0.4s;
         }
 
-        #btn-align {
-            display: flex;
-            justify-content: center;
-        }
-
         .button:hover {
             background-color: #3598d9;
             color: white;
@@ -128,6 +124,7 @@
                 query_url.searchParams.append('study_no', val);
             }
             trace_data = await getData(query_url);
+
             let update = {
                 'x': [trace_data.x],
                 'y': [trace_data.y],
@@ -221,6 +218,7 @@
         </div>
     </div>
     <div class="right">
+        <a class="button" href="/" style="position: absolute; right: 0; bottom: 0"><i class="fa fa-home"></i></a>
     </div>
 </div>
 
