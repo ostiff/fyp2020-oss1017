@@ -68,7 +68,7 @@ class Logger:
             if not os.listdir(self._path):
                 self._path.rmdir()
             else:
-                if self.compress:
+                if self._compress:
                     shutil.make_archive(self._path, 'zip', self._path)
                     shutil.rmtree(self._path)
 
