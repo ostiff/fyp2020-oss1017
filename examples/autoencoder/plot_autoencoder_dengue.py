@@ -23,7 +23,7 @@ from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
 from pkgname.core.AE.autoencoder import Autoencoder, train_autoencoder, plot_autoencoder_loss, get_device, set_seed
-from pkgname.utils.data_loader import load_dengue
+from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
@@ -48,8 +48,6 @@ features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
 df = load_dengue(usecols=['study_no']+features)
-df = df.loc[df['dsource'] != 'md']
-df = df.loc[df['plt'] < 5000]
 
 for feat in features:
     df[feat] = df.groupby('study_no')[feat].ffill().bfill()
@@ -74,6 +72,8 @@ df = df.groupby(by="study_no", dropna=False).agg(
     bleeding_skin=pd.NamedAgg(column="bleeding_skin", aggfunc="max"),
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
+
+df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
 
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})

@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
-from pkgname.utils.data_loader import load_dengue
+from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
@@ -67,8 +67,10 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
+df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
+
 mapping = {'Female': 0, 'Male': 1}
-before_mapping = df
+before_mapping = df.copy()
 
 df = df.replace({'gender': mapping})
 

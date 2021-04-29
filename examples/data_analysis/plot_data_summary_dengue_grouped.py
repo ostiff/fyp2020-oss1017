@@ -8,7 +8,7 @@ Report generated using ``dataprep``.
 import pandas as pd
 import numpy as np
 from dataprep.eda import create_report
-from pkgname.utils.data_loader import load_dengue
+from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.print_utils import suppress_stdout, suppress_stderr
 
 features = ["dsource", "age", "gender", "weight", "bleeding", "plt",
@@ -41,6 +41,8 @@ with suppress_stdout() and suppress_stderr():
         bleeding_skin=pd.NamedAgg(column="bleeding_skin", aggfunc="max"),
         body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
     ).dropna()
+
+    df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
 
     report = create_report(df, title="Dengue dataset report")
 

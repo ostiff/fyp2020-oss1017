@@ -25,7 +25,7 @@ from tableone import TableOne
 
 # Utils
 from pkgname.utils.som_utils import diff_graph_hex, feature_maps, project_hex
-from pkgname.utils.data_loader import load_dengue
+from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
 
 # Configuration
@@ -67,6 +67,8 @@ df = df.groupby(by="study_no", dropna=False).agg(
     bleeding_skin=pd.NamedAgg(column="bleeding_skin", aggfunc="max"),
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
+
+df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
 
 mapping = {'Female': 0, 'Male': 1}
 before_mapping = df

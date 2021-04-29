@@ -37,7 +37,7 @@ from sklearn.neighbors import KDTree
 from tableone import TableOne
 
 from pkgname.core.AE.autoencoder import get_device, set_seed
-from pkgname.utils.data_loader import load_dengue
+from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import formatTable
 from definitions import ROOT_DIR
 
@@ -184,8 +184,7 @@ if __name__ == "__main__":
 
     before_fill = load_dengue(usecols=['study_no'] + features)
     before_fill = before_fill.loc[before_fill['age'] <= 18]
-    before_fill = before_fill.loc[before_fill['dsource'] != 'md']
-    before_fill = before_fill.loc[before_fill['plt'] < 5000]
+    before_fill = IQR_rule(before_fill, ['plt', 'haematocrit_percent', 'body_temperature'])
 
     df = before_fill.copy()
 
