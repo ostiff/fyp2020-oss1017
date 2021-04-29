@@ -22,7 +22,7 @@ from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
 from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
 logger = Logger('TSNE_Dengue')
@@ -102,8 +102,7 @@ clusters = [x+1 for x in clustering.labels_] if outliers else clustering.labels_
 
 N_CLUSTERS = len(set(clusters))
 
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+colours = colours[:N_CLUSTERS]
 
 scatter = plt.scatter(X_embedded[:,0], X_embedded[:,1], c=clusters, cmap=ListedColormap(colours))
 

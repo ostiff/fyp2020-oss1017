@@ -34,7 +34,7 @@ from tableone import TableOne
 
 from pkgname.core.AE.vae import VAE, train_vae, plot_vae_loss, get_device, set_seed
 from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
 logger = Logger('VAE_Dengue')
@@ -146,8 +146,7 @@ logger.add_plt(plot)
 # Clustering
 # ----------
 
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+colours = colours[:N_CLUSTERS]
 
 # Encode test set and plot in 2D (assumes latent_dim = 2)
 encoded_test = model.encode_inputs(loader_test)

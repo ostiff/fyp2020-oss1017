@@ -24,7 +24,7 @@ from tableone import TableOne
 
 from pkgname.core.AE.autoencoder import Autoencoder, train_autoencoder, plot_autoencoder_loss, get_device, set_seed
 from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
 logger = Logger('AE_Dengue')
@@ -123,8 +123,7 @@ logger.add_plt(plot)
 # %%
 #
 
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+colours = colours[:N_CLUSTERS]
 
 # Encode test set and plot in 2D (assumes latent_dim = 2)
 encoded_test = model.encode_inputs(loader_test)

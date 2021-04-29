@@ -4,6 +4,10 @@ import numpy as np
 from plotly.subplots import make_subplots
 from plotly.io import to_html
 import plotly.graph_objects as go
+from seaborn import color_palette
+
+colours = color_palette(as_cmap=True) + color_palette('pastel',as_cmap=True)
+pastel = color_palette('pastel',as_cmap=True) + color_palette(as_cmap=True)
 
 def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , path=None, disp=False):
     with warnings.catch_warnings():
@@ -20,15 +24,28 @@ def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , 
 
         for i, feat in enumerate(features):
             for j in range(len(colours)):
-                fig.add_trace(
-                    go.Box(
-                        y=data[clusters == j][feat].values,
-                        boxpoints='outliers', boxmean=True, name=labels[j],
-                        marker=dict(color=colours[j]),
-                    ),
-                    row=(i // cols) + 1, col=(i % cols) + 1
-                )
-            fig.update_yaxes(title_text=feat, row=(i // cols) + 1, col=(i % cols) + 1)
+                if data[feat].dtype == bool:
+                    percent_true = data[clusters == j][feat].sum() / len(data[clusters == j]) * 100
+                    fig.add_trace(
+                        go.Bar(
+                            x=['True %'], y=[percent_true],
+                            name=labels[j] + ' %',
+                            marker=dict(color=colours[j],
+                                        opacity=0.6),
+                        ),
+                        row=(i // cols) + 1, col=(i % cols) + 1
+                    )
+                    fig.update_yaxes(title_text=feat, row=(i // cols) + 1, col=(i % cols) + 1, range=[0,100])
+                else:
+                    fig.add_trace(
+                        go.Box(
+                            y=data[clusters == j][feat].values,
+                            boxpoints='outliers', boxmean=True, name=labels[j],
+                            marker=dict(color=colours[j]),
+                        ),
+                        row=(i // cols) + 1, col=(i % cols) + 1
+                    )
+                    fig.update_yaxes(title_text=feat, row=(i // cols) + 1, col=(i % cols) + 1)
 
         fig.update_xaxes(showticklabels=False)
         fig.update_layout(height=477 * rows // 2, title_text=title, showlegend=False)

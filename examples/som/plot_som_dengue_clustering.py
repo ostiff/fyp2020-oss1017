@@ -26,7 +26,7 @@ from tableone import TableOne
 # Utils
 from pkgname.utils.som_utils import diff_graph_hex, feature_maps, project_hex
 from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
 
 # Configuration
 rcParams.update({'figure.autolayout': True})
@@ -105,8 +105,7 @@ feature_maps(som, feature_names=data_feat, cols=2, show=True, printout=False)
 # Clustering
 # ----------
 
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+colours = colours[:N_CLUSTERS]
 
 proj = project_hex(som, x)
 
