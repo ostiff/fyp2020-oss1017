@@ -1,11 +1,13 @@
 # TODO: Document code
 
+import math
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 import matplotlib.pyplot as plt
+from matplotlib import animation
 import matplotlib.gridspec as gridspec
 
 
@@ -59,7 +61,45 @@ class Autoencoder(nn.Module):
         return torch.cat(z, dim=0).to("cpu").numpy()
 
 
-def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs):
+def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, **anim):
+    if 'animation_data' in anim:
+        animation_enable = True
+        animation_data = anim['animation_data']
+
+        if 'animation_colour' in anim:
+            animation_colour = anim['animation_colour']
+        else:
+            animation_colour = [['#539ecd'] * len(animation_data)]
+
+        n_features = len(animation_colour)
+        cols = math.ceil(math.sqrt(n_features))
+        rows = math.ceil(n_features / cols)
+
+        # Create figure
+        fig, axes = plt.subplots(rows, cols, figsize=(2*cols,2*rows))
+        fig.tight_layout(rect=[0, 0, 1, 0.93])
+        axes = axes.flatten()
+
+        if 'animation_labels' in anim:
+            animation_labels = anim['animation_labels']
+        else:
+            animation_labels = [f'Feature {i}' for i in range(n_features)]
+
+        for i, ax in enumerate(axes):
+            if i < n_features:
+                ax.axis('equal')
+                ax.axis([-3, 1, -3, 1])
+                ax.title.set_text(animation_labels[i])
+                plt.setp(ax.get_xticklabels(), visible=False)
+                plt.setp(ax.get_yticklabels(), visible=False)
+            else:
+                ax.axis('off')
+
+        frames = []
+
+    else:
+        animation_enable = False
+
     model.train()
     train_losses = []
     test_losses = []
@@ -108,9 +148,40 @@ def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs):
 
             test_losses.append(test_loss / len(loader_test))
 
-    return {'train_loss': train_losses,
+
+            if animation_enable:
+                encoded = model.encode_inputs(animation_data)
+                frame = []
+
+                title = plt.figtext(0.5,0.97, "Epoch: {0:4}".format(epoch),
+                                size=plt.rcParams["axes.titlesize"],
+                                ha="center")
+                frame.append(title)
+
+                for i, ax in enumerate(axes):
+                    if i < n_features:
+                        ax.axis('equal')
+                        ax.axis([-3, 1, -3, 1])
+                        scat = ax.scatter(encoded[:, 0], encoded[:, 1], c=animation_colour[i], s=2)
+                        frame.append(scat)
+
+                frames.append(frame)
+
+    ret = {'train_loss': train_losses,
             'test_loss': test_losses
            }
+
+    if animation_enable:
+        anim_obj = animation.ArtistAnimation(fig, frames, interval=50, blit=False)
+
+        if 'animation_path' in anim:
+            anim_obj.save(anim['animation_path'], fps=15)
+
+        ret['gif'] = anim_obj.to_jshtml()
+        plt.clf()
+
+
+    return ret
 
 
 def plot_autoencoder_loss(losses, show=False, printout=True, dpi=300, fname='./autoencoder_losses.jpg'):

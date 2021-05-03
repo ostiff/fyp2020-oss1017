@@ -27,7 +27,7 @@ from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
-logger = Logger('AE_Dengue')
+logger = Logger('AE_Dengue', enable=True)
 
 SEED = 0
 N_CLUSTERS = 3
@@ -38,7 +38,7 @@ set_seed(SEED)
 # Get device
 device = get_device(usegpu=False)
 
-num_epochs = 500
+num_epochs = 150
 learning_rate = 0.00005
 batch_size = 16
 latent_dim = 2
@@ -73,7 +73,7 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
+df = IQR_rule(df, ['plt'])
 
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
@@ -97,6 +97,7 @@ test_scaled = scaler.transform(test_data.to_numpy())
 
 loader_train = DataLoader(train_scaled, batch_size, shuffle=True)
 loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
+loader_train_no_shuffle = DataLoader(train_scaled, batch_size, shuffle=False)
 
 
 # Additional parameters
@@ -111,14 +112,33 @@ model = Autoencoder(input_size=input_size,
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # Train
-losses = train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs)
+losses = train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs,
+                           # animation_data=loader_train_no_shuffle,
+                           # animation_colour=[train_info['shock'],
+                           #                   train_info['bleeding'],
+                           #                   train_info['ascites'],
+                           #                   train_info['abdominal_pain'],
+                           #                   train_info['bleeding_mucosal'],
+                           #                   train_info['bleeding_gum'],
+                           #                   train_info['bleeding_skin'],
+                           #                   train_info['gender']],
+                           # animation_labels=['Shock', 'Bleeding', 'Ascites', 'Abdominal pain',
+                           #                   'Bleeding mucosal', 'Bleeding gum',
+                           #                   'Bleeding skin', 'Gender'],
+                           # animation_path='animation.gif'
+                           )
 
 # Save model
 logger.save_object(model)
 
+
+# %%
+#
+
 # Plot losses
-plot = plot_autoencoder_loss(losses, show=True, printout=False)
+plot = plot_autoencoder_loss(losses, show=False, printout=False)
 logger.add_plt(plot)
+plt.show()
 
 # %%
 #
@@ -126,24 +146,51 @@ logger.add_plt(plot)
 colours = colours[:N_CLUSTERS]
 
 # Encode test set and plot in 2D (assumes latent_dim = 2)
+
 encoded_test = model.encode_inputs(loader_test)
+encoded_train = model.encode_inputs(loader_train_no_shuffle)
+
+
 plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=test_info['shock'])
-logger.add_plt(plt.gcf())
-plt.show()
-
-
-# Perform clustering on encoded inputs
-cluster = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_test)
-
-labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
-
-scatter = plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=cluster, cmap=ListedColormap(colours))
-plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+plt.title('AE shock in latent space (testing data)')
 logger.add_plt(plt.gcf())
 plt.show()
 
 # %%
 #
+
+plt.scatter(encoded_train[:, 0], encoded_train[:, 1], c=train_info['shock'])
+plt.title('AE shock in latent space (training data)')
+logger.add_plt(plt.gcf())
+plt.show()
+
+# %%
+#
+
+
+clusters_test = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_test)
+clusters_train = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_train)
+
+labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
+
+scatter = plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=clusters_test, cmap=ListedColormap(colours))
+plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+plt.title('AE k-means (testing data)')
+logger.add_plt(plt.gcf())
+plt.show()
+
+# %%
+#
+
+scatter = plt.scatter(encoded_train[:, 0], encoded_train[:, 1], c=clusters_train, cmap=ListedColormap(colours))
+plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+plt.title('AE k-means (training data)')
+logger.add_plt(plt.gcf())
+plt.show()
+
+# %%
+#
+
 
 # Table
 with warnings.catch_warnings():
@@ -152,7 +199,7 @@ with warnings.catch_warnings():
     mapping = {0: 'Female', 1: 'Male'}
     table_df = test.replace({'gender': mapping})
 
-    table_df['cluster'] = cluster
+    table_df['cluster'] = clusters_test
 
 columns = info_feat+data_feat
 nonnormal = list(table_df[columns].select_dtypes(include='number').columns)
@@ -174,7 +221,7 @@ html
 
 fig, html = plotBox(data=test_info,
                     features=info_feat,
-                    clusters=cluster,
+                    clusters=clusters_test,
                     colours=colours,
                     title="Attributes not used in training",
                     )
@@ -186,7 +233,7 @@ fig
 
 fig, html = plotBox(data=test_data,
                     features=data_feat,
-                    clusters=cluster,
+                    clusters=clusters_test,
                     colours=colours,
                     title="Attributes used in training",
                     )
