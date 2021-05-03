@@ -6,6 +6,9 @@
 Welcome to fyp2020-oss1017's documentation!
 ===========================================
 
+.. image:: images/ae_training_latent_dim.gif
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
