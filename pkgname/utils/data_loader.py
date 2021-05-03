@@ -35,7 +35,6 @@ def IQR_rule(data, cols):
 
             data = data.query('(@Q1 - 5 * @IQR) <= ' + col + ' <= (@Q3 + 5 * @IQR)')
 
-            print(f'{col}: Q1={Q1}, Q3={Q3}')
     return data
 
 
