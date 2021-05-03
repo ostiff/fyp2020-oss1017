@@ -20,8 +20,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
-from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.data_loader import load_dengue, IQR_rule
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
 logger = Logger('TSNE_Dengue')
@@ -69,7 +69,9 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-before_mapping = df
+df = IQR_rule(df, ['plt'])
+
+before_mapping = df.copy()
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
 
@@ -118,8 +120,7 @@ clusters = [x+1 for x in clustering.labels_] if outliers else clustering.labels_
 
 N_CLUSTERS = len(set(clusters))
 
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+colours = colours[:N_CLUSTERS]
 
 scatter = plt.scatter(X_embedded[:,0], X_embedded[:,1], c=clusters, cmap=ListedColormap(colours))
 

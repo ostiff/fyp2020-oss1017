@@ -43,7 +43,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="KDTree for fast retrieval of nearest neighbours" href="plot_ae_latent_kdtree.html" />
+    <link rel="next" title="Simple autoencoder for pathology data clustering" href="plot_ae_daily_profile.html" />
     <link rel="prev" title="Auto-encoders for dimensionality reduction" href="index.html" /> 
 </head>
 
@@ -96,12 +96,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../som/index.html">The self-organising map gallery</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Auto-encoders for dimensionality reduction</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Auto-encoder interactive example (Code)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_ae_daily_profile.html">Simple autoencoder for pathology data clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_ae_latent_kdtree.html">KDTree for fast retrieval of nearest neighbours</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_autoencoder_dengue.html">Simple autoencoder for dengue clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_vae_dengue_clustering_1.html">Beta-VAE used for clustering 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_vae_dengue_clustering_2.html">Beta-VAE used for clustering 2</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../result_analysis/index.html">Result analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">The Widgets’ gallery</a></li>
 </ul>
 
@@ -372,7 +374,60 @@ patients which are closest in the latent space.</p></li>
 <span class="normal">200</span>
 <span class="normal">201</span>
 <span class="normal">202</span>
-<span class="normal">203</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">render_template</span>
 
  <span class="kn">import</span> <span class="nn">os</span>
  <span class="kn">import</span> <span class="nn">sys</span>
@@ -388,16 +443,34 @@ patients which are closest in the latent space.</p></li>
  <span class="kn">from</span> <span class="nn">tableone</span> <span class="kn">import</span> <span class="n">TableOne</span>
 
  <span class="kn">from</span> <span class="nn">pkgname.core.AE.autoencoder</span> <span class="kn">import</span> <span class="n">get_device</span><span class="p">,</span> <span class="n">set_seed</span>
- <span class="kn">from</span> <span class="nn">pkgname.utils.data_loader</span> <span class="kn">import</span> <span class="n">load_dengue</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.data_loader</span> <span class="kn">import</span> <span class="n">load_dengue</span><span class="p">,</span> <span class="n">IQR_rule</span>
  <span class="kn">from</span> <span class="nn">pkgname.utils.plot_utils</span> <span class="kn">import</span> <span class="n">formatTable</span>
  <span class="kn">from</span> <span class="nn">definitions</span> <span class="kn">import</span> <span class="n">ROOT_DIR</span>
 
 
  <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">template_folder</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s1">&#39;examples&#39;</span><span class="p">,</span> <span class="s1">&#39;autoencoder&#39;</span><span class="p">,</span> <span class="s1">&#39;templates&#39;</span><span class="p">))</span>
 
+ <span class="c1"># ------------</span>
+ <span class="c1"># Render Pages</span>
+ <span class="c1"># ------------</span>
+
+
  <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
  <span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">)</span>
+
+ <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/knn&#39;</span><span class="p">)</span>
+ <span class="k">def</span> <span class="nf">knn</span><span class="p">():</span>
      <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;ae_kd_tree_client.html&#39;</span><span class="p">)</span>
+
+ <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/trace&#39;</span><span class="p">)</span>
+ <span class="k">def</span> <span class="nf">trace</span><span class="p">():</span>
+     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;ae_patient_trace.html&#39;</span><span class="p">)</span>
+
+
+ <span class="c1"># --------</span>
+ <span class="c1"># API</span>
+ <span class="c1"># --------</span>
 
  <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/get_data&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
  <span class="k">def</span> <span class="nf">get_data</span><span class="p">():</span>
@@ -416,7 +489,8 @@ patients which are closest in the latent space.</p></li>
      <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">encoded_test</span><span class="p">))]</span>
      <span class="n">table_df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
      <span class="n">table</span> <span class="o">=</span> <span class="n">TableOne</span><span class="p">(</span><span class="n">table_df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="n">categorical</span><span class="p">,</span> <span class="n">nonnormal</span><span class="o">=</span><span class="n">nonnormal</span><span class="p">,</span>
-                      <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">rename</span><span class="o">=</span><span class="n">rename</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overall</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                      <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">rename</span><span class="o">=</span><span class="n">rename</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overall</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                      <span class="n">pval</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
      <span class="n">html</span> <span class="o">=</span> <span class="n">formatTable</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="s2">&quot;#ff7f0e&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Not selected&quot;</span><span class="p">,</span> <span class="s2">&quot;Selected&quot;</span><span class="p">])</span>
      <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
@@ -460,6 +534,36 @@ patients which are closest in the latent space.</p></li>
      <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
      <span class="k">return</span> <span class="n">response</span>
 
+
+ <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/get_trace&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+ <span class="k">def</span> <span class="nf">get_trace</span><span class="p">():</span>
+     <span class="n">study_no</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">,</span> <span class="n">before_fill</span><span class="p">[</span><span class="s1">&#39;study_no&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+     <span class="n">patient_data</span> <span class="o">=</span> <span class="n">before_fill</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">before_fill</span><span class="p">[</span><span class="s1">&#39;study_no&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">study_no</span><span class="p">]</span>
+
+     <span class="k">if</span> <span class="n">patient_data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+         <span class="k">return</span> <span class="s2">&quot;study_no not found&quot;</span><span class="p">,</span> <span class="mi">400</span>
+
+     <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">patient_data</span><span class="p">[</span><span class="n">data_feat</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+     <span class="n">inp</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+     <span class="n">enc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+     <span class="n">patient_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+     <span class="n">patient_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+     <span class="n">patient_data</span> <span class="o">=</span> <span class="n">patient_data</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+     <span class="n">data</span> <span class="o">=</span> <span class="n">patient_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+     <span class="n">resp</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s1">&#39;study_no&#39;</span><span class="p">:</span> <span class="n">study_no</span><span class="p">,</span>
+         <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+         <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+         <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+     <span class="p">}</span>
+
+     <span class="n">response</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+     <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+     <span class="k">return</span> <span class="n">response</span>
+
+
  <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
      <span class="c1"># --------------</span>
@@ -480,13 +584,21 @@ patients which are closest in the latent space.</p></li>
      <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span>
                  <span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span>
                  <span class="s2">&quot;ascites&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
+     <span class="n">info_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span> <span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span> <span class="s2">&quot;ascites&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">]</span>
+     <span class="n">data_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
 
-     <span class="n">df</span> <span class="o">=</span> <span class="n">load_dengue</span><span class="p">(</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;study_no&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">features</span><span class="p">)</span>
+     <span class="n">before_fill</span> <span class="o">=</span> <span class="n">load_dengue</span><span class="p">(</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;study_no&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">features</span><span class="p">)</span>
+     <span class="n">before_fill</span> <span class="o">=</span> <span class="n">before_fill</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">before_fill</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">]</span>
+     <span class="n">before_fill</span> <span class="o">=</span> <span class="n">IQR_rule</span><span class="p">(</span><span class="n">before_fill</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;plt&#39;</span><span class="p">,</span> <span class="s1">&#39;haematocrit_percent&#39;</span><span class="p">,</span> <span class="s1">&#39;body_temperature&#39;</span><span class="p">])</span>
+
+     <span class="n">df</span> <span class="o">=</span> <span class="n">before_fill</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+     <span class="n">before_fill</span> <span class="o">=</span> <span class="n">before_fill</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">data_feat</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
 
      <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
-         <span class="n">df</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">)[</span><span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+         <span class="n">df</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="o">=</span> <span class="n">before_fill</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">)[</span><span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
 
-     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">]</span>
      <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
      <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;study_no&quot;</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
@@ -510,10 +622,6 @@ patients which are closest in the latent space.</p></li>
      <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Female&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
      <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">})</span>
 
-     <span class="n">info_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span> <span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span> <span class="s2">&quot;ascites&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">]</span>
-     <span class="n">data_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
-
      <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
 
      <span class="n">train_data</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">data_feat</span><span class="p">]</span>
@@ -526,7 +634,7 @@ patients which are closest in the latent space.</p></li>
      <span class="n">train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_data</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
      <span class="n">test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
 
-     <span class="n">loader_train</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+     <span class="n">loader_train</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
      <span class="n">loader_test</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_scaled</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
      <span class="c1"># ------------------</span>
@@ -534,7 +642,7 @@ patients which are closest in the latent space.</p></li>
      <span class="c1"># ------------------</span>
 
      <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
-     <span class="n">encoded_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span><span class="n">loader_test</span><span class="p">)</span>
+     <span class="n">encoded_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span><span class="n">loader_train</span><span class="p">)</span>
      <span class="n">tree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">encoded_test</span><span class="p">,</span> <span class="n">leaf_size</span><span class="o">=</span><span class="n">LEAF_SIZE</span><span class="p">)</span>
 
      <span class="c1"># --------------</span>
@@ -542,7 +650,7 @@ patients which are closest in the latent space.</p></li>
      <span class="c1"># --------------</span>
 
      <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;Male&#39;</span><span class="p">}</span>
-     <span class="n">table_df</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">})</span>
+     <span class="n">table_df</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">})</span>
      <span class="n">columns</span> <span class="o">=</span> <span class="p">(</span><span class="n">info_feat</span> <span class="o">+</span> <span class="n">data_feat</span><span class="p">)</span>
      <span class="n">columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;dsource&quot;</span><span class="p">)</span>
      <span class="n">nonnormal</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">table_df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
@@ -572,7 +680,7 @@ patients which are closest in the latent space.</p></li>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="plot_ae_latent_kdtree.html" class="btn btn-neutral float-right" title="KDTree for fast retrieval of nearest neighbours" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_ae_daily_profile.html" class="btn btn-neutral float-right" title="Simple autoencoder for pathology data clustering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="index.html" class="btn btn-neutral float-left" title="Auto-encoders for dimensionality reduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

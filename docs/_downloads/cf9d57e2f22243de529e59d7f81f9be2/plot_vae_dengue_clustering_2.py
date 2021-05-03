@@ -27,8 +27,8 @@ from matplotlib.colors import ListedColormap
 from tableone import TableOne
 
 from pkgname.core.AE.vae import VAE, train_vae, plot_vae_loss, get_device, set_seed
-from pkgname.utils.data_loader import load_dengue
-from pkgname.utils.plot_utils import plotBox, formatTable
+from pkgname.utils.data_loader import load_dengue, IQR_rule
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
 logger = Logger('VAE_Dengue')
@@ -78,6 +78,8 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
+df = IQR_rule(df, ['plt'])
+
 mapping = {'Female': 0, 'Male': 1}
 df = df.replace({'gender': mapping})
 
@@ -123,8 +125,7 @@ logger.add_plt(plot)
 # %%
 #
 
-colours = ["red", "blue", "limegreen", "orangered", "yellow",
-           "violet", "salmon", "slategrey", "green", "crimson"][:N_CLUSTERS]
+colours = colours[:N_CLUSTERS]
 
 # Encode test set and plot in 2D (assumes latent_dim = 2)
 encoded_test = model.encode_inputs(loader_test)

@@ -51,6 +51,27 @@ Below is a gallery of examples
    :hidden:
 
    /_examples/tsne/plot_tsne_dengue_2
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Training attributes: FBC panel">
+
+.. only:: html
+
+ .. figure:: /_examples/tsne/images/thumb/sphx_glr_plot_tsne_pathology_thumb.png
+     :alt: t-SNE: Pathology dataset 1
+
+     :ref:`sphx_glr__examples_tsne_plot_tsne_pathology.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/tsne/plot_tsne_pathology
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

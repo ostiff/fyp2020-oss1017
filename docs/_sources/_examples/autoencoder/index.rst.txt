@@ -34,6 +34,27 @@ Below is a gallery of examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Training attributes: FBC panel">
+
+.. only:: html
+
+ .. figure:: /_examples/autoencoder/images/thumb/sphx_glr_plot_ae_daily_profile_thumb.png
+     :alt: Simple autoencoder for pathology data clustering
+
+     :ref:`sphx_glr__examples_autoencoder_plot_ae_daily_profile.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/autoencoder/plot_ae_daily_profile
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Model: Simple auto-encoder.">
 
 .. only:: html
