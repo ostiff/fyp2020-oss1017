@@ -27,19 +27,30 @@ from tableone import TableOne
 from pkgname.utils.som_utils import diff_graph_hex, feature_maps, project_hex
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
+from pkgname.utils.log_utils import Logger
+from pkgname.core.AE.autoencoder import set_seed
+
+logger = Logger('SOM_Dengue')
 
 # Configuration
 rcParams.update({'figure.autolayout': True})
 
 N_CLUSTERS = 3
+SOM_X_SIZE = 20
+SOM_Y_SIZE = 20
+SOM_SIGMA = 3
+SOM_lr = 0.05
+SOM_ACTIVATION_DIST = 'euclidean'
+SOM_NEIGHBOURHOOD = 'gaussian'
 SEED = 0
 np.random.seed(SEED)
+set_seed(SEED)
 
 # %-----------
 # Load dataset
 # ------------
 
-features = ["dsource", "age", "gender", "weight", "bleeding", "plt",
+features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
             "ascites", "bleeding_mucosal", "bleeding_skin", "body_temperature"]
 
@@ -53,6 +64,7 @@ df = df.dropna()
 
 df = df.groupby(by="study_no", dropna=False).agg(
     dsource=pd.NamedAgg(column="dsource", aggfunc="last"),
+    date=pd.NamedAgg(column="date", aggfunc="last"),
     age=pd.NamedAgg(column="age", aggfunc="max"),
     gender=pd.NamedAgg(column="gender", aggfunc="first"),
     weight=pd.NamedAgg(column="weight", aggfunc=np.mean),
@@ -68,10 +80,10 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
+df = IQR_rule(df, ['plt'])
 
 mapping = {'Female': 0, 'Male': 1}
-before_mapping = df
+before_mapping = df.copy()
 
 df = df.replace({'gender': mapping})
 
@@ -89,16 +101,19 @@ x = scaler.fit_transform(data.values)
 # Train SOM
 # ----------------------
 # Create SOM
-som = MiniSom(20, 20, x.shape[1],
+
+som = MiniSom(SOM_X_SIZE, SOM_Y_SIZE, x.shape[1],
     topology='hexagonal',
-    activation_distance='euclidean',
-    neighborhood_function='gaussian',
-    sigma=3, learning_rate=0.05,
+    activation_distance=SOM_ACTIVATION_DIST,
+    neighborhood_function=SOM_NEIGHBOURHOOD,
+    sigma=SOM_SIGMA, learning_rate=SOM_lr,
     random_seed=SEED)
 
 # Train
 som.pca_weights_init(x)
 som.train_random(x, 10000000, verbose=True)
+
+logger.save_object(project_hex(som, x), "som_embedded")
 
 diff_graph_hex(som, show=True, printout=False)
 feature_maps(som, feature_names=data_feat, cols=2, show=True, printout=False)
@@ -120,6 +135,8 @@ scatter = plt.scatter(proj[:, 0], proj[:, 1], c=cluster, cmap=ListedColormap(col
 plt.legend(handles=scatter.legend_elements()[0], labels=labels)
 plt.show()
 
+# %%
+#
 
 # ----------------
 # Cluster analysis
@@ -146,3 +163,19 @@ print(table.tabulate(tablefmt="grid"))
 # html = formatTable(table, colours, labels)
 # html
 
+logger.save_parameters(
+    {
+        'SEED': SEED,
+        'features': features,
+        'info_feat': info_feat,
+        'data_feat': data_feat,
+        'SOM_X_SIZE': SOM_X_SIZE,
+        'SOM_Y_SIZE': SOM_Y_SIZE,
+        'SOM_SIGMA': SOM_SIGMA,
+        'SOM_lr': SOM_lr,
+        'SOM_ACTIVATION_DIST': SOM_ACTIVATION_DIST,
+        'SOM_NEIGHBOURHOOD': SOM_NEIGHBOURHOOD
+    }
+)
+
+logger.create_report()
