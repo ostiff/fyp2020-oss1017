@@ -20,7 +20,10 @@ Welcome to fyp2020-oss1017's documentation!
    _examples/tsne/index
    _examples/som/index
    _examples/autoencoder/index
+   _examples/result_analysis/index
    _examples/widgets/index
+
+
 
 
 

@@ -87,13 +87,15 @@ sphinx_gallery_conf = {
                       '../../examples/widgets',
                       '../../examples/som',
                       '../../examples/autoencoder',
-                      '../../examples/data_analysis'],
+                      '../../examples/data_analysis',
+                      '../../examples/result_analysis'],
     # path to where to save gallery generated output
     'gallery_dirs': ['../source/_examples/tsne',
                      '../source/_examples/widgets',
                      '../source/_examples/som',
                      '../source/_examples/autoencoder',
-                     '../source/_examples/data_analysis'],
+                     '../source/_examples/data_analysis',
+                     '../source/_examples/result_analysis'],
     # Other
     'line_numbers': True,
     'download_all_examples': False,
