@@ -24,6 +24,7 @@ from tableone import TableOne
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
+from pkgname.core.AE.autoencoder import set_seed
 
 logger = Logger('TSNE_Dengue')
 
@@ -36,6 +37,7 @@ DBSCAN_eps = 5
 DBSCAN_min_samples = 5
 
 np.random.seed(SEED)
+set_seed(SEED)
 
 features = ["dsource","date", "age", "gender", "weight", "bleeding", "plt",
             "shock", "haematocrit_percent", "bleeding_gum", "abdominal_pain",
@@ -67,7 +69,7 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
+df = IQR_rule(df, ['plt'])
 
 mapping = {'Female': 0, 'Male': 1}
 before_mapping = df.copy()

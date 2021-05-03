@@ -42,7 +42,7 @@ with suppress_stdout() and suppress_stderr():
         body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
     ).dropna()
 
-    df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
+    df = IQR_rule(df, ['plt'])
 
     report = create_report(df, title="Dengue dataset report")
 

@@ -69,7 +69,7 @@ df = df.groupby(by="study_no", dropna=False).agg(
     body_temperature=pd.NamedAgg(column="body_temperature", aggfunc=np.mean),
 ).dropna()
 
-df = IQR_rule(df, ['plt', 'haematocrit_percent', 'body_temperature'])
+df = IQR_rule(df, ['plt'])
 
 before_mapping = df.copy()
 mapping = {'Female': 0, 'Male': 1}
