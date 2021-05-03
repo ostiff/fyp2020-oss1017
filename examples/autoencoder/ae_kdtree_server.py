@@ -228,7 +228,7 @@ if __name__ == "__main__":
     train_scaled = scaler.transform(train_data.to_numpy())
     test_scaled = scaler.transform(test_data.to_numpy())
 
-    loader_train = DataLoader(train_scaled, batch_size, shuffle=True)
+    loader_train = DataLoader(train_scaled, batch_size, shuffle=False)
     loader_test = DataLoader(test_scaled, batch_size, shuffle=False)
 
     # ------------------
@@ -236,7 +236,7 @@ if __name__ == "__main__":
     # ------------------
 
     model = pickle.load(open(MODEL_PATH, 'rb'))
-    encoded_test = model.encode_inputs(loader_test)
+    encoded_test = model.encode_inputs(loader_train)
     tree = KDTree(encoded_test, leaf_size=LEAF_SIZE)
 
     # --------------
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     # --------------
 
     mapping = {0: 'Female', 1: 'Male'}
-    table_df = test.replace({'gender': mapping})
+    table_df = train.replace({'gender': mapping})
     columns = (info_feat + data_feat)
     columns.remove("dsource")
     nonnormal = list(table_df[columns].select_dtypes(include='number').columns)
