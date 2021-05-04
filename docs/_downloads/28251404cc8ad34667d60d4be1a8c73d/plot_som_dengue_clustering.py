@@ -36,10 +36,10 @@ logger = Logger('SOM_Dengue')
 rcParams.update({'figure.autolayout': True})
 
 N_CLUSTERS = 3
-SOM_X_SIZE = 20
-SOM_Y_SIZE = 20
-SOM_SIGMA = 3
-SOM_lr = 0.05
+SOM_X_SIZE = 50
+SOM_Y_SIZE = 13
+SOM_SIGMA = 5
+SOM_lr = 0.1
 SOM_ACTIVATION_DIST = 'euclidean'
 SOM_NEIGHBOURHOOD = 'gaussian'
 SEED = 0
@@ -93,7 +93,7 @@ data_feat = ["age", "weight", "plt", "haematocrit_percent", "body_temperature"]
 
 info = df[info_feat]
 data = df[data_feat]
-
+print('len', len(data.index))
 scaler = preprocessing.StandardScaler()
 x = scaler.fit_transform(data.values)
 
@@ -111,7 +111,7 @@ som = MiniSom(SOM_X_SIZE, SOM_Y_SIZE, x.shape[1],
 
 # Train
 som.pca_weights_init(x)
-som.train_random(x, 10000000, verbose=True)
+som.train_random(x, 1000000, verbose=True)
 
 logger.save_object(project_hex(som, x), "som_embedded")
 

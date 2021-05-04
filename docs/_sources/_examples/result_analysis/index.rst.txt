@@ -17,10 +17,10 @@ reduction and clustering algorithms
 
 .. only:: html
 
- .. figure:: /_examples/result_analysis/images/thumb/sphx_glr_plot_ae_analysis_thumb.png
+ .. figure:: /_examples/result_analysis/images/thumb/sphx_glr_plot_dr_analysis_thumb.png
      :alt: Dimensionality reduction analysis
 
-     :ref:`sphx_glr__examples_result_analysis_plot_ae_analysis.py`
+     :ref:`sphx_glr__examples_result_analysis_plot_dr_analysis.py`
 
 .. raw:: html
 
@@ -30,7 +30,7 @@ reduction and clustering algorithms
 .. toctree::
    :hidden:
 
-   /_examples/result_analysis/plot_ae_analysis
+   /_examples/result_analysis/plot_dr_analysis
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

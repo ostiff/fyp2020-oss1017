@@ -30,11 +30,11 @@ logger = Logger('TSNE_Dengue')
 
 SEED = 0
 TSNE_n_components = 2
-TSNE_perplexity = 15
-TSNE_early_exaggeration = 70
-TSNE_learning_rate = 500
+TSNE_perplexity = 40
+TSNE_early_exaggeration = 1
+TSNE_learning_rate = 200
 DBSCAN_eps = 5
-DBSCAN_min_samples = 5
+DBSCAN_min_samples = 7
 
 np.random.seed(SEED)
 set_seed(SEED)
@@ -94,7 +94,8 @@ X_embedded = TSNE(n_components=TSNE_n_components,
                   random_state=SEED, n_jobs=-1).fit_transform(x)
 
 logger.save_object(X_embedded, "X_embedded")
-
+plt.scatter(X_embedded[:,0], X_embedded[:,1], c=info['shock'])
+plt.show()
 
 clustering = DBSCAN(eps=DBSCAN_eps, min_samples=DBSCAN_min_samples).fit(X_embedded)
 outliers = -1 in clustering.labels_
@@ -105,7 +106,7 @@ clusters = [x+1 for x in clustering.labels_] if outliers else clustering.labels_
 # --------
 
 N_CLUSTERS = len(set(clusters))
-
+print('n_clusters = ', N_CLUSTERS)
 colours = colours[:N_CLUSTERS]
 
 scatter = plt.scatter(X_embedded[:,0], X_embedded[:,1], c=clusters, cmap=ListedColormap(colours))

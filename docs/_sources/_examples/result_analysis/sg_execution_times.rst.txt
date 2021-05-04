@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:04.648** total execution time for **_examples_result_analysis** files:
+**00:13.357** total execution time for **_examples_result_analysis** files:
 
 +-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_result_analysis_plot_ae_analysis.py` (``plot_ae_analysis.py``) | 00:04.648 | 0.0 MB |
+| :ref:`sphx_glr__examples_result_analysis_plot_dr_analysis.py` (``plot_dr_analysis.py``) | 00:13.357 | 0.0 MB |
 +-----------------------------------------------------------------------------------------+-----------+--------+

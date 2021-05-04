@@ -1,0 +1,14 @@
+
+:orphan:
+
+.. _sphx_glr__examples_other_sg_execution_times:
+
+Computation times
+=================
+**00:04.769** total execution time for **_examples_other** files:
+
++-----------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_other_plot_lda_dengue.py` (``plot_lda_dengue.py``) | 00:02.402 | 0.0 MB |
++-----------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_other_plot_pca_dengue.py` (``plot_pca_dengue.py``) | 00:02.367 | 0.0 MB |
++-----------------------------------------------------------------------------+-----------+--------+

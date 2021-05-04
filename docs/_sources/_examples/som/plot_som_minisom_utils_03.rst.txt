@@ -140,7 +140,7 @@ Plot Utils for MiniSom
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.291 seconds)
+   **Total running time of the script:** ( 0 minutes  9.186 seconds)
 
 
 .. _sphx_glr_download__examples_som_plot_som_minisom_utils_03.py:
