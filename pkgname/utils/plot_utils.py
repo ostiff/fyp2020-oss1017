@@ -5,9 +5,20 @@ from plotly.subplots import make_subplots
 from plotly.io import to_html
 import plotly.graph_objects as go
 from seaborn import color_palette
+import matplotlib.colors as mc
+import colorsys
 
 colours = color_palette(as_cmap=True) + color_palette('pastel',as_cmap=True)
 pastel = color_palette('pastel',as_cmap=True) + color_palette(as_cmap=True)
+
+def adjust_lightness(colour, multiplier=0.75):
+    try:
+        c = mc.cnames[colour]
+    except:
+        c = colour
+
+    c = colorsys.rgb_to_hls(*mc.to_rgb(c))
+    return colorsys.hls_to_rgb(c[0], max(0, min(1, multiplier * c[1])), c[2])
 
 def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , path=None, disp=False):
     with warnings.catch_warnings():
