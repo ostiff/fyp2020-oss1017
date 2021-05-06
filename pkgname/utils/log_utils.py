@@ -137,13 +137,14 @@ class Logger:
             json.dump(self._parameters, fp, indent=4)
 
     @_log_enable
-    def add_plt(self, plot, fname='figure'):
+    def add_plt(self, plot, fname='figure', ext='svg'):
         """Add a matplotlib figure to the body of the generated report.
 
         :param matplotlib.figure.Figure plot: matplotlib figure.
         :param str fname: Filename (not full path).
+        :param str ext: File extension. (Avoid svg for big figures)
         """
-        fname += str(self._figcount) + '.svg'
+        fname += f'{self._figcount}.{ext}'
         self._figcount += 1
         plot.savefig(os.path.join(self._path, fname))
         html = f'<img src="./{fname}">'
