@@ -16,13 +16,9 @@ import shutil
 from definitions import LOG_PATH, TEMPLATES_PATH
 
 class Logger:
-    """Class used ot log parameters and save results to an archive
+    """Class used to log parameters and save results to an archive
     or directory.
     """
-
-    _parameters = dict()
-    _report = []
-    _figcount = 0
 
     def __init__(self, log_type, compress=True , enable=True):
         """Constructor method.
@@ -38,7 +34,9 @@ class Logger:
         if self.enable:
             self._log_type = log_type
             self._compress = compress
-
+            self._parameters = dict()
+            self._report = list()
+            self._figcount = 0
             # Create log directory
             self._time = time.localtime()
             self._path = Path(os.path.join(LOG_PATH, log_type, time.strftime("%Y%m%d-%H%M%S", self._time)))
@@ -46,6 +44,13 @@ class Logger:
 
             # Call on_exit when obj is garbage collected
             atexit.register(self.on_exit)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        atexit.unregister(self.on_exit())
+        self.on_exit()
 
     def _log_enable(func):
         """Decorator to only execute class methods if logging is enabled.
