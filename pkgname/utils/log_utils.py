@@ -18,12 +18,13 @@ import shutil
 
 from definitions import LOG_PATH, TEMPLATES_PATH
 
+
 class Logger:
     """Class used to log parameters and save results to an archive
     or directory.
     """
 
-    def __init__(self, log_type, compress=True , enable=True):
+    def __init__(self, log_type, compress=True, enable=True):
         """Constructor method.
 
         :param str log_type: String used in path to identify the type of log.
@@ -31,8 +32,8 @@ class Logger:
         :param bool enable: Enable logging.
         """
         self.enable = enable \
-                       and os.path.exists(LOG_PATH) \
-                       and os.path.isdir(LOG_PATH)
+                      and os.path.exists(LOG_PATH) \
+                      and os.path.isdir(LOG_PATH)
 
         if self.enable:
             self._log_type = log_type
@@ -58,6 +59,7 @@ class Logger:
     def _log_enable(func):
         """Decorator to only execute class methods if logging is enabled.
         """
+
         @wraps(func)
         def wrapped(inst, *args, **kwargs):
             if inst.enable:
@@ -79,7 +81,6 @@ class Logger:
                 if self._compress:
                     shutil.make_archive(self._path, 'zip', self._path)
                     shutil.rmtree(self._path)
-
 
     @_log_enable
     @property
@@ -210,9 +211,10 @@ class Logger:
 
 
 def extract_log_results(dir_path, keys, fpath='compiled_logs.csv', verbose=False):
-
     count = 0
-    with open(fpath, 'w', newline='')  as output_file:
+    keys.insert(0, 'log_name')
+
+    with open(fpath, 'w', newline='') as output_file:
         dict_writer = csv.DictWriter(output_file, keys, extrasaction="ignore")
         dict_writer.writeheader()
 
@@ -228,6 +230,7 @@ def extract_log_results(dir_path, keys, fpath='compiled_logs.csv', verbose=False
                         if archive_filename.endswith('.json'):
                             try:
                                 json_data = json.loads(archive.read(archive_filename))
+                                json_data['log_name'] = filename.rsplit('.', 1)[0]
                                 dict_writer.writerow(json_data)
                                 if verbose:
                                     print(f"Added {filepath} - {archive_filename}")
@@ -241,6 +244,7 @@ def extract_log_results(dir_path, keys, fpath='compiled_logs.csv', verbose=False
                     try:
                         with open(filepath, 'r') as json_file:
                             json_data = json.loads(json_file.read())
+                            json_data['log_name'] = subdir.rsplit(os.sep)[-1]
                         dict_writer.writerow(json_data)
                         if verbose:
                             print(f"Added {filepath}")
@@ -251,8 +255,8 @@ def extract_log_results(dir_path, keys, fpath='compiled_logs.csv', verbose=False
     if verbose:
         print(f"{count} rows added to {fpath}.")
 
-def get_log_keys(dir_path):
 
+def get_log_keys(dir_path):
     for subdir, dirs, files in os.walk(dir_path):
         for filename in files:
             filepath = subdir + os.sep + filename
@@ -283,5 +287,6 @@ def get_log_keys(dir_path):
 
 
 if __name__ == '__main__':
-    keys = get_log_keys('/homes/oss1017/Desktop/AE_Dengue')
-    extract_log_results('/homes/oss1017/Desktop/AE_Dengue', keys, verbose=True)
+    keys = get_log_keys(r'C:\Users\Oliver\Desktop\desktop\RESULTS\TSNE_Dengue_grid_search')
+    extract_log_results(r'C:\Users\Oliver\Desktop\desktop\RESULTS\TSNE_Dengue_grid_search',
+                        keys, fpath='ae_grid_search.csv', verbose=True)
