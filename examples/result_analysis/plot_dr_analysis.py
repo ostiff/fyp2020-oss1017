@@ -93,7 +93,9 @@ def eval_dim_reduction(original_points, original_dist, new_points, labels, label
 
     # Correlation old vs new distances
     corr = pearsonr(original_dist, new_dist)
-    print(f'Corr {method_name} distances: {corr[0]}; p-val: {corr[1]}')
+    print(f'Corr pearsonr{method_name} distances: {corr[0]}; p-val: {corr[1]}')
+    corr = spearmanr(original_dist, new_dist)
+    print(f'Corr spearmanr {method_name} distances: {corr[0]}; p-val: {corr[1]}')
 
     # Procrustes
     padded_data = np.c_[new_points, np.zeros(N_points), np.zeros(N_points), np.zeros(N_points)]
