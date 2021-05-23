@@ -4,8 +4,11 @@ Logger class implementation.
 
 # Libraries
 import os
+import re
+import csv
 import time
 import atexit
+import zipfile
 from functools import wraps
 from pathlib import Path
 import pickle
@@ -204,3 +207,81 @@ class Logger:
         file_path = os.path.join(self._path, 'report.html')
         with open(file_path, "w") as file:
             file.write(html)
+
+
+def extract_log_results(dir_path, keys, fpath='compiled_logs.csv', verbose=False):
+
+    count = 0
+    with open(fpath, 'w', newline='')  as output_file:
+        dict_writer = csv.DictWriter(output_file, keys, extrasaction="ignore")
+        dict_writer.writeheader()
+
+        for subdir, dirs, files in os.walk(dir_path):
+            for filename in files:
+                filepath = subdir + os.sep + filename
+
+                if re.match(r"^[0-9]{8}-[0-9]{6}(.zip)$", filename):
+                    archive = zipfile.ZipFile(filepath)
+                    archive_fileList = archive.namelist()
+
+                    for archive_filename in archive_fileList:
+                        if archive_filename.endswith('.json'):
+                            try:
+                                json_data = json.loads(archive.read(archive_filename))
+                                dict_writer.writerow(json_data)
+                                if verbose:
+                                    print(f"Added {filepath} - {archive_filename}")
+                                count += 1
+                            except Exception as e:
+                                print(f"Could not add {filepath} - {archive_filename}\n{e}")
+
+                    archive.close()
+
+                elif re.match(r"^.*[0-9]{8}-[0-9]{6}$", subdir) and filename.endswith('.json'):
+                    try:
+                        with open(filepath, 'r') as json_file:
+                            json_data = json.loads(json_file.read())
+                        dict_writer.writerow(json_data)
+                        if verbose:
+                            print(f"Added {filepath}")
+                        count += 1
+                    except Exception as e:
+                        print(f"Could not add {filepath}\n{e}")
+
+    if verbose:
+        print(f"{count} rows added to {fpath}.")
+
+def get_log_keys(dir_path):
+
+    for subdir, dirs, files in os.walk(dir_path):
+        for filename in files:
+            filepath = subdir + os.sep + filename
+
+            if re.match(r"^[0-9]{8}-[0-9]{6}(.zip)$", filename):
+                archive = zipfile.ZipFile(filepath)
+                archive_fileList = archive.namelist()
+
+                for archive_filename in archive_fileList:
+                    if archive_filename.endswith('.json'):
+                        try:
+                            json_data = json.loads(archive.read(archive_filename))
+                            return [*json_data]
+                        except Exception as e:
+                            print(f"Could not read {filepath} - {archive_filename}\n{e}")
+
+                archive.close()
+
+            elif re.match(r"^.*[0-9]{8}-[0-9]{6}$", subdir) and filename.endswith('.json'):
+                with open(filepath) as json_file:
+                    try:
+                        json_data = json.loads(json_file)
+                        return [*json_data]
+                    except Exception as e:
+                        print(f"Could not read {filepath}\n{e}")
+
+    return None
+
+
+if __name__ == '__main__':
+    keys = get_log_keys('/homes/oss1017/Desktop/AE_Dengue')
+    extract_log_results('/homes/oss1017/Desktop/AE_Dengue', keys, verbose=True)
