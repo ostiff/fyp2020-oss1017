@@ -94,19 +94,25 @@ def distance_metrics(original_data, reduced_data, n_points, method_name, verbose
     plt.title(f"Sheppard diagram ({method_name})")
 
     # Correlation old vs new distances
-    corr = pearsonr(original_dist, new_dist)
+    pearson = pearsonr(original_dist, new_dist)
+    spearman = spearmanr(original_dist, new_dist)
 
     # Procrustes
     padded_data = np.c_[reduced_data, np.zeros(n_points), np.zeros(n_points), np.zeros(n_points)]
-    proc = procrustes(original_data, padded_data)
-
+    try:
+        proc = procrustes(original_data, padded_data)
+    except ValueError as e:
+        print(str(e))
+        proc = str(e)
     if verbose:
-        print(f'Corr {method_name} distances: {corr[0]}; p-val: {corr[1]}')
+        print(f'pearson {method_name} distances: {pearson[0]}; p-val: {pearson[1]}')
+        print(f'spearman {method_name} distances: {spearman[0]}; p-val: {spearman[1]}')
         print(f'Procrustes {method_name}: {proc[2]}')
 
     return {
         'procrustes': proc[2],
-        'sheppard_correlation': corr,
+        'spearman':spearman,
+        'pearson': pearson,
     }, fig
 
 
@@ -143,40 +149,50 @@ def density_metrics(info_df, reduced_data, labels, method_name, colours=None, sc
         y = info_df[label_name].to_numpy().astype(int)
 
         # GMM with 1 component
-        plot = plt.axes(axes[i*3 + 0])
-        plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=colours[y], s=8)
-        plt.title(f"{method_name} gmm ratio ({label_name})")
+        try:
+            plot = plt.axes(axes[i*3 + 0])
+            plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=colours[y], s=8)
+            plt.title(f"{method_name} gmm ratio ({label_name})")
 
-        gmm_all = mixture.BayesianGaussianMixture(n_components=1, covariance_type='full').fit(reduced_data)
-        gmm_attr = mixture.BayesianGaussianMixture(n_components=1, covariance_type='full').fit(reduced_data[y == 1])
-        means = np.concatenate([gmm_all.means_, gmm_attr.means_])
-        covs = np.concatenate([gmm_all.covariances_, gmm_attr.covariances_])
-        gmm_ratio = plot_ellipse(means, covs, plot, outline_colours)
+            gmm_all = mixture.BayesianGaussianMixture(n_components=1, covariance_type='full').fit(reduced_data)
+            gmm_attr = mixture.BayesianGaussianMixture(n_components=1, covariance_type='full').fit(reduced_data[y == 1])
+            means = np.concatenate([gmm_all.means_, gmm_attr.means_])
+            covs = np.concatenate([gmm_all.covariances_, gmm_attr.covariances_])
+            gmm_ratio = plot_ellipse(means, covs, plot, outline_colours)
 
-        print(f'Gaussian area ratio: {gmm_ratio}')
-        results[f'{label_name}_gmm_ratio'] = gmm_ratio
+            print(f'Gaussian area ratio: {gmm_ratio}')
+            results[f'{label_name}_gmm_ratio'] = gmm_ratio
+        except Exception as e:
+            results[f'{label_name}_gmm_ratio'] = str(e)
+
 
         # Convex hulls ratio
-        plt.axes(axes[i*3 + 1])
-        plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=colours[y], s=8)
-        plt.title(f"{method_name} convex hulls ({label_name})")
+        try:
+            plt.axes(axes[i*3 + 1])
+            plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=colours[y], s=8)
+            plt.title(f"{method_name} convex hulls ({label_name})")
 
-        hull_all = plot_polygon(reduced_data, 0.0, outline_colours[0])
-        hull_atr = plot_polygon(reduced_data[y == 1], 0.0, outline_colours[1])
+            hull_all = plot_polygon(reduced_data, 0.0, outline_colours[0])
+            hull_atr = plot_polygon(reduced_data[y == 1], 0.0, outline_colours[1])
 
-        print(f'Convex hull area ratio: {hull_atr / hull_all}')
-        results[f'{label_name}_convex_hull_ratio'] = hull_atr / hull_all
+            print(f'Convex hull area ratio: {hull_atr / hull_all}')
+            results[f'{label_name}_convex_hull_ratio'] = hull_atr / hull_all
+        except Exception as e:
+            results[f'{label_name}_convex_hull_ratio'] = str(e)
+
 
         # Concave hulls ratio
-        plt.axes(axes[i*3 + 2])
-        plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=colours[y], s=8)
-        plt.title(f"{method_name} concave hulls ({label_name})")
-        hull_all = plot_polygon(reduced_data, 5.0, outline_colours[0])
-        hull_atr = plot_polygon(reduced_data[y == 1], 5.0, outline_colours[1])
+        try:
+            plt.axes(axes[i*3 + 2])
+            plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=colours[y], s=8)
+            plt.title(f"{method_name} concave hulls ({label_name})")
+            hull_all = plot_polygon(reduced_data, 5.0, outline_colours[0])
+            hull_atr = plot_polygon(reduced_data[y == 1], 5.0, outline_colours[1])
 
-        print(f'Concave hull area ratio: {hull_atr / hull_all}')
-        results[f'{label_name}_concave_hull_ratio'] = hull_atr / hull_all
-
+            print(f'Concave hull area ratio: {hull_atr / hull_all}')
+            results[f'{label_name}_concave_hull_ratio'] = hull_atr / hull_all
+        except Exception as e:
+            results[f'{label_name}_concave_hull_ratio'] = str(e)
     print()
 
     return results, fig
