@@ -9,7 +9,7 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 from matplotlib import animation
 import matplotlib.gridspec as gridspec
-
+import random
 
 class Autoencoder(nn.Module):
     def __init__(self, input_size, layers, latent_dim=2, device="cpu"):
@@ -21,8 +21,8 @@ class Autoencoder(nn.Module):
 
         enc = []
         prev = input_size
-        for i in range(len(layers)):
-            enc.append(nn.Linear(prev, prev:=layers[i]))
+        for l in layers:
+            enc.append(nn.Linear(prev, prev:=l))
             enc.append(nn.ReLU())
         enc.append(nn.Linear(prev, latent_dim))
 
@@ -30,8 +30,8 @@ class Autoencoder(nn.Module):
 
         dec = []
         prev = latent_dim
-        for i in range(len(layers)-1, -1, -1):
-            dec.append(nn.Linear(prev, prev:=layers[i]))
+        for l in reversed(layers):
+            dec.append(nn.Linear(prev, prev:=l))
             dec.append(nn.ReLU())
 
         dec.append(nn.Linear(prev, input_size))
@@ -47,21 +47,22 @@ class Autoencoder(nn.Module):
     def loss_fn(recon_x, x):
         return F.mse_loss(recon_x, x, reduction='sum')
 
+    @torch.no_grad()
     def encode_inputs(self, loader):
-        self.eval()
         z = []
 
-        with torch.no_grad():
-            for i, data in enumerate(loader):
-                x = self.encoder(data.to(self.device).float())
-                z.append(x)
-
-        self.train()
+        for i, data in enumerate(loader):
+            x = data.to(self.device).float().view(-1, self.input_size)
+            x = self.encoder(x)
+            z.append(x)
 
         return torch.cat(z, dim=0).to("cpu").numpy()
 
 
 def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, **anim):
+    state_np = np.random.get_state()
+    state_py = random.getstate()
+    state_torch = torch.random.get_rng_state()
     if 'animation_data' in anim:
         animation_enable = True
         animation_data = anim['animation_data']
@@ -69,7 +70,7 @@ def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, *
         if 'animation_colour' in anim:
             animation_colour = anim['animation_colour']
         else:
-            animation_colour = [['#539ecd'] * len(animation_data)]
+            animation_colour = [['#539ecd'] * len(animation_data.dataset)]
 
         n_features = len(animation_colour)
         cols = math.ceil(math.sqrt(n_features))
@@ -99,6 +100,10 @@ def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, *
 
     else:
         animation_enable = False
+    random.setstate(state_py)
+    np.random.set_state(state_np)
+    torch.random.set_rng_state(state_torch)
+
 
     model.train()
     train_losses = []
@@ -150,7 +155,12 @@ def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, *
 
 
             if animation_enable:
+                state_np = np.random.get_state()
+                state_py = random.getstate()
+                state_torch = torch.random.get_rng_state()
+
                 encoded = model.encode_inputs(animation_data)
+                #encoded = np.random.rand(len(animation_colour[0]),2)
                 frame = []
 
                 title = plt.figtext(0.5,0.97, "Epoch: {0:4}".format(epoch),
@@ -167,6 +177,10 @@ def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, *
 
                 frames.append(frame)
 
+                random.setstate(state_py)
+                np.random.set_state(state_np)
+                torch.random.set_rng_state(state_torch)
+
     ret = {'train_loss': train_losses,
             'test_loss': test_losses
            }
@@ -177,7 +191,7 @@ def train_autoencoder(model, optimizer, loader_train, loader_test, num_epochs, *
         if 'animation_path' in anim:
             anim_obj.save(anim['animation_path'], fps=15)
 
-        ret['gif'] = anim_obj.to_jshtml()
+        # ret['gif'] = anim_obj.to_jshtml()
         plt.clf()
 
 

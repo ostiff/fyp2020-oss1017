@@ -8,7 +8,7 @@ from seaborn import color_palette
 import matplotlib.colors as mc
 import colorsys
 
-colours = color_palette(as_cmap=True) + color_palette('pastel',as_cmap=True)
+colours = color_palette(as_cmap=True) + color_palette('pastel',as_cmap=True) + ["#D8BFD8","#CD919E","#7F7F7F","#FFEFD5","#CD96CD","#9400D3","#F5F5DC","#FF9912","#FAFAFA","#969696","#E066FF","#FAEBD7","#FFEFDB","#9BCD9B","#FA8072","#EECBAD","#CD2626","#8470FF","#CD950C","#EE82EE","#EE3A8C","#8B2323","#FF7F50","#CDB79E","#BF3EFF","#C1FFC1","#556B2F","#8B7B8B","#668B8B","#E8E8E8","#CD9B9B","#050505","#CAFF70","#F7F7F7","#FFD700","#FF82AB","#009ACD","#8B864E","#EE7600","#EEA2AD","#FFD39B","#949494","#FDF5E6","#8968CD","#EEC591","#6CA6CD","#71C671","#FFC1C1","#838B83","#555555","#C4C4C4","#CD1076","#00FFFF","#EED5B7","#8B5A00","#8B8970","#8B8386","#4A708B","#8FBC8F","#EEE9BF","#E3A869","#FFAEB9","#FF34B3","#CD69C9","#32CD32","#9C9C9C","#A0522D","#D3D3D3","#8C8C8C","#FFF68F","#B23AEE","#BCEE68","#B0171F","#8B1C62","#EE4000","#8B3E2F","#98F5FF","#BDBDBD","#FFA54F","#FFC0CB","#B8860B","#212121","#FFFAF0","#C67171","#EEB422","#BCD2EE","#5D478B","#FFF5EE","#CD853F","#778899","#D4D4D4","#00688B","#FFA500","#FFBBFF","#00EEEE","#EE30A7","#ABABAB","#008080","#CD8500","#171717"]
 pastel = color_palette('pastel',as_cmap=True) + color_palette(as_cmap=True)
 
 def adjust_lightness(colour, multiplier=0.75):
@@ -87,7 +87,9 @@ def formatTable(table, colours, labels):
 
     th_format = {}
     for i, l in enumerate(labels):
-        th_format[l] = [dict(selector='th', props=[('color', colours[i])])]
+        c = colours[i] if i < len(colours) else '#000000'
+
+        th_format[l] = [dict(selector='th', props=[('color', c)])]
 
     html = html.set_table_styles(th_format, overwrite=False)
 
