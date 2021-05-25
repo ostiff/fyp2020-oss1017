@@ -42,7 +42,7 @@ from pkgname.utils.plot_utils import formatTable
 from definitions import ROOT_DIR
 
 TEMPLATE_DIR = os.path.join(ROOT_DIR, 'pkgname', 'application', 'templates')
-STATIC_DIR = os.path.join(ROOT_DIR, 'pkgname', 'application', 'static')
+STATIC_DIR = os.path.join(ROOT_DIR, 'pkgname', 'application', 'assets')
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
@@ -50,6 +50,13 @@ app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 # Render Pages
 # ------------
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/similarity-retrieval')
+def similarity_retrieval():
+    return render_template('similarity_retrieval.html')
 
 @app.route('/')
 def home():

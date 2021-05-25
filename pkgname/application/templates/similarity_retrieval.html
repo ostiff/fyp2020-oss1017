@@ -1,0 +1,285 @@
+<!doctype html>
+<html class="fixed">
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <title>Similarity retrieval</title>
+    <meta name="keywords" content="HTML5 application" />
+    <meta name="description" content="Similarity retrieval - Interactive examples">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+
+    <link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>
+
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="assets/custom/styles/style.css">
+
+
+    <script>
+
+        const data_url = "http://127.0.0.1:5000/get_data";
+        const KDTree_url = "http://127.0.0.1:5000/get_k_nearest"
+        const encPatient_url = "http://127.0.0.1:5000/enc_patient"
+
+        let N = 0;
+
+        async function getData(url) {
+            let response = await fetch(url);
+            return await response.json();
+        }
+
+        function updatePage(url) {
+            let tableSummary = document.getElementById("tableSummary");
+            getData(url).then((data) => {
+                let colours = Array(N).fill('#1f77b4');
+                for(let i=0; i < data.idx[0].length; i++){
+                    colours[data.idx[0][i]] = '#ff7f0e';
+                }
+
+                let update = {'marker':{color: colours}};
+                Plotly.restyle('scatterPlot', update, 0);
+
+                tableSummary.innerHTML = data.table;
+            });
+        }
+
+        function encPatient() {
+            let form = document.getElementById("patientForm");
+            let query_url = new URL(encPatient_url);
+            query_url.searchParams.append('k', document.getElementById("selectK").value);
+
+            let params = ["age", "weight", "plt", "hct", "b_temp"];
+
+            for (let i = 0; i < form.length - 1 ;i++) {
+                query_url.searchParams.append(params[i], form.elements[i].value);
+            }
+
+            updatePage(query_url);
+        }
+
+        async function main() {
+
+            const scatter_data = await getData(data_url)
+            N = scatter_data.x.length;
+
+            let data = {
+                x: scatter_data.x,
+                y: scatter_data.y,
+                mode: 'markers',
+                type: 'scatter',
+                marker: {
+                    color: '#1f77b4'
+                }
+            };
+
+            let layout = {
+                hovermode:'closest',
+                title:'Auto-Encoder - Latent dimension',
+                // yaxis: {
+                //     automargin: true,
+                //     scaleanchor: "x",
+                // },
+                margin: {
+                    t: 50,
+                    l: 50,
+                    r: 50,
+                    b: 50
+                }
+            };
+
+            Plotly.newPlot('scatterPlot', [data], layout);
+
+            let slider = document.getElementById("selectK");
+            let scatterPlot = document.getElementById('scatterPlot');
+            let dispK = document.getElementById("dispK");
+            let k = slider.value;
+            slider.max = N - 1;
+            dispK.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                k = this.value;
+                dispK.innerHTML = this.value;
+            }
+
+            scatterPlot.on('plotly_click', function(data){
+                let id = data.points[0].pointIndex;
+                let query_url = new URL(KDTree_url);
+                query_url.searchParams.append('id', id);
+                query_url.searchParams.append('k', k);
+
+                updatePage(query_url);
+            });
+        }
+
+        main();
+
+    </script>
+
+</head>
+<body>
+<section class="body">
+    <div class="inner-wrapper">
+        <!-- start: sidebar -->
+        <aside id="sidebar-left" class="sidebar-left" style="top: 0px">
+
+            <div class="sidebar-header">
+                <div class="sidebar-title" style="color: #FFFFFF">
+                    Navigation
+                </div>
+                <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
+
+            <div class="nano">
+                <div class="nano-content">
+                    <nav id="menu" class="nav-main" role="navigation">
+                        <ul class="nav nav-main">
+                            <li>
+                                <a href="dashboard">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-parent">
+                                <a>
+                                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                                    <span>Applications</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a href="knn">
+                                            Similarity retrieval
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="trace">
+                                            Patient trace
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </aside>
+        <!-- end: sidebar -->
+
+        <section role="main" class="content-body">
+            <header class="page-header" style="top: 0px">
+                <h2>Similarity retrieval</h2>
+            </header>
+
+            <!-- start: page -->
+            <div class="grid-container">
+                <div class="left">
+                    <div id='scatterPlot'></div>
+                    <div class="slider-grid">
+                        <section class="panel">
+                            <div class="panel-body">
+<!--                                <input type="range" min="1" max="1000" value="100" class="slider" id="selectK">-->
+                                <div id="selectK" class="mt-lg mb-lg slider-primary ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-plugin-slider="" min="1" max="1000" value="100" class="slider" data-plugin-slider-output="#listenSlider" aria-disabled="false">
+                                    <input id="listenSlider" type="hidden" value="23">
+                                    <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a></div>
+
+                                <p style="margin-left: 40px">K nearest points: <span id="dispK"></span></p>
+
+                                <form id="patientForm" action="javascript:encPatient()">
+                                    <ul>
+                                        <li>
+                                            <label>Age:</label><br>
+                                            <input type="number" step="0.01" name="form_age" value="">
+                                        </li>
+                                        <li>
+                                            <label>Weight:</label><br>
+                                            <input type="number" step="0.01" name="form_weight" value="">
+                                        </li>
+                                        <li>
+                                            <label>Plt:</label><br>
+                                            <input type="number" step="0.01" name="form_plt" value="">
+                                        </li>
+                                        <li>
+                                            <label>Hct %:</label><br>
+                                            <input type="number" step="0.01" name="form_hct" value="">
+                                        </li>
+                                        <li>
+                                            <label>Body temperature:</label><br>
+                                            <input type="number" step="0.01" name="form_bt" value="">
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="Submit">
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="right panel">
+                    <div id='tableSummary'></div>
+                    <a class="button" href="/" style="position: absolute; right: 0; bottom: 0"><i class="fa fa-home"></i></a>
+                </div>
+            </div>
+            <!-- end: page -->
+        </section>
+    </div>
+</section>
+
+<!-- Vendor -->
+<script src="assets/vendor/jquery/jquery.js"></script>
+<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+<!-- Specific Page Vendor -->
+<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+<script src="assets/vendor/store-js/store.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="assets/javascripts/theme.js"></script>
+
+<!-- Sliders -->
+<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+<!-- Theme Custom -->
+<script src="assets/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="assets/javascripts/theme.init.js"></script>
+
+</body>
+</html>
