@@ -38,7 +38,7 @@
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="assets/custom/styles/style.css">
+    <!--    <link rel="stylesheet" href="assets/custom/styles/style.css">-->
 
 
     <script>
@@ -72,7 +72,7 @@
         function encPatient() {
             let form = document.getElementById("patientForm");
             let query_url = new URL(encPatient_url);
-            query_url.searchParams.append('k', document.getElementById("selectK").value);
+            query_url.searchParams.append('k', $( "#selectK" ).slider( "option", "value" ));
 
             let params = ["age", "weight", "plt", "hct", "b_temp"];
 
@@ -115,17 +115,19 @@
 
             Plotly.newPlot('scatterPlot', [data], layout);
 
-            let slider = document.getElementById("selectK");
             let scatterPlot = document.getElementById('scatterPlot');
-            let dispK = document.getElementById("dispK");
-            let k = slider.value;
-            slider.max = N - 1;
-            dispK.innerHTML = slider.value;
 
-            slider.oninput = function() {
+            let k = $( "#selectK" ).slider( "option", "value" );
+
+            $( "#selectK" ).slider({
+                max: N-1
+            });
+
+            $('#listenSlider').change(function() {
+                $('.output b').text( this.value );
                 k = this.value;
-                dispK.innerHTML = this.value;
-            }
+            });
+
 
             scatterPlot.on('plotly_click', function(data){
                 let id = data.points[0].pointIndex;
@@ -174,7 +176,7 @@
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
-                                        <a href="knn">
+                                        <a href="similarity-retrieval">
                                             Similarity retrieval
                                         </a>
                                     </li>
@@ -200,54 +202,81 @@
             </header>
 
             <!-- start: page -->
-            <div class="grid-container">
-                <div class="left">
-                    <div id='scatterPlot'></div>
-                    <div class="slider-grid">
-                        <section class="panel">
-                            <div class="panel-body">
-<!--                                <input type="range" min="1" max="1000" value="100" class="slider" id="selectK">-->
-                                <div id="selectK" class="mt-lg mb-lg slider-primary ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-plugin-slider="" min="1" max="1000" value="100" class="slider" data-plugin-slider-output="#listenSlider" aria-disabled="false">
-                                    <input id="listenSlider" type="hidden" value="23">
-                                    <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 0%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div id='scatterPlot'></div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="selectK" class="mt-lg mb-lg slider-primary" data-plugin-slider data-plugin-options='{ "value": 50, "range": "min", "min":1, "max": 100 }' data-plugin-slider-output="#listenSlider">
+                                        <input id="listenSlider" type="hidden" value="50" />
+                                    </div>
+                                    <p class="output">Select <b>50</b> nearest patients</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="fa fa-caret-down"></a>
+                                        <a href="#" class="fa fa-times"></a>
+                                    </div>
 
-                                <p style="margin-left: 40px">K nearest points: <span id="dispK"></span></p>
-
-                                <form id="patientForm" action="javascript:encPatient()">
-                                    <ul>
-                                        <li>
-                                            <label>Age:</label><br>
-                                            <input type="number" step="0.01" name="form_age" value="">
-                                        </li>
-                                        <li>
-                                            <label>Weight:</label><br>
-                                            <input type="number" step="0.01" name="form_weight" value="">
-                                        </li>
-                                        <li>
-                                            <label>Plt:</label><br>
-                                            <input type="number" step="0.01" name="form_plt" value="">
-                                        </li>
-                                        <li>
-                                            <label>Hct %:</label><br>
-                                            <input type="number" step="0.01" name="form_hct" value="">
-                                        </li>
-                                        <li>
-                                            <label>Body temperature:</label><br>
-                                            <input type="number" step="0.01" name="form_bt" value="">
-                                        </li>
-                                        <li>
-                                            <input type="submit" value="Submit">
-                                        </li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </section>
+                                    <h2 class="panel-title">New patient similarity</h2>
+                                </header>
+                                <div class="panel-body" style="display: block;">
+                                    <form id="patientForm" action="javascript:encPatient()">
+                                        <ul>
+                                            <li>
+                                                <label>Age:</label><br>
+                                                <input type="number" step="0.01" name="form_age" value="">
+                                            </li>
+                                            <li>
+                                                <label>Weight:</label><br>
+                                                <input type="number" step="0.01" name="form_weight" value="">
+                                            </li>
+                                            <li>
+                                                <label>Plt:</label><br>
+                                                <input type="number" step="0.01" name="form_plt" value="">
+                                            </li>
+                                            <li>
+                                                <label>Hct %:</label><br>
+                                                <input type="number" step="0.01" name="form_hct" value="">
+                                            </li>
+                                            <li>
+                                                <label>Body temperature:</label><br>
+                                                <input type="number" step="0.01" name="form_bt" value="">
+                                            </li>
+                                            <li>
+                                                <input type="submit" value="Submit">
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="fa fa-caret-down"></a>
+                                <a href="#" class="fa fa-times"></a>
+                            </div>
 
-                <div class="right panel">
-                    <div id='tableSummary'></div>
-                    <a class="button" href="/" style="position: absolute; right: 0; bottom: 0"><i class="fa fa-home"></i></a>
+                            <h2 class="panel-title">Statistical summary</h2>
+                        </header>
+                        <div class="panel-body" style="display: block;">
+                            <div id='tableSummary'></div>
+                        </div>
+                    </section>
                 </div>
             </div>
             <!-- end: page -->
@@ -280,6 +309,11 @@
 
 <!-- Theme Initialization Files -->
 <script src="assets/javascripts/theme.init.js"></script>
+
+<!--Update slider text-->
+<script>
+
+</script>
 
 </body>
 </html>
