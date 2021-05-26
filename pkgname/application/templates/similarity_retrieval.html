@@ -70,7 +70,7 @@
         }
 
         function encPatient() {
-            let form = document.getElementById("patientForm");
+            let form = document.getElementById("encode-form");
             let query_url = new URL(encPatient_url);
             query_url.searchParams.append('k', $( "#selectK" ).slider( "option", "value" ));
 
@@ -221,45 +221,71 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <section class="panel">
-                                <header class="panel-heading">
-                                    <div class="panel-actions">
-                                        <a href="#" class="fa fa-caret-down"></a>
-                                        <a href="#" class="fa fa-times"></a>
-                                    </div>
+                            <form id="encode-form" action="javascript:encPatient()" class="form">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="fa fa-caret-down"></a>
+                                            <a href="#" class="fa fa-times"></a>
+                                        </div>
 
-                                    <h2 class="panel-title">New patient similarity</h2>
-                                </header>
-                                <div class="panel-body" style="display: block;">
-                                    <form id="patientForm" action="javascript:encPatient()">
-                                        <ul>
-                                            <li>
-                                                <label>Age:</label><br>
-                                                <input type="number" step="0.01" name="form_age" value="">
-                                            </li>
-                                            <li>
-                                                <label>Weight:</label><br>
-                                                <input type="number" step="0.01" name="form_weight" value="">
-                                            </li>
-                                            <li>
-                                                <label>Plt:</label><br>
-                                                <input type="number" step="0.01" name="form_plt" value="">
-                                            </li>
-                                            <li>
-                                                <label>Hct %:</label><br>
-                                                <input type="number" step="0.01" name="form_hct" value="">
-                                            </li>
-                                            <li>
-                                                <label>Body temperature:</label><br>
-                                                <input type="number" step="0.01" name="form_bt" value="">
-                                            </li>
-                                            <li>
-                                                <input type="submit" value="Submit">
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </section>
+                                        <h2 class="panel-title">New patient similarity</h2>
+                                        <p class="panel-subtitle">
+                                            Encode a patient's data and retrieve nearest neighbours.
+                                        </p>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="validation-message">
+                                            <ul></ul>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Age <span class="required">*</span></label>
+                                                    <input type="number" step="0.01" min="0" max="18" name="form_age" class="form-control" title="Please enter patient age [0, 18]." required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Weight <span class="required">*</span></label>
+                                                    <input type="number" step="0.01" name="form_weight" class="form-control" title="Please enter patient weight." required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Platelets <span class="required">*</span></label>
+                                                    <input type="number" step="0.01" name="form_plt" class="form-control" title="Please enter patient platelet count (unit: 10<sup>9</sup>/L)." required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Haematocrit <span class="required">*</span></label>
+                                                    <input type="number" step="0.01" min="0" max="100" name="form_hct" class="form-control" title="Please enter patient haematocrit [0, 100]." required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Body Temperature <span class="required">*</span></label>
+                                                    <input type="number" step="0.01" name="form_bt" class="form-control" title="Please enter patient body temperature." required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <footer class="panel-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-primary">Submit</button>
+                                                <button type="reset" class="btn btn-default">Reset</button>
+                                            </div>
+                                        </div>
+                                    </footer>
+                                </section>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -304,15 +330,25 @@
 <!-- Sliders -->
 <script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 <script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+
+<!--Form validation-->
+<script src="assets/vendor/jquery-validation/jquery.validate.js"></script>
+
 <!-- Theme Custom -->
 <script src="assets/javascripts/theme.custom.js"></script>
 
 <!-- Theme Initialization Files -->
 <script src="assets/javascripts/theme.init.js"></script>
 
-<!--Update slider text-->
+<!--Validate form-->
 <script>
-
+    // validation summary
+    var $encodeForm = $("#encode-form");
+    $encodeForm.validate({
+        errorContainer: $encodeForm.find( 'div.validation-message' ),
+        errorLabelContainer: $encodeForm.find( 'div.validation-message ul' ),
+        wrapper: "li"
+    });
 </script>
 
 </body>
