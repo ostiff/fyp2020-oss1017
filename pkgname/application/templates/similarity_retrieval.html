@@ -243,13 +243,13 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Age <span class="required">*</span></label>
-                                                    <input type="number" step="0.01" min="0" max="18" name="form_age" class="form-control" title="Please enter patient age [0, 18]." required/>
+                                                    <input type="number" step="0.01" min="0" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109" max="18" name="form_age" class="form-control" title="Please enter patient age [0, 18]." required/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Weight <span class="required">*</span></label>
-                                                    <input type="number" step="0.01" name="form_weight" class="form-control" title="Please enter patient weight." required/>
+                                                    <input type="number" step="0.01" min="0" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109" name="form_weight" class="form-control" title="Please enter patient weight." required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -257,13 +257,13 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Platelets <span class="required">*</span></label>
-                                                    <input type="number" step="0.01" name="form_plt" class="form-control" title="Please enter patient platelet count (unit: 10<sup>9</sup>/L)." required/>
+                                                    <input type="number" step="0.01" min="0" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109" name="form_plt" class="form-control" title="Please enter patient platelet count (unit: 10<sup>9</sup>/L)." required/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Haematocrit <span class="required">*</span></label>
-                                                    <input type="number" step="0.01" min="0" max="100" name="form_hct" class="form-control" title="Please enter patient haematocrit [0, 100]." required/>
+                                                    <input type="number" step="0.01" min="0" max="100" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109" name="form_hct" class="form-control" title="Please enter patient haematocrit [0, 100]." required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -271,7 +271,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="control-label">Body Temperature <span class="required">*</span></label>
-                                                    <input type="number" step="0.01" name="form_bt" class="form-control" title="Please enter patient body temperature." required/>
+                                                    <input type="number" step="0.01" min="0" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109" name="form_bt" class="form-control" title="Please enter patient body temperature." required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -300,7 +300,7 @@
                             <h2 class="panel-title">Statistical summary</h2>
                         </header>
                         <div class="panel-body" style="display: block;">
-                            <div id='tableSummary'></div>
+                            <div id='tableSummary' class="table-responsive"></div>
                         </div>
                     </section>
                 </div>

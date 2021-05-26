@@ -38,7 +38,7 @@ from tableone import TableOne
 
 from pkgname.core.AE.autoencoder import get_device, set_seed
 from pkgname.utils.data_loader import load_dengue, IQR_rule
-from pkgname.utils.plot_utils import formatTable
+from pkgname.utils.plot_utils import formatTable, format_table_bootstrap
 from definitions import ROOT_DIR
 
 TEMPLATE_DIR = os.path.join(ROOT_DIR, 'pkgname', 'application', 'templates')
@@ -94,8 +94,8 @@ def makeTable(idx):
     table = TableOne(table_df, columns=columns, categorical=categorical, nonnormal=nonnormal,
                      groupby='cluster', rename=rename, missing=False, overall=False,
                      pval=True)
-    html = formatTable(table, ["#1f77b4", "#ff7f0e"], ["Not selected", "Selected"])
-    return html.render()
+    html = format_table_bootstrap(table, ["#1f77b4", "#ff7f0e"], ["Not selected", "Selected"])
+    return html
 
 
 @app.route('/get_k_nearest', methods=['GET'])

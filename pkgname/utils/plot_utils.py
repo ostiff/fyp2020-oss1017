@@ -69,7 +69,7 @@ def plotBox(data, features, clusters, colours, labels=None, title="Box plots" , 
     return fig, to_html(fig)
 
 
-def formatTable(table, colours, labels):
+def formatTable(table, colours, labels, resize_header=True):
     table_df = table.tableone
 
     # Drop 'Group by' index level created by TableOne
@@ -78,19 +78,26 @@ def formatTable(table, colours, labels):
     # Rename groupby columns
     table_df = table_df.rename(columns=dict(zip([str(i) for i in range(len(labels))], labels)))
 
-    styles = [
-        dict(selector="th.col_heading", props=[("font-size", "130%"),
-                                               ("text-align", "right")]),
-    ]
-
-    html = (table_df.style.set_table_styles(styles))
-
     th_format = {}
     for i, l in enumerate(labels):
         c = colours[i] if i < len(colours) else '#000000'
 
         th_format[l] = [dict(selector='th', props=[('color', c)])]
 
-    html = html.set_table_styles(th_format, overwrite=False)
+    table = table_df.style.set_table_styles(th_format, overwrite=False)
 
-    return html
+    if resize_header:
+        styles = [
+            dict(selector="th.col_heading", props=[("font-size", "130%"),
+                                                   ("text-align", "right")]),
+        ]
+
+        table = (table.set_table_styles(styles))
+
+    return table
+
+def format_table_bootstrap(table, colours, labels):
+    table = formatTable(table, colours, labels, resize_header=False)
+    table.set_table_attributes('class="table table-bordered table-striped table-condensed mb-none"')
+
+    return table.render()
