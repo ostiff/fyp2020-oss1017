@@ -60,7 +60,7 @@ def similarity_retrieval():
 
 @app.route('/trace')
 def trace():
-    return render_template('ae_patient_trace.html')
+    return render_template('patient_trace.html')
 
 
 # --------

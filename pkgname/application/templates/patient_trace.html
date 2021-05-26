@@ -1,0 +1,315 @@
+<!doctype html>
+<html class="fixed">
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <title>Patient trace</title>
+    <meta name="keywords" content="HTML5 application" />
+    <meta name="description" content="Patient trace - Interactive examples">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+
+    <link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.js"></script>
+
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<script>
+
+        const data_url = "http://127.0.0.1:5000/get_data";
+        const trace_url = "http://127.0.0.1:5000/get_trace";
+        let trace_data = {};
+
+        async function getData(url) {
+            let response = await fetch(url);
+            return await response.json();
+        }
+
+        function updateColour(day, N) {
+            let colours = [];
+            for(let i=0; i < day; i++){
+                colours.push('#ff7f0e');
+            }
+            for(let i=day; i < N; i++){
+                colours.push('#000000');
+            }
+            let update = {'marker':{color: colours, size: 15}};
+            Plotly.restyle('scatterPlot', update, 1);
+        }
+
+        async function updateTrace(val){
+            let query_url = new URL(trace_url);
+            if(val) {
+                query_url.searchParams.append('study_no', val);
+            }
+            trace_data = await getData(query_url);
+
+            let update = {
+                'x': [trace_data.x],
+                'y': [trace_data.y],
+                name: trace_data.study_no
+            };
+            $( "#dateSlider" ).slider({
+                max: trace_data.x.length,
+                value: 1
+            });
+            $('#dispDate b').text( trace_data.date[0] );
+
+            await Plotly.restyle('scatterPlot', update, 1);
+            updateColour(1, trace_data.x.length);
+        }
+
+        function submitForm() {
+            let form = document.getElementById("studynoForm");
+            updateTrace(form.elements[0].value)
+        }
+
+        function resizePlot() {
+            let width = $("#scatterPlot").parent().width();
+            let height = $("#scatterPlot").parent().height();
+            Plotly.relayout('scatterPlot', {
+                width: width,
+                height: height
+            })
+        }
+
+        async function main() {
+
+            const scatter_data = await getData(data_url)
+
+            let general_trace = {
+                x: scatter_data.x,
+                y: scatter_data.y,
+                mode: 'markers',
+                type: 'scatter',
+                marker: {
+                    color: '#1f77b4'
+                },
+                name: 'All data'
+            };
+
+            let patient_trace = {
+                x: [],
+                y: [],
+                mode: 'lines+markers',
+                type: 'scatter',
+                marker: {
+                    size: 15,
+                    color: '#000000'
+                },
+                line: {
+                    color: '#000000'
+                }
+            };
+
+            let layout = {
+                hovermode:'closest',
+                title:'Auto-Encoder - Latent dimension',
+                margin: {
+                    t: 50,
+                    l: 50,
+                    r: 50,
+                    b: 50
+                }
+            };
+
+            Plotly.newPlot('scatterPlot', [general_trace, patient_trace], layout);
+            window.addEventListener('resize', resizePlot);
+            $(".sidebar-toggle").click(function(){
+                resizePlot();
+            });
+
+            $('#listenSlider').change(function() {
+                updateColour(this.value, this.max);
+                $('#dispDate b').text( trace_data.date[this.value-1] );
+            });
+        }
+
+        main();
+
+    </script>
+
+
+</head>
+<body>
+<section class="body">
+    <div class="inner-wrapper">
+        <!-- start: sidebar -->
+        <aside id="sidebar-left" class="sidebar-left" style="top: 0px">
+
+            <div class="sidebar-header">
+                <div class="sidebar-title" style="color: #FFFFFF">
+                    Navigation
+                </div>
+                <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
+
+            <div class="nano">
+                <div class="nano-content">
+                    <nav id="menu" class="nav-main" role="navigation">
+                        <ul class="nav nav-main">
+                            <li>
+                                <a href="/">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-parent nav-expanded nav-active">
+                                <a>
+                                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                                    <span>Applications</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a href="similarity-retrieval">
+                                            Similarity retrieval
+                                        </a>
+                                    </li>
+                                    <li class="nav-active">
+                                        <a href="trace">
+                                            Patient trace
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </aside>
+        <!-- end: sidebar -->
+
+        <section role="main" class="content-body">
+            <header class="page-header" style="top: 0px">
+                <h2>Patient trace</h2>
+            </header>
+
+            <!-- start: page -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div id='scatterPlot'></div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="dateSlider" class="mt-lg mb-lg slider-primary" data-plugin-slider data-plugin-options='{ "value": 1, "range": "min", "min":1, "max": 1 }' data-plugin-slider-output="#listenSlider">
+                                        <input id="listenSlider" type="hidden" value="1" />
+                                    </div>
+                                    <p id="dispDate" class="output">Date: <b></b></p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="studynoForm" action="javascript:submitForm()" class="form-horizontal">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        <h2 class="panel-title">Patient search</h2>
+                                        <p class="panel-subtitle">
+                                            Display a patient's trace using their <code>study_no</code>.
+                                        </p>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Study number <span class="required">*</span></label>
+                                                <input type="text" name="form_studyno" class="form-control" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <footer class="panel-footer">
+                                        <button class="btn btn-primary">Submit </button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </footer>
+                                </section>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="fa fa-caret-down"></a>
+                                        <a href="#" class="fa fa-times"></a>
+                                    </div>
+
+                                    <h2 class="panel-title">Random search</h2>
+                                    <p class="panel-subtitle">Display a random patient trace or select the example trace <code>06dx-06DXA249</code></p>
+                                </header>
+                                <div class="panel-body">
+                                    <button type="button" class="mb-xs mt-xs mr-xs btn btn-default btn-lg btn-block" onclick="updateTrace();">Randomise</button>
+                                    <button type="button" class="mb-xs mt-xs mr-xs btn btn-default btn-lg btn-block" onclick="updateTrace('06dx-06DXA249');">06dx-06DXA249</button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: page -->
+        </section>
+    </div>
+</section>
+
+<!-- Vendor -->
+<script src="assets/vendor/jquery/jquery.js"></script>
+<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+<!-- Specific Page Vendor -->
+<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+<script src="assets/vendor/store-js/store.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="assets/javascripts/theme.js"></script>
+
+<!-- Sliders -->
+<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+
+<!-- Theme Custom -->
+<script src="assets/javascripts/theme.custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="assets/javascripts/theme.init.js"></script>
+
+</body>
+</html>
