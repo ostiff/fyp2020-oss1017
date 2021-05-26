@@ -38,8 +38,6 @@
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--    <link rel="stylesheet" href="assets/custom/styles/style.css">-->
-
 
     <script>
 
@@ -83,6 +81,16 @@
             updatePage(query_url);
         }
 
+        function resizePlot() {
+            var width = $("#scatterPlot").parent().width();
+            var height = $("#scatterPlot").parent().height();
+            Plotly.relayout('scatterPlot', {
+                width: width,
+                height: height
+            })
+        }
+
+
         async function main() {
 
             const scatter_data = await getData(data_url)
@@ -114,7 +122,10 @@
             };
 
             Plotly.newPlot('scatterPlot', [data], layout);
-
+            window.addEventListener('resize', resizePlot);
+            $(".sidebar-toggle").click(function(){
+                resizePlot();
+            });
             let scatterPlot = document.getElementById('scatterPlot');
 
             let k = $( "#selectK" ).slider( "option", "value" );
@@ -142,6 +153,12 @@
         main();
 
     </script>
+
+    <style>
+        div.plotly-notifier {
+            visibility: hidden;
+        }
+    </style>
 
 </head>
 <body>
