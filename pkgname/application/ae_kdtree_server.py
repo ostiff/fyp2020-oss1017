@@ -50,21 +50,13 @@ app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 # Render Pages
 # ------------
 
-@app.route('/dashboard')
+@app.route('/')
 def dashboard():
     return render_template('dashboard.html')
 
 @app.route('/similarity-retrieval')
 def similarity_retrieval():
     return render_template('similarity_retrieval.html')
-
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-@app.route('/knn')
-def knn():
-    return render_template('ae_kd_tree_client.html')
 
 @app.route('/trace')
 def trace():
