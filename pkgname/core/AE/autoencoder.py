@@ -23,8 +23,9 @@ class Autoencoder(nn.Module):
         prev = input_size
         for l in layers:
             enc.append(nn.Linear(prev, prev:=l))
-            enc.append(nn.ReLU())
+            enc.append(nn.Sigmoid())
         enc.append(nn.Linear(prev, latent_dim))
+        enc.append(nn.Sigmoid())
 
         self.encoder = nn.Sequential(*enc)
 
@@ -32,7 +33,7 @@ class Autoencoder(nn.Module):
         prev = latent_dim
         for l in reversed(layers):
             dec.append(nn.Linear(prev, prev:=l))
-            dec.append(nn.ReLU())
+            dec.append(nn.Sigmoid())
 
         dec.append(nn.Linear(prev, input_size))
         dec.append(nn.Sigmoid())

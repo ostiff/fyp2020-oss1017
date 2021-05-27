@@ -37,8 +37,8 @@ from tqdm import tqdm
 import matplotlib
 matplotlib.use('Agg')
 
-layers_list = [[],[5],[4],[3],[5,4],[5,3],[4,3],[5,4,3],[4,4,3,3]]
-learning_rates = [0.005,0.001,0.0005,0.0001,0.00005,0.00001]
+layers_list = [[],[5],[4],[3],[5,4],[5,3],[4,3],[5,4,3]]
+learning_rates = [0.1, 0.05, 0.01, 0.005,0.001,0.0005,0.0001,0.00005,0.00001]
 epochs_list = [10, 30, 50, 100, 150, 250, 350, 500]
 b_size_list = [16, 32]
 
@@ -47,10 +47,10 @@ grid_search = [[lay, epochs, lr, b_size] for lay in layers_list
                  for lr in learning_rates
                  for b_size in b_size_list]
 
-start_idx = 689
+start_idx = 0
 
 for lay, epochs, lr, b_size in tqdm(grid_search[start_idx:]):
-    with Logger('AE_Dengue_grid_search', enable=True) as logger, suppress_stdout(), suppress_stderr():
+    with Logger('AE_Dengue_grid_search_sigmoid', enable=True) as logger, suppress_stdout(), suppress_stderr():
         try:
             SEED = 0
             N_CLUSTERS = 3
