@@ -16,149 +16,18 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
-
-    <link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css">
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/theme.css" />
-
-    <!-- Skin CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
-
-    <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+    <link rel="stylesheet" href="assets/stylesheets/theme.min.css" />
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.min.css" />
+    <link rel="stylesheet" href="assets/custom/styles/style.css">
 
     <!-- Head Libs -->
-    <script src="assets/vendor/modernizr/modernizr.js"></script>
-
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-    <script>
-
-        const data_url = "http://127.0.0.1:5000/get_data";
-        const KDTree_url = "http://127.0.0.1:5000/get_k_nearest"
-        const encPatient_url = "http://127.0.0.1:5000/enc_patient"
-
-        let N = 0;
-
-        async function getData(url) {
-            let response = await fetch(url);
-            return await response.json();
-        }
-
-        function updatePage(url) {
-            let tableSummary = document.getElementById("tableSummary");
-            getData(url).then((data) => {
-                let colours = Array(N).fill('#1f77b4');
-                for(let i=0; i < data.idx[0].length; i++){
-                    colours[data.idx[0][i]] = '#ff7f0e';
-                }
-
-                let update = {'marker':{color: colours}};
-                Plotly.restyle('scatterPlot', update, 0);
-
-                tableSummary.innerHTML = data.table;
-            });
-        }
-
-        function encPatient() {
-            let form = document.getElementById("encode-form");
-            let query_url = new URL(encPatient_url);
-            query_url.searchParams.append('k', $( "#selectK" ).slider( "option", "value" ));
-
-            let params = ["age", "weight", "plt", "hct", "b_temp"];
-
-            for (let i = 0; i < form.length - 1 ;i++) {
-                query_url.searchParams.append(params[i], form.elements[i].value);
-            }
-
-            updatePage(query_url);
-        }
-
-        function resizePlot() {
-            let width = $("#scatterPlot").parent().width();
-            let height = $("#scatterPlot").parent().height();
-            Plotly.relayout('scatterPlot', {
-                width: width,
-                height: height
-            })
-        }
-
-
-        async function main() {
-
-            const scatter_data = await getData(data_url)
-            N = scatter_data.x.length;
-
-            let data = {
-                x: scatter_data.x,
-                y: scatter_data.y,
-                mode: 'markers',
-                type: 'scatter',
-                marker: {
-                    color: '#1f77b4'
-                }
-            };
-
-            let layout = {
-                hovermode:'closest',
-                title:'Auto-Encoder - Latent dimension',
-                // yaxis: {
-                //     automargin: true,
-                //     scaleanchor: "x",
-                // },
-                margin: {
-                    t: 50,
-                    l: 50,
-                    r: 50,
-                    b: 50
-                }
-            };
-
-            Plotly.newPlot('scatterPlot', [data], layout);
-            window.addEventListener('resize', resizePlot);
-            $(".sidebar-toggle").click(function(){
-                resizePlot();
-            });
-            let scatterPlot = document.getElementById('scatterPlot');
-
-            let k = $( "#selectK" ).slider( "option", "value" );
-
-            $( "#selectK" ).slider({
-                max: N-1
-            });
-
-            $('#listenSlider').change(function() {
-                $('.output b').text( this.value );
-                k = this.value;
-            });
-
-
-            scatterPlot.on('plotly_click', function(data){
-                let id = data.points[0].pointIndex;
-                let query_url = new URL(KDTree_url);
-                query_url.searchParams.append('id', id);
-                query_url.searchParams.append('k', k);
-
-                updatePage(query_url);
-            });
-        }
-
-        main();
-
-    </script>
-
-    <style>
-        div.plotly-notifier {
-            visibility: hidden;
-        }
-    </style>
+    <script src="assets/vendor/modernizr/modernizr.min.js"></script>
 
 </head>
 <body>
@@ -327,46 +196,19 @@
     </div>
 </section>
 
-<!-- Vendor -->
-<script src="assets/vendor/jquery/jquery.js"></script>
-<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
-<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
-<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
-<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+<!--Page script-->
+<script src='assets/custom/script/similarity_retrieval.min.js'></script>
 
-<!-- Specific Page Vendor -->
-<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
-<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
-<script src="assets/vendor/store-js/store.js"></script>
+<!-- Vendor -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js" integrity="sha512-Z1AU18k/qc1YyEkZkh+pTQ2I95w76DTli3cpFe03jaYTyX+Rsmvh5ZnTmi4Zg8gBc1QGbcwgpN0o1t9b9L1B2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Theme Base, Components and Settings -->
-<script src="assets/javascripts/theme.js"></script>
-
-<!-- Sliders -->
-<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
-<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
-
-<!--Form validation-->
-<script src="assets/vendor/jquery-validation/jquery.validate.js"></script>
-
-<!-- Theme Custom -->
-<script src="assets/javascripts/theme.custom.js"></script>
-
-<!-- Theme Initialization Files -->
-<script src="assets/javascripts/theme.init.js"></script>
-
-<!--Validate form-->
-<script>
-    // validation summary
-    var $encodeForm = $("#encode-form");
-    $encodeForm.validate({
-        errorContainer: $encodeForm.find( 'div.validation-message' ),
-        errorLabelContainer: $encodeForm.find( 'div.validation-message ul' ),
-        wrapper: "li"
-    });
-</script>
+<script src="assets/javascripts/theme.min.js"></script>
+<script src="assets/javascripts/theme.init.min.js"></script>
 
 </body>
 </html>
