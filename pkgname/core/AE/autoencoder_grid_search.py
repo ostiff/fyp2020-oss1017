@@ -9,6 +9,10 @@ Attributes used in cluster comparison: `bleeding`, `shock`, `bleeding_gum`,
 `abdominal_pain`, `ascites`, `bleeding_mucosal`, `bleeding_skin`.
 
 """
+import logging
+logging.disable(logging.CRITICAL)
+
+
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
@@ -47,7 +51,7 @@ grid_search = [[lay, epochs, lr, b_size] for lay in layers_list
                  for lr in learning_rates
                  for b_size in b_size_list]
 
-start_idx = 0
+start_idx = 907
 
 for lay, epochs, lr, b_size in tqdm(grid_search[start_idx:]):
     with Logger('AE_Dengue_grid_search_sigmoid', enable=True) as logger, suppress_stdout(), suppress_stderr():
