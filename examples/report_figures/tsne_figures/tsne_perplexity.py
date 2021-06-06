@@ -4,12 +4,12 @@ import pickle
 import pandas as pd
 import numpy as np
 import seaborn as sns
+from seaborn import color_palette
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
-from seaborn import color_palette
 from pkgname.utils.data_loader import load_dengue, IQR_rule
-from pkgname.utils.plot_utils import adjust_lightness
 from definitions import ROOT_DIR
 
 sys.path.insert(0, os.path.abspath('.'))
@@ -104,16 +104,14 @@ for ax in axes:
 
 
 for i, (path, perp) in enumerate(paths):
-    # colours = np.array(color_palette('Set2').as_hex())
-    # colours = dict(zip(list(range(len(colours))), colours))
+    colours = np.array(color_palette('pastel').as_hex())
+    colours = dict(zip(list(range(len(colours))), colours))
 
     tsne_points = np.take(pickle.load(open(path, 'rb')), ind_list, axis=0)
 
     sns.scatterplot(ax=axes[i], x=tsne_points[:,0], y=tsne_points[:,1],
-                    hue=info['shock'],  linewidth=0, s=15, legend=(i==2))
+                    hue=info['shock'], palette=colours, linewidth=0, s=15, legend=(i==2))
     axes[i].set_title(f'Perplexity: {perp}')
 
-plt.legend(title='Shock', loc='upper right')
+plt.legend(title='Shock', loc='upper right',borderpad=0.2,labelspacing=0.2)
 fig.savefig("tsne_diff_perp.pdf", bbox_inches='tight')
-
-plt.show()

@@ -12,7 +12,7 @@ from sklearn import preprocessing
 from seaborn import color_palette
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from definitions import ROOT_DIR
-from sklearn.cluster import DBSCAN
+from sklearn.cluster import DBSCAN, KMeans
 
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -25,11 +25,9 @@ mpl.rcParams.update({
 })
 
 SEED = 0
-DBSCAN_eps = 4
-DBSCAN_min_samples = 10
 np.random.seed(SEED)
 
-TSNE_POINTS_PATH = os.path.join(ROOT_DIR, 'examples', 'report_figures', 'tsne_figures', 'perp_40')
+SOM_POINTS_PATH = os.path.join(ROOT_DIR, 'examples', 'report_figures', 'som_figures', 'som_embedded')
 
 features_labels = ["DSource", "Date", "Age", "Gender", "Weight", "Bleeding",
                    "Platelets", "Shock", "Haematocrit", "Bleeding gum", "Abdominal pain",
@@ -89,7 +87,7 @@ colours = np.array(color_palette('pastel').as_hex())
 labels = info['shock'].to_numpy().astype(int)
 
 # %%
-# t-SNE
+# SOM
 # -------
 
 
@@ -102,16 +100,12 @@ for ax in axes:
 for i in [3,12,15]:
     axes[i].axis('off')
 
-tsne_points = pickle.load(open(TSNE_POINTS_PATH, 'rb'))
+som_points = pickle.load(open(SOM_POINTS_PATH, 'rb'))
 
-clustering = DBSCAN(eps=DBSCAN_eps, min_samples=DBSCAN_min_samples).fit(tsne_points)
-outliers = -1 in clustering.labels_
-clusters = clustering.labels_
+clusters = KMeans(n_clusters=3, random_state=SEED).fit_predict(som_points)
 
 before_mapping['cluster'] = clusters
 
-if outliers:
-    before_mapping = before_mapping.loc[before_mapping['cluster'] != -1]
 
 # %%
 # Plotting
@@ -121,10 +115,7 @@ N_CLUSTERS = len(set(clusters))
 colours = colours[:N_CLUSTERS]
 
 
-if outliers:
-    labels = ["Outliers"] + [f"Cluster {i}" for i in range(N_CLUSTERS - 1)]
-else:
-    labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
+labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
 
 i = 0
 for feat in sorted(data_feat):
@@ -136,7 +127,9 @@ for feat in sorted(data_feat):
     if i == 2:
         c1 = mpatches.Patch(color=colours[0], label='Cluster 1')
         c2 = mpatches.Patch(color=colours[1], label='Cluster 2')
-        axes[3].legend(handles=[c1, c2], loc='center')
+        c3 = mpatches.Patch(color=colours[2], label='Cluster 3')
+
+        axes[3].legend(handles=[c1, c2, c3], loc='center')
         i += 1
     i += 1
 
@@ -153,27 +146,29 @@ for feat in sorted(info_feat):
         g.text(0, 0.75, 'Female', color='black', ha="center")
         g.text(1, 0.25, 'Male', color='black', ha="center")
         g.text(1, 0.75, 'Female', color='black', ha="center")
+        g.text(2, 0.25, 'Male', color='black', ha="center")
+        g.text(2, 0.75, 'Female', color='black', ha="center")
 
     axes[i].get_xaxis().set_ticks([])
     axes[i].set(xlabel=label_mapping[feat], ylabel=None)
 
     i += 1 if i != 11 else 2
 
-fig.savefig("tsne_cluster_stats.pdf", bbox_inches='tight')
-
-colours = np.array(sns.color_palette("pastel", as_cmap=True))
-colours = np.insert(colours, 0, "#737373")
-colours = dict(zip(list(range(-1, len(colours) - 1)), colours))
-
-plt.figure()
-ind_list = np.random.choice(len(df.index), 5000)
-tsne_points = np.take(tsne_points, ind_list, axis=0)
-clusters = np.take(clusters, ind_list, axis=0)
-scatter = sns.scatterplot(x=tsne_points[:, 0], y=tsne_points[:, 1],
-                          hue=clusters, palette=colours, linewidth=0,
-                          s=10)
-handles, _  =  scatter.get_legend_handles_labels()
-
-scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
-plt.savefig("tsne_dbscan.pdf", bbox_inches='tight')
-plt.show()
+fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
+#
+# colours = np.array(sns.color_palette("pastel", as_cmap=True))
+# colours = np.insert(colours, 0, "#737373")
+# colours = dict(zip(list(range(-1, len(colours) - 1)), colours))
+#
+# plt.figure()
+# ind_list = np.random.choice(len(df.index), 5000)
+# tsne_points = np.take(tsne_points, ind_list, axis=0)
+# clusters = np.take(clusters, ind_list, axis=0)
+# scatter = sns.scatterplot(x=tsne_points[:, 0], y=tsne_points[:, 1],
+#                           hue=clusters, palette=colours, linewidth=0,
+#                           s=10)
+# handles, _  =  scatter.get_legend_handles_labels()
+#
+# scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
+# plt.savefig("tsne_dbscan.pdf", bbox_inches='tight')
+# plt.show()
