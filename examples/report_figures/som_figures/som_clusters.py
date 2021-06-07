@@ -155,7 +155,7 @@ for feat in sorted(info_feat):
     i += 1 if i != 11 else 2
 
 fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
-#
+
 # colours = np.array(sns.color_palette("pastel", as_cmap=True))
 # colours = np.insert(colours, 0, "#737373")
 # colours = dict(zip(list(range(-1, len(colours) - 1)), colours))

@@ -7,6 +7,11 @@
 # Temporal files
 **/~*
 
+*/report_figures/**/*.png
+*/report_figures/**/*.pdf
+*/report_figures/*.png
+*/report_figures/*.pdf
+
 # Data files
 *.csv
 *.xlsx
