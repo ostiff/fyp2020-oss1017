@@ -28,7 +28,7 @@ from sklearn import mixture
 
 SEED = 0
 batch_size = 16
-MODEL_PATH = os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'model')
+MODEL_PATH = os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'sigmoid')
 N_CLUSTERS = 3
 # Set seed
 set_seed(SEED)
@@ -127,8 +127,8 @@ def plot_results(X, Y_, means, covariances, index, title):
         ell.set_alpha(0.5)
         splot.add_artist(ell)
 
-    plt.xlim(-3., 1.)
-    plt.ylim(-3.25, 0.5)
+    plt.xlim(0, 1.)
+    plt.ylim(0, 1)
     plt.xticks(())
     plt.yticks(())
     plt.title(title)

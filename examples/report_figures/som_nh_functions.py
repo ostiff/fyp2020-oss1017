@@ -1,5 +1,5 @@
 """
-Spearman's Rank Coefficient
+SOM neighbourhood functions
 ===========================
 
 """
