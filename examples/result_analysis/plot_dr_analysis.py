@@ -11,6 +11,7 @@ import sys
 import pickle
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from scipy import linalg
 import alphashape
 from scipy.spatial.distance import cdist
@@ -32,7 +33,13 @@ from definitions import ROOT_DIR
 
 sys.path.insert(0, os.path.abspath('.'))
 mpl.rcParams.update({'figure.autolayout': True})
-
+mpl.use("pgf")
+mpl.rcParams.update({
+    "pgf.texsystem": "pdflatex",
+    'font.family': 'serif',
+    'text.usetex': True,
+    'font.size': 18,
+})
 
 def plot_ellipse(means, covariances, plot, colours):
     areas = []
@@ -140,6 +147,40 @@ def eval_dim_reduction(original_points, original_dist, new_points, labels, label
 
     plt.show()
 
+    # REPORT FIG - DENSITY METRICS
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    for ax in axes:
+        ax.set(aspect='equal')
+        ax.set(xlim=(-0.1, 1.1), ylim=(-0.1, 1.1))
+        ax.get_xaxis().set_ticks([])
+        ax.get_yaxis().set_ticks([])
+
+    colours = dict(zip(list(range(0,len(colours))), colours))
+
+
+    plt.axes(axes[0])
+    sns.scatterplot(x=new_points[:, 0], y=new_points[:, 1], ax=axes[0],
+                    hue=labels, palette=colours, legend=False, linewidth=0)
+    plot_ellipse(means, covs, axes[0], outline_colours)
+    axes[0].set_title(r'GMM ratio')
+
+    plt.axes(axes[1])
+    sns.scatterplot(x=new_points[:, 0], y=new_points[:, 1], ax=axes[1],
+                    hue=labels, palette=colours, legend=False, linewidth=0)
+    plot_polygon(new_points, 0.0, outline_colours[0])
+    plot_polygon(new_points[labels == 1], 0.0, outline_colours[1])
+    axes[1].set_title(r'Convex hull ratio')
+
+    plt.axes(axes[2])
+    sns.scatterplot(x=new_points[:, 0], y=new_points[:, 1], ax=axes[2],
+                    hue=labels, palette=colours, legend=False, linewidth=0)
+    plot_polygon(new_points, 5.0, outline_colours[0])
+    plot_polygon(new_points[labels == 1], 5.0, outline_colours[1])
+    axes[2].set_title(r'Concave hull ratio')
+    fig.savefig("density_ratios.pdf", bbox_inches='tight')
+
+    plt.show()
+
     print()
 
 
@@ -222,7 +263,7 @@ scaled = scaler.transform(data)
 loader = DataLoader(scaled, batch_size, shuffle=False)
 og_dist = cdist(scaled, scaled).flatten()
 
-colours = np.array(color_palette('pastel', 2).as_hex())
+colours = np.array(color_palette('viridis', 2).as_hex())
 labels = info['shock'].to_numpy().astype(int)
 
 
@@ -238,29 +279,29 @@ encoded_ae = model.encode_inputs(loader)
 eval_dim_reduction(scaled, og_dist, encoded_ae, labels, 'shock', 'AE', colours)
 
 
-# %%
-# PCA
-# -------
-
-pca = PCA(n_components=2).fit(scaled)
-pca_points = pca.transform(scaled)
-
-eval_dim_reduction(scaled, og_dist, pca_points, labels, 'shock', 'PCA', colours)
-
-
-# %%
-# t-SNE
-# -------
-
-tsne_points = np.take(pickle.load(open(TSNE_POINTS_PATH, 'rb')), ind_list, axis=0)
-
-eval_dim_reduction(scaled, og_dist, tsne_points, labels, 'shock', 't-SNE', colours)
-
-
-# %%
-# SOM
-# -------
-
-som_points = np.take(pickle.load(open(SOM_POINTS_PATH, 'rb')), ind_list, axis=0)
-
-eval_dim_reduction(scaled, og_dist, som_points, labels, 'shock', 'SOM', colours)
+# # %%
+# # PCA
+# # -------
+#
+# pca = PCA(n_components=2).fit(scaled)
+# pca_points = pca.transform(scaled)
+#
+# eval_dim_reduction(scaled, og_dist, pca_points, labels, 'shock', 'PCA', colours)
+#
+#
+# # %%
+# # t-SNE
+# # -------
+#
+# tsne_points = np.take(pickle.load(open(TSNE_POINTS_PATH, 'rb')), ind_list, axis=0)
+#
+# eval_dim_reduction(scaled, og_dist, tsne_points, labels, 'shock', 't-SNE', colours)
+#
+#
+# # %%
+# # SOM
+# # -------
+#
+# som_points = np.take(pickle.load(open(SOM_POINTS_PATH, 'rb')), ind_list, axis=0)
+#
+# eval_dim_reduction(scaled, og_dist, som_points, labels, 'shock', 'SOM', colours)

@@ -10,19 +10,30 @@ import matplotlib.patches as mpatches
 
 from sklearn import preprocessing
 from seaborn import color_palette
+
+from core.evaluation.dr_evaluation import distance_metrics
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from definitions import ROOT_DIR
 from sklearn.cluster import DBSCAN, KMeans
 
 sys.path.insert(0, os.path.abspath('.'))
 
-mpl.use("pgf")
+# mpl.use("pgf")
+# mpl.rcParams.update({
+#     "pgf.texsystem": "pdflatex",
+#     'font.family': 'serif',
+#     'text.usetex': True,
+#     'font.size': 18,
+# })
+
+
 mpl.rcParams.update({
-    "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
-    'font.size': 18,
+    'font.weight': 'light',
+    'font.size': 16,
 })
+
+
 
 SEED = 0
 np.random.seed(SEED)
@@ -172,3 +183,8 @@ fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
 # scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
 # plt.savefig("tsne_dbscan.pdf", bbox_inches='tight')
 # plt.show()
+
+
+#SHEPPARD
+_, fig = distance_metrics(scaled, som_points, 6000, '', verbose=False)
+fig.savefig("som_sheppard.png", bbox_inches='tight', dpi=300)

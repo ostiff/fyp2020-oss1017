@@ -7,6 +7,7 @@ import sys
 import pickle
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from scipy import linalg
 import alphashape
 from scipy.spatial.distance import cdist
@@ -27,7 +28,7 @@ from pkgname.utils.plot_utils import adjust_lightness
 from definitions import ROOT_DIR
 
 sys.path.insert(0, os.path.abspath('.'))
-mpl.rcParams.update({'figure.autolayout': True})
+mpl.rcParams.update({'font.family': 'serif'})
 
 
 def plot_ellipse(means, covariances, plot, colours):
@@ -83,15 +84,17 @@ def distance_metrics(original_data, reduced_data, n_points, method_name, verbose
     rows = 1
     cols = 1
 
-    fig = plt.figure(figsize=(4,4), dpi=300)
-    fig.tight_layout()
+    # fig = plt.figure(figsize=(4,4), dpi=300)
+    # fig.tight_layout()
 
     # Sheppard Diagram
-    plt.subplot(rows, cols, 1)
-    plt.scatter(new_dist, original_dist, s=1)
+    # plt.subplot(rows, cols, 1)
+    fig = plt.figure()
+    sns.scatterplot(x=new_dist, y=original_dist, color=".3", linewidth=0, s=1)
+    # plt.scatter(new_dist, original_dist, s=1)
     plt.xlabel("Encoded points distance")
     plt.ylabel("Original distance (scaled data)")
-    plt.title(f"Sheppard diagram ({method_name})")
+    # plt.title(f"Sheppard diagram ({method_name})")
 
     # Correlation old vs new distances
     pearson = pearsonr(original_dist, new_dist)

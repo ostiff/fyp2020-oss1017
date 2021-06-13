@@ -118,7 +118,7 @@ colours = np.array(color_palette('pastel').as_hex())
 # AE
 # -------
 
-
+# OVERALL CLUSTER COMP.
 fig, axes = plt.subplots(4, 4, figsize=(15, 15))
 fig.tight_layout()
 axes=axes.flatten()
@@ -132,8 +132,14 @@ for i in [3,12,15]:
 gmm = mixture.GaussianMixture(n_components=3,
                                         covariance_type='full', random_state=SEED).fit(ae_points)
 clusters = gmm.predict(ae_points)
-before_mapping['cluster'] = clusters
+# clusters_k_means = KMeans(n_clusters=3, random_state=SEED).fit_predict(ae_points)
 
+
+before_mapping['cluster'] = clusters
+before_mapping['cluster'] = before_mapping['cluster'].replace([1, 2], [2, 1])
+
+print(before_mapping[(before_mapping.shock > 0) & (before_mapping.cluster == 1)].shape[0])
+print(before_mapping[before_mapping.cluster == 1].shape[0])
 
 # %%
 # Plotting
@@ -184,7 +190,7 @@ for feat in sorted(info_feat):
 
 fig.savefig("ae_cluster_stats.pdf", bbox_inches='tight')
 
-
+# SHOCK CLUSTER COMP
 fig, axes = plt.subplots(1, 6, figsize=(15, 4))
 fig.tight_layout()
 axes=axes.flatten()
@@ -212,7 +218,7 @@ fig.savefig("ae_cluster0_shock.pdf", bbox_inches='tight')
 
 
 
-
+#GMM
 colours = np.array(sns.color_palette("pastel", as_cmap=True))
 # colours = np.insert(colours, 0, "#737373")
 colours = dict(zip(list(range(len(colours))), colours))
@@ -235,6 +241,29 @@ plot_results(ae_points_subset, clusters, gmm.means_, gmm.covariances_, colours, 
 plt.savefig("ae_gmm.pdf", bbox_inches='tight')
 # plt.show()
 
+#KMEANS
 
+# clusters_k_means = np.take(clusters_k_means, ind_list, axis=0)
+# plt.figure()
+# splot = sns.scatterplot(x=ae_points_subset[:, 0], y=ae_points_subset[:, 1], hue=clusters_k_means, palette=colours,
+#                             linewidth=0, s=10)
+# handles, _ = splot.get_legend_handles_labels()
+# splot.legend(handles, labels, loc='lower right', borderpad=0.2, labelspacing=0.2)
+# plt.savefig("ae_kmeans.pdf", bbox_inches='tight')
+
+
+#SHEPPARD
 # _, fig = distance_metrics(scaled, ae_points, 6000, '', verbose=False)
 # fig.savefig("ae_sheppard.png", bbox_inches='tight', dpi=300)
+
+# SHOCK LABEL
+shock = np.take(before_mapping['shock'].to_numpy(), ind_list, axis=0)
+plt.figure()
+splot = sns.scatterplot(x=ae_points_subset[:, 0], y=ae_points_subset[:, 1], hue=shock, palette='pastel',
+                            linewidth=0, s=10)
+legend_colours = np.array(color_palette('pastel').as_hex())
+
+plt.legend(title='Shock', loc='lower right',borderpad=0.2,labelspacing=0.2)
+
+
+plt.savefig("ae_sig_shock.pdf", bbox_inches='tight')
