@@ -157,6 +157,8 @@ if __name__ == "__main__":
     SEED = 0
     batch_size = 16
     MODEL_PATH = os.path.join(ROOT_DIR, 'examples', 'autoencoder', 'model')
+    MODEL_PATH = os.path.join(ROOT_DIR, 'pkgname', 'application', 'ae_sig_3')
+
     LEAF_SIZE = 40
 
     # Set seed
