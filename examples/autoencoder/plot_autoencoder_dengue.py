@@ -27,7 +27,7 @@ from pkgname.utils.data_loader import load_dengue, IQR_rule
 from pkgname.utils.plot_utils import plotBox, formatTable, colours
 from pkgname.utils.log_utils import Logger
 
-logger = Logger('AE_Dengue', enable=True)
+logger = Logger('AE_Dengue', enable=False)
 
 SEED = 0
 N_CLUSTERS = 3
@@ -38,8 +38,8 @@ set_seed(SEED)
 # Get device
 device = get_device(usegpu=False)
 
-num_epochs = 150
-learning_rate = 0.00005
+num_epochs = 250
+learning_rate = 0.0001
 batch_size = 16
 latent_dim = 2
 
@@ -102,7 +102,7 @@ loader_train_no_shuffle = DataLoader(train_scaled, batch_size, shuffle=False)
 
 # Additional parameters
 input_size = len(data_feat)
-layers=[5]
+layers=[3]
 model = Autoencoder(input_size=input_size,
                     layers=layers,
                     latent_dim=latent_dim,
