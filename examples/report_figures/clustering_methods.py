@@ -1,3 +1,9 @@
+"""
+Clustering method comparison
+============================
+
+"""
+
 import numpy as np
 import seaborn as sns
 import matplotlib
@@ -6,11 +12,11 @@ import matplotlib.pyplot as plt
 from sklearn import cluster, datasets, mixture
 from sklearn.preprocessing import StandardScaler
 
-matplotlib.use("pgf")
+# matplotlib.use("pgf")
 matplotlib.rcParams.update({
-    "pgf.texsystem": "pdflatex",
+    # "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
+    # 'text.usetex': True,
 })
 
 SEED = 1
@@ -76,8 +82,6 @@ for i_dataset, (dataset, params) in enumerate(datasets):
 
         plot_num += 1
 
-# plt.show()
 fig.tight_layout(h_pad=1, w_pad=2)
-
-
-fig.savefig("clustering_methods.pdf", bbox_inches='tight')
+# fig.savefig("clustering_methods.pdf", bbox_inches='tight')
+plt.show()

@@ -1,6 +1,6 @@
 """
-Spearman's Rank Coefficient
-===========================
+Spearman's Rank Correlation Coefficient
+=======================================
 
 """
 
@@ -9,11 +9,11 @@ import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use("pgf")
+# matplotlib.use("pgf")
 matplotlib.rcParams.update({
-    "pgf.texsystem": "pdflatex",
+    # "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
+    # 'text.usetex': True,
     'font.size': 18,
     'pgf.rcfonts': False
 })
@@ -42,4 +42,5 @@ axes[1].set_title(r'$\rho \approx 0$')
 sns.scatterplot(ax=axes[2], x=x, y=y_neg_corr, color=".3")
 axes[2].set_title(r'$\rho = -1$')
 
-fig.savefig("spearman_corr.pdf", bbox_inches='tight')
+# fig.savefig("spearman_corr.pdf", bbox_inches='tight')
+plt.show()

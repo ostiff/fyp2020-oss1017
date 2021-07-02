@@ -9,11 +9,11 @@ import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use("pgf")
+# matplotlib.use("pgf")
 matplotlib.rcParams.update({
-    "pgf.texsystem": "pdflatex",
+    # "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
+    # 'text.usetex': True,
     'font.size': 18,
     'pgf.rcfonts': False
 })
@@ -52,5 +52,5 @@ sns.lineplot(ax=axes[1], x=x, y=sigmoid(x), color=".3")
 axes[1].set_title(r'Sigmoid')
 
 
-fig.savefig("ae_activation_functions.pdf", bbox_inches='tight')
+# fig.savefig("ae_activation_functions.pdf", bbox_inches='tight')
 plt.show()

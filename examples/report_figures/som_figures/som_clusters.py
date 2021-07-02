@@ -1,3 +1,9 @@
+"""
+SOM experiment figures
+======================
+
+"""
+
 import os
 import sys
 import pickle
@@ -10,24 +16,35 @@ import matplotlib.patches as mpatches
 
 from sklearn import preprocessing
 from seaborn import color_palette
+
+from core.evaluation.dr_evaluation import distance_metrics
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from definitions import ROOT_DIR
 from sklearn.cluster import DBSCAN, KMeans
 
 sys.path.insert(0, os.path.abspath('.'))
 
-mpl.use("pgf")
+# mpl.use("pgf")
+# mpl.rcParams.update({
+#     "pgf.texsystem": "pdflatex",
+#     'font.family': 'serif',
+#     'text.usetex': True,
+#     'font.size': 18,
+# })
+
+
 mpl.rcParams.update({
-    "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
-    'font.size': 18,
+    'font.weight': 'light',
+    'font.size': 16,
 })
+
+
 
 SEED = 0
 np.random.seed(SEED)
 
-SOM_POINTS_PATH = os.path.join(ROOT_DIR, 'examples', 'report_figures', 'som_figures', 'som_embedded')
+SOM_POINTS_PATH = os.path.join(ROOT_DIR, 'examples', 'report_figures', 'som_figures', 'som_embedded_bubble')
 
 features_labels = ["DSource", "Date", "Age", "Gender", "Weight", "Bleeding",
                    "Platelets", "Shock", "Haematocrit", "Bleeding gum", "Abdominal pain",
@@ -115,7 +132,7 @@ N_CLUSTERS = len(set(clusters))
 colours = colours[:N_CLUSTERS]
 
 
-labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
+labels = [f"Cluster {i}" for i in range(1,N_CLUSTERS+1)]
 
 i = 0
 for feat in sorted(data_feat):
@@ -154,21 +171,36 @@ for feat in sorted(info_feat):
 
     i += 1 if i != 11 else 2
 
-fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
+# fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
+plt.show()
 
-# colours = np.array(sns.color_palette("pastel", as_cmap=True))
-# colours = np.insert(colours, 0, "#737373")
-# colours = dict(zip(list(range(-1, len(colours) - 1)), colours))
-#
-# plt.figure()
-# ind_list = np.random.choice(len(df.index), 5000)
-# tsne_points = np.take(tsne_points, ind_list, axis=0)
-# clusters = np.take(clusters, ind_list, axis=0)
-# scatter = sns.scatterplot(x=tsne_points[:, 0], y=tsne_points[:, 1],
-#                           hue=clusters, palette=colours, linewidth=0,
-#                           s=10)
-# handles, _  =  scatter.get_legend_handles_labels()
-#
-# scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
-# plt.savefig("tsne_dbscan.pdf", bbox_inches='tight')
-# plt.show()
+
+# %%
+# SOM k-means Clustering
+# -----------------------
+
+colours = np.array(sns.color_palette("pastel", as_cmap=True))
+colours = np.insert(colours, 0, "#737373")
+colours = dict(zip(list(range(-1, len(colours) - 1)), colours))
+
+plt.figure(figsize=(15,4))
+ind_list = np.random.choice(len(df.index), 5000)
+som_points_sampled = np.take(som_points, ind_list, axis=0)
+clusters = np.take(clusters, ind_list, axis=0)
+scatter = sns.scatterplot(x=som_points_sampled[:, 0], y=som_points_sampled[:, 1],
+                          hue=clusters, palette=colours, linewidth=0,
+                          s=60)
+handles, _  =  scatter.get_legend_handles_labels()
+
+scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
+# plt.savefig("som_k_means.pdf", bbox_inches='tight')
+plt.show()
+
+
+# %%
+# SOM Sheppard Diagram
+# --------------------
+
+_, fig = distance_metrics(scaled, som_points, 6000, '', verbose=False)
+# fig.savefig("som_sheppard.png", bbox_inches='tight', dpi=300)
+plt.show()
