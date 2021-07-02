@@ -1,3 +1,11 @@
+"""
+SOM dimension analysis
+======================
+
+Results of analysis of SOM dimensions on metrics.
+
+"""
+
 import os
 import sys
 import pandas as pd
@@ -8,20 +16,20 @@ import matplotlib.pyplot as plt
 
 sys.path.insert(0, os.path.abspath('.'))
 
-mpl.use("pgf")
-mpl.rcParams.update({
-    "pgf.texsystem": "pdflatex",
-    'font.family': 'serif',
-    'text.usetex': True,
-    'font.size': 18,
-})
-
-
+# mpl.use("pgf")
 # mpl.rcParams.update({
+#     "pgf.texsystem": "pdflatex",
 #     'font.family': 'serif',
-#     'font.weight': 'light',
-#     'font.size': 16,
+#     'text.usetex': True,
+#     'font.size': 18,
 # })
+
+
+mpl.rcParams.update({
+    'font.family': 'serif',
+    'font.weight': 'light',
+    'font.size': 16,
+})
 
 NUM_NODE_DATA = {
     'n_nodes': [100,169,225,324,400,625,900,1225,1600,2025,2500],
@@ -38,9 +46,13 @@ SIDES_RATIO_DATA = {
 }
 
 
+# %%
+# Number of nodes impact on distance metrics
+# -------------------------------------------
+
 df = pd.DataFrame(data=NUM_NODE_DATA)
 
-# Number of nodes impact on distance metrics
+
 plt.figure()
 sns.lineplot(data=df, x="n_nodes", y="correlation", label="Pearson correlation")
 sns.lineplot(data=df, x="n_nodes", y="procrustes", label="Procrustes disparity")
@@ -48,20 +60,24 @@ plt.legend()
 plt.xlabel("Number of nodes")
 plt.ylabel("Metric value")
 plt.axvline(602, 0, 1, c='r', ls='--')
-plt.savefig("som_n_nodes_dist.pdf", bbox_inches='tight')
+# plt.savefig("som_n_nodes_dist.pdf", bbox_inches='tight')
 plt.show()
 
 
+# %%
+# Impact of ratio of sides on density metrics
+# -------------------------------------------
+
 df = pd.DataFrame(data=SIDES_RATIO_DATA)
 
-# Impact of ratio of sides on density metrics
+
 plt.figure()
 sns.lineplot(data=df, x="ratio", y="gmm", label="GMM ratio")
 plt.legend()
 plt.xlabel("Ratio of sides ($X / Y$)")
 plt.ylabel("Metric result")
 plt.axvline(4.334411446, 0, 1, c='r', ls='--')
-plt.savefig("som_ratio_density.pdf", bbox_inches='tight')
+# plt.savefig("som_ratio_density.pdf", bbox_inches='tight')
 plt.show()
 
 

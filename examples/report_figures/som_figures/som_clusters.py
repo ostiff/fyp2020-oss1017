@@ -1,3 +1,9 @@
+"""
+SOM experiment figures
+======================
+
+"""
+
 import os
 import sys
 import pickle
@@ -18,20 +24,20 @@ from sklearn.cluster import DBSCAN, KMeans
 
 sys.path.insert(0, os.path.abspath('.'))
 
-mpl.use("pgf")
-mpl.rcParams.update({
-    "pgf.texsystem": "pdflatex",
-    'font.family': 'serif',
-    'text.usetex': True,
-    'font.size': 18,
-})
-
-
+# mpl.use("pgf")
 # mpl.rcParams.update({
+#     "pgf.texsystem": "pdflatex",
 #     'font.family': 'serif',
-#     'font.weight': 'light',
-#     'font.size': 16,
+#     'text.usetex': True,
+#     'font.size': 18,
 # })
+
+
+mpl.rcParams.update({
+    'font.family': 'serif',
+    'font.weight': 'light',
+    'font.size': 16,
+})
 
 
 
@@ -165,7 +171,13 @@ for feat in sorted(info_feat):
 
     i += 1 if i != 11 else 2
 
-fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
+# fig.savefig("som_cluster_stats.pdf", bbox_inches='tight')
+plt.show()
+
+
+# %%
+# SOM k-means Clustering
+# -----------------------
 
 colours = np.array(sns.color_palette("pastel", as_cmap=True))
 colours = np.insert(colours, 0, "#737373")
@@ -173,18 +185,22 @@ colours = dict(zip(list(range(-1, len(colours) - 1)), colours))
 
 plt.figure(figsize=(15,4))
 ind_list = np.random.choice(len(df.index), 5000)
-som_points = np.take(som_points, ind_list, axis=0)
+som_points_sampled = np.take(som_points, ind_list, axis=0)
 clusters = np.take(clusters, ind_list, axis=0)
-scatter = sns.scatterplot(x=som_points[:, 0], y=som_points[:, 1],
+scatter = sns.scatterplot(x=som_points_sampled[:, 0], y=som_points_sampled[:, 1],
                           hue=clusters, palette=colours, linewidth=0,
                           s=60)
 handles, _  =  scatter.get_legend_handles_labels()
 
 scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
-plt.savefig("som_k_means.pdf", bbox_inches='tight')
+# plt.savefig("som_k_means.pdf", bbox_inches='tight')
 plt.show()
 
 
-#SHEPPARD
-# _, fig = distance_metrics(scaled, som_points, 6000, '', verbose=False)
+# %%
+# SOM Sheppard Diagram
+# --------------------
+
+_, fig = distance_metrics(scaled, som_points, 6000, '', verbose=False)
 # fig.savefig("som_sheppard.png", bbox_inches='tight', dpi=300)
+plt.show()
