@@ -1,0 +1,9 @@
+@media only screen and (min-width: 768px) {
+    html.fixed .inner-wrapper {
+        padding-top: 54px;
+    }
+}
+
+div.plotly-notifier {
+    visibility: hidden;
+}
