@@ -1,0 +1,14 @@
+
+:orphan:
+
+.. _sphx_glr__examples_report_figures_som_figures_sg_execution_times:
+
+Computation times
+=================
+**00:27.504** total execution time for **_examples_report_figures_som_figures** files:
+
++----------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_report_figures_som_figures_plot_som_clusters.py` (``plot_som_clusters.py``)     | 00:27.277 | 0.0 MB |
++----------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_report_figures_som_figures_plot_som_dimensions.py` (``plot_som_dimensions.py``) | 00:00.227 | 0.0 MB |
++----------------------------------------------------------------------------------------------------------+-----------+--------+

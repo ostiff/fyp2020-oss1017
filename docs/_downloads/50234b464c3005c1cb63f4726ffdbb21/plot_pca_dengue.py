@@ -8,18 +8,27 @@ Training attributes: `age`, `weight`, `plt`, `haematocrit_percent`,
 
 """
 
+import warnings
 import pandas as pd
 import numpy as np
+from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+from tableone import TableOne
 
-from pkgname.core.AE.autoencoder import  set_seed
+from pkgname.core.AE.autoencoder import set_seed
 from pkgname.utils.data_loader import load_dengue, IQR_rule
+from pkgname.utils.plot_utils import plotBox, formatTable, colours
+from pkgname.utils.log_utils import Logger
 
+import pkgname.core.evaluation.dr_evaluation as dr_evaluation
 
+logger = Logger('PCA_Dengue', enable=False)
 SEED = 0
+N_CLUSTERS = 3
 
 # Set seed
 set_seed(SEED)
@@ -76,21 +85,126 @@ scaler = preprocessing.StandardScaler().fit(train_data)
 train_scaled = scaler.transform(train_data.to_numpy())
 test_scaled = scaler.transform(test_data.to_numpy())
 
-pca = PCA(n_components=2)
-X = pca.fit(train_scaled).transform(train_scaled)
-y = train_info['shock'].to_numpy()
+pca = PCA(n_components=2).fit(train_scaled)
+encoded_test = pca.transform(test_scaled)
+encoded_train = pca.transform(train_scaled)
 
 # Percentage of variance explained for each components
 print('explained variance ratio (first two components): %s'
       % str(pca.explained_variance_ratio_))
 
-plt.figure()
-colors = ['navy', 'turquoise']
-lw = 2
 
-for color, i, target_name in zip(colors, [0, 1], ['No shock', 'shock']):
-    plt.scatter(X[y == i, 0], X[y == i, 1], color=color, alpha=.8, lw=lw,
-                label=target_name)
-plt.legend(loc='best', shadow=False, scatterpoints=1)
-plt.title('PCA of Dengue dataset')
+# Evaluate dimensionality reduction
+# Distance metrics
+res, fig = dr_evaluation.distance_metrics(train_scaled, encoded_train, n_points=1000, method_name='PCA', verbose=True)
+logger.add_plt(plt.gcf(), ext='png')
 plt.show()
+logger.add_parameters(res)
+
+# Density metrics
+res, fig = dr_evaluation.density_metrics(train_info, encoded_train, ["shock", "bleeding", "bleeding_gum", "abdominal_pain", "ascites",
+           "bleeding_mucosal", "bleeding_skin"], 'PCA')
+logger.add_plt(plt.gcf(), ext='png')
+plt.show()
+logger.add_parameters(res)
+
+
+# ----------
+# Clustering
+# ----------
+
+colours = colours[:N_CLUSTERS]
+
+
+# %%
+#
+
+
+clusters_test = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_test)
+clusters_train = KMeans(n_clusters=N_CLUSTERS, random_state=SEED).fit_predict(encoded_train)
+
+labels = [f"Cluster {i}" for i in range(N_CLUSTERS)]
+
+scatter = plt.scatter(encoded_test[:, 0], encoded_test[:, 1], c=clusters_test, cmap=ListedColormap(colours))
+plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+plt.title('k-means (testing data)')
+logger.add_plt(plt.gcf())
+plt.show()
+
+# %%
+#
+
+scatter = plt.scatter(encoded_train[:, 0], encoded_train[:, 1], c=clusters_train, cmap=ListedColormap(colours))
+plt.legend(handles=scatter.legend_elements()[0], labels=labels)
+plt.title('k-means (training data)')
+logger.add_plt(plt.gcf())
+plt.show()
+
+# %%
+#
+
+
+# Table
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+
+    mapping = {0: 'Female', 1: 'Male'}
+    table_df = test.replace({'gender': mapping})
+
+    table_df['cluster'] = clusters_test
+
+columns = info_feat+data_feat
+nonnormal = list(table_df[columns].select_dtypes(include='number').columns)
+categorical = list(set(columns).difference(set(nonnormal)))
+columns = sorted(categorical) + sorted(nonnormal)
+
+rename = {'haematocrit_percent': 'hct',
+          'body_temperature': 'temperature'}
+
+table = TableOne(table_df, columns=columns, categorical=categorical, nonnormal=nonnormal,
+                 groupby='cluster', rename=rename, missing=False)
+
+html = formatTable(table, colours, labels)
+logger.append_html(html.render())
+html
+
+# %%
+#
+
+fig, html = plotBox(data=train_info,
+                    features=info_feat,
+                    clusters=clusters_train,
+                    colours=colours,
+                    title="Attributes not used in training",
+                    )
+logger.append_html(html)
+fig
+
+# %%
+#
+
+fig, html = plotBox(data=train_data,
+                    features=data_feat,
+                    clusters=clusters_train,
+                    colours=colours,
+                    title="Attributes used in training",
+                    )
+logger.append_html(html)
+fig
+
+# %%
+# Logging
+# -------
+
+# Log parameters
+logger.save_parameters(
+    {
+        'SEED': SEED,
+        'N_CLUSTERS': N_CLUSTERS,
+        'features': features,
+        'info_feat': info_feat,
+        'data_feat': data_feat
+    }
+)
+
+logger.create_report()

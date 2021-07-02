@@ -43,7 +43,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="The Widgets’ gallery" href="../widgets/index.html" />
+    <link rel="next" title="Dissertation figures" href="../report_figures/index.html" />
     <link rel="prev" title="Result analysis" href="index.html" /> 
 </head>
 
@@ -106,6 +106,10 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html">Dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#autoencoder-experiment-dissertation-figures">Autoencoder experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#som-experiment-dissertation-figures">SOM experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#t-sne-experiment-dissertation-figures">t-SNE experiment dissertation figures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">The Widgets’ gallery</a></li>
 </ul>
 
@@ -399,11 +403,56 @@ to download the full example code</p>
 <span class="normal">221</span>
 <span class="normal">222</span>
 <span class="normal">223</span>
-<span class="normal">224</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">os</span>
  <span class="kn">import</span> <span class="nn">sys</span>
  <span class="kn">import</span> <span class="nn">pickle</span>
  <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
  <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
  <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
  <span class="kn">import</span> <span class="nn">alphashape</span>
  <span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cdist</span>
@@ -426,6 +475,13 @@ to download the full example code</p>
  <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
  <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 
+ <span class="c1"># mpl.use(&quot;pgf&quot;)</span>
+ <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+     <span class="c1"># &quot;pgf.texsystem&quot;: &quot;pdflatex&quot;,</span>
+     <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+     <span class="c1"># &#39;text.usetex&#39;: True,</span>
+     <span class="c1"># &#39;font.size&#39;: 18,</span>
+ <span class="p">})</span>
 
  <span class="k">def</span> <span class="nf">plot_ellipse</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">covariances</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">colours</span><span class="p">):</span>
      <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
@@ -486,7 +542,9 @@ to download the full example code</p>
 
      <span class="c1"># Correlation old vs new distances</span>
      <span class="n">corr</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">original_dist</span><span class="p">,</span> <span class="n">new_dist</span><span class="p">)</span>
-     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Corr </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s1"> distances: </span><span class="si">{</span><span class="n">corr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">; p-val: </span><span class="si">{</span><span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Corr pearsonr</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s1"> distances: </span><span class="si">{</span><span class="n">corr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">; p-val: </span><span class="si">{</span><span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+     <span class="n">corr</span> <span class="o">=</span> <span class="n">spearmanr</span><span class="p">(</span><span class="n">original_dist</span><span class="p">,</span> <span class="n">new_dist</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Corr spearmanr </span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s1"> distances: </span><span class="si">{</span><span class="n">corr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">; p-val: </span><span class="si">{</span><span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
      <span class="c1"># Procrustes</span>
      <span class="n">padded_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">new_points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_points</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_points</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_points</span><span class="p">)]</span>
@@ -530,6 +588,40 @@ to download the full example code</p>
      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Concave hull area ratio: </span><span class="si">{</span><span class="n">hull_atr</span> <span class="o">/</span> <span class="n">hull_all</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
      <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+     <span class="c1"># REPORT FIG - DENSITY METRICS</span>
+     <span class="c1"># fig, axes = plt.subplots(1, 3, figsize=(15, 5))</span>
+     <span class="c1"># for ax in axes:</span>
+     <span class="c1">#     ax.set(aspect=&#39;equal&#39;)</span>
+     <span class="c1">#     ax.set(xlim=(-0.1, 1.1), ylim=(-0.1, 1.1))</span>
+     <span class="c1">#     ax.get_xaxis().set_ticks([])</span>
+     <span class="c1">#     ax.get_yaxis().set_ticks([])</span>
+     <span class="c1">#</span>
+     <span class="c1"># colours = dict(zip(list(range(0,len(colours))), colours))</span>
+     <span class="c1">#</span>
+     <span class="c1">#</span>
+     <span class="c1"># plt.axes(axes[0])</span>
+     <span class="c1"># sns.scatterplot(x=new_points[:, 0], y=new_points[:, 1], ax=axes[0],</span>
+     <span class="c1">#                 hue=labels, palette=colours, legend=False, linewidth=0)</span>
+     <span class="c1"># plot_ellipse(means, covs, axes[0], outline_colours)</span>
+     <span class="c1"># axes[0].set_title(r&#39;GMM ratio&#39;)</span>
+     <span class="c1">#</span>
+     <span class="c1"># plt.axes(axes[1])</span>
+     <span class="c1"># sns.scatterplot(x=new_points[:, 0], y=new_points[:, 1], ax=axes[1],</span>
+     <span class="c1">#                 hue=labels, palette=colours, legend=False, linewidth=0)</span>
+     <span class="c1"># plot_polygon(new_points, 0.0, outline_colours[0])</span>
+     <span class="c1"># plot_polygon(new_points[labels == 1], 0.0, outline_colours[1])</span>
+     <span class="c1"># axes[1].set_title(r&#39;Convex hull ratio&#39;)</span>
+     <span class="c1">#</span>
+     <span class="c1"># plt.axes(axes[2])</span>
+     <span class="c1"># sns.scatterplot(x=new_points[:, 0], y=new_points[:, 1], ax=axes[2],</span>
+     <span class="c1">#                 hue=labels, palette=colours, legend=False, linewidth=0)</span>
+     <span class="c1"># plot_polygon(new_points, 5.0, outline_colours[0])</span>
+     <span class="c1"># plot_polygon(new_points[labels == 1], 5.0, outline_colours[1])</span>
+     <span class="c1"># axes[2].set_title(r&#39;Concave hull ratio&#39;)</span>
+     <span class="c1"># # fig.savefig(&quot;density_ratios.pdf&quot;, bbox_inches=&#39;tight&#39;)</span>
+     <span class="c1">#</span>
+     <span class="c1"># plt.show()</span>
 
      <span class="nb">print</span><span class="p">()</span>
 
@@ -613,7 +705,7 @@ to download the full example code</p>
  <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
  <span class="n">og_dist</span> <span class="o">=</span> <span class="n">cdist</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">scaled</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
- <span class="n">colours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">as_hex</span><span class="p">())</span>
+ <span class="n">colours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">as_hex</span><span class="p">())</span>
  <span class="n">labels</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;shock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -625,10 +717,10 @@ to download the full example code</p>
 <h2>AE<a class="headerlink" href="#ae" title="Permalink to this headline">¶</a></h2>
 <p>Results show distances between points are relatively well preserved and points
 in the latent space</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
  <span class="n">encoded_ae</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span><span class="n">loader</span><span class="p">)</span>
 
  <span class="n">eval_dim_reduction</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">og_dist</span><span class="p">,</span> <span class="n">encoded_ae</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;shock&#39;</span><span class="p">,</span> <span class="s1">&#39;AE&#39;</span><span class="p">,</span> <span class="n">colours</span><span class="p">)</span>
@@ -638,7 +730,8 @@ in the latent space</p>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>#########################################
 # AE
-Corr AE distances: 0.896303443147839; p-val: 0.0
+Corr pearsonrAE distances: 0.896303443147839; p-val: 0.0
+Corr spearmanr AE distances: 0.8880921431156082; p-val: 0.0
 Procrustes AE: 0.2616027543110887
 Gaussian area ratio: 0.5780906091458728
 Convex hull area ratio: 0.33701927074312027
@@ -648,10 +741,10 @@ Concave hull area ratio: 0.28301766691139807
 </section>
 <section id="pca">
 <h2>PCA<a class="headerlink" href="#pca" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">scaled</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">scaled</span><span class="p">)</span>
  <span class="n">pca_points</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">scaled</span><span class="p">)</span>
 
  <span class="n">eval_dim_reduction</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">og_dist</span><span class="p">,</span> <span class="n">pca_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;shock&#39;</span><span class="p">,</span> <span class="s1">&#39;PCA&#39;</span><span class="p">,</span> <span class="n">colours</span><span class="p">)</span>
@@ -661,7 +754,8 @@ Concave hull area ratio: 0.28301766691139807
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>#########################################
 # PCA
-Corr PCA distances: 0.9252311596136652; p-val: 0.0
+Corr pearsonrPCA distances: 0.9252311596136652; p-val: 0.0
+Corr spearmanr PCA distances: 0.904108732771537; p-val: 0.0
 Procrustes PCA: 0.23113167859929865
 Gaussian area ratio: 0.9899152120774876
 Convex hull area ratio: 0.3732338088625033
@@ -671,9 +765,9 @@ Concave hull area ratio: 0.3803984034811639
 </section>
 <section id="t-sne">
 <h2>t-SNE<a class="headerlink" href="#t-sne" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">tsne_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">TSNE_POINTS_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)),</span> <span class="n">ind_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">tsne_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">TSNE_POINTS_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)),</span> <span class="n">ind_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
  <span class="n">eval_dim_reduction</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">og_dist</span><span class="p">,</span> <span class="n">tsne_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;shock&#39;</span><span class="p">,</span> <span class="s1">&#39;t-SNE&#39;</span><span class="p">,</span> <span class="n">colours</span><span class="p">)</span>
 </pre></div>
@@ -682,7 +776,8 @@ Concave hull area ratio: 0.3803984034811639
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>#########################################
 # t-SNE
-Corr t-SNE distances: 0.7358246452056606; p-val: 0.0
+Corr pearsonrt-SNE distances: 0.7358246452056606; p-val: 0.0
+Corr spearmanr t-SNE distances: 0.736511243793765; p-val: 0.0
 Procrustes t-SNE: 0.41802190743682116
 Gaussian area ratio: 0.6211292253706172
 Convex hull area ratio: 0.43141999132215575
@@ -692,9 +787,9 @@ Concave hull area ratio: 0.31621987971914
 </section>
 <section id="som">
 <h2>SOM<a class="headerlink" href="#som" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">som_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">SOM_POINTS_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)),</span> <span class="n">ind_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">som_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">SOM_POINTS_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)),</span> <span class="n">ind_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
  <span class="n">eval_dim_reduction</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">og_dist</span><span class="p">,</span> <span class="n">som_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;shock&#39;</span><span class="p">,</span> <span class="s1">&#39;SOM&#39;</span><span class="p">,</span> <span class="n">colours</span><span class="p">)</span>
 </pre></div>
@@ -703,14 +798,15 @@ Concave hull area ratio: 0.31621987971914
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>#########################################
 # SOM
-Corr SOM distances: 0.45836059744508467; p-val: 0.0
+Corr pearsonrSOM distances: 0.45836059744508467; p-val: 0.0
+Corr spearmanr SOM distances: 0.45828097661009026; p-val: 0.0
 Procrustes SOM: 0.7490825241634731
 Gaussian area ratio: 0.3616913677360118
 Convex hull area ratio: 0.28896377422072456
 Concave hull area ratio: 0.233134073441503
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  13.357 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.356 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-result-analysis-plot-dr-analysis-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/ff88037846bd9f7e31e5e84234f2ee1c/plot_dr_analysis.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_dr_analysis.py</span></code></a></p>
@@ -729,7 +825,7 @@ Concave hull area ratio: 0.233134073441503
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../widgets/index.html" class="btn btn-neutral float-right" title="The Widgets’ gallery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../report_figures/index.html" class="btn btn-neutral float-right" title="Dissertation figures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="index.html" class="btn btn-neutral float-left" title="Result analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

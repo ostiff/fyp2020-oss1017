@@ -128,7 +128,7 @@ which best separates the `shock` and `no_shock` classes.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.402 seconds)
+   **Total running time of the script:** ( 0 minutes  2.445 seconds)
 
 
 .. _sphx_glr_download__examples_other_plot_lda_dengue.py:

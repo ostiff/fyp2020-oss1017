@@ -1,0 +1,16 @@
+
+:orphan:
+
+.. _sphx_glr__examples_report_figures_sg_execution_times:
+
+Computation times
+=================
+**00:01.071** total execution time for **_examples_report_figures** files:
+
++------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_report_figures_plot_spearman_rank_coef.py` (``plot_spearman_rank_coef.py``) | 00:00.490 | 0.0 MB |
++------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_report_figures_plot_clustering_methods.py` (``plot_clustering_methods.py``) | 00:00.338 | 0.0 MB |
++------------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_report_figures_plot_som_nh_functions.py` (``plot_som_nh_functions.py``)     | 00:00.243 | 0.0 MB |
++------------------------------------------------------------------------------------------------------+-----------+--------+

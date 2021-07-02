@@ -51,6 +51,27 @@ Below is a gallery of examples
    :hidden:
 
    /_examples/other/plot_pca_dengue
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="2D to 1D with two classes.">
+
+.. only:: html
+
+ .. figure:: /_examples/other/images/thumb/sphx_glr_plot_pca_vs_lda_thumb.png
+     :alt: PCA vs. LDA
+
+     :ref:`sphx_glr__examples_other_plot_pca_vs_lda.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/other/plot_pca_vs_lda
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

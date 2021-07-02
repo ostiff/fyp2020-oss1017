@@ -55,6 +55,27 @@ Below is a gallery of examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Auto-encoder w/ GMM clustering">
+
+.. only:: html
+
+ .. figure:: /_examples/autoencoder/images/thumb/sphx_glr_plot_ae_gmm_thumb.png
+     :alt: Auto-encoder w/ GMM clustering
+
+     :ref:`sphx_glr__examples_autoencoder_plot_ae_gmm.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/autoencoder/plot_ae_gmm
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Model: Simple auto-encoder.">
 
 .. only:: html

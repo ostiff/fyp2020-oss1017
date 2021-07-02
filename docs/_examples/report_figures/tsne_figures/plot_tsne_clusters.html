@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>t-SNE Experiment figures &mdash; pkgname 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Effect of perplexity on t-SNE results" href="plot_tsne_perplexity.html" />
+    <link rel="prev" title="SOM dimension analysis" href="../som_figures/plot_som_dimensions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> pkgname
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Example Galleries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../data_analysis/index.html">Dataset analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tsne/index.html">The manifold TSNE gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../som/index.html">The self-organising map gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoencoder/index.html">Auto-encoders for dimensionality reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/index.html">Other DR techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../result_analysis/index.html">Result analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#autoencoder-experiment-dissertation-figures">Autoencoder experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#som-experiment-dissertation-figures">SOM experiment dissertation figures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html#t-sne-experiment-dissertation-figures">t-SNE experiment dissertation figures</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">t-SNE Experiment figures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plotting">Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#t-sne-dbscan-clustering">t-SNE DBSCAN Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#t-sne-sheppard-diagram">t-SNE Sheppard Diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plot_tsne_perplexity.html">Effect of perplexity on t-SNE results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../widgets/index.html">The Widgets’ gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pkgname</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Dissertation figures</a> &raquo;</li>
+        
+      <li>t-SNE Experiment figures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/_examples/report_figures/tsne_figures/plot_tsne_clusters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-report-figures-tsne-figures-plot-tsne-clusters-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="t-sne-experiment-figures">
+<span id="sphx-glr-examples-report-figures-tsne-figures-plot-tsne-clusters-py"></span><h1>t-SNE Experiment figures<a class="headerlink" href="#t-sne-experiment-figures" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">os</span>
+ <span class="kn">import</span> <span class="nn">sys</span>
+ <span class="kn">import</span> <span class="nn">pickle</span>
+ <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+ <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+ <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+
+ <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+ <span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">color_palette</span>
+
+ <span class="kn">from</span> <span class="nn">pkgname.core.evaluation.dr_evaluation</span> <span class="kn">import</span> <span class="n">distance_metrics</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.data_loader</span> <span class="kn">import</span> <span class="n">load_dengue</span><span class="p">,</span> <span class="n">IQR_rule</span>
+ <span class="kn">from</span> <span class="nn">definitions</span> <span class="kn">import</span> <span class="n">ROOT_DIR</span>
+ <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
+
+ <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+
+ <span class="c1"># mpl.use(&quot;pgf&quot;)</span>
+ <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+     <span class="c1"># &quot;pgf.texsystem&quot;: &quot;pdflatex&quot;,</span>
+     <span class="c1"># &#39;font.family&#39;: &#39;serif&#39;,</span>
+     <span class="c1"># &#39;text.usetex&#39;: True,</span>
+     <span class="c1"># &#39;font.size&#39;: 18,</span>
+
+     <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;font.weight&#39;</span><span class="p">:</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+ <span class="p">})</span>
+
+ <span class="n">SEED</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="n">DBSCAN_eps</span> <span class="o">=</span> <span class="mi">4</span>
+ <span class="n">DBSCAN_min_samples</span> <span class="o">=</span> <span class="mi">10</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+
+ <span class="n">TSNE_POINTS_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">,</span> <span class="s1">&#39;examples&#39;</span><span class="p">,</span> <span class="s1">&#39;report_figures&#39;</span><span class="p">,</span> <span class="s1">&#39;tsne_figures&#39;</span><span class="p">,</span> <span class="s1">&#39;perp_40&#39;</span><span class="p">)</span>
+
+ <span class="n">features_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DSource&quot;</span><span class="p">,</span> <span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Gender&quot;</span><span class="p">,</span> <span class="s2">&quot;Weight&quot;</span><span class="p">,</span> <span class="s2">&quot;Bleeding&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Platelets&quot;</span><span class="p">,</span> <span class="s2">&quot;Shock&quot;</span><span class="p">,</span> <span class="s2">&quot;Haematocrit&quot;</span><span class="p">,</span> <span class="s2">&quot;Bleeding gum&quot;</span><span class="p">,</span> <span class="s2">&quot;Abdominal pain&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Ascites&quot;</span><span class="p">,</span> <span class="s2">&quot;Bleeding mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;Bleeding skin&quot;</span><span class="p">,</span> <span class="s2">&quot;Body temperature&quot;</span><span class="p">]</span>
+
+ <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;ascites&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
+
+ <span class="n">label_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">features_labels</span><span class="p">))</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">load_dengue</span><span class="p">(</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;study_no&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">features</span><span class="p">)</span>
+
+ <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+     <span class="n">df</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">)[</span><span class="n">feat</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">]</span>
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;study_no&quot;</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+     <span class="n">dsource</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;dsource&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">),</span>
+     <span class="n">date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">),</span>
+     <span class="n">age</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">gender</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">),</span>
+     <span class="n">weight</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">),</span>
+     <span class="n">bleeding</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">plt</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;plt&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">),</span>
+     <span class="n">shock</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">haematocrit_percent</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">bleeding_gum</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">abdominal_pain</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">ascites</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;ascites&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">bleeding_mucosal</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">bleeding_skin</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+     <span class="n">body_temperature</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;body_temperature&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">),</span>
+ <span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">IQR_rule</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;plt&#39;</span><span class="p">])</span>
+
+ <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Female&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+ <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">})</span>
+ <span class="n">before_mapping</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+ <span class="n">info_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;shock&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_gum&quot;</span><span class="p">,</span> <span class="s2">&quot;abdominal_pain&quot;</span><span class="p">,</span> <span class="s2">&quot;ascites&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;bleeding_mucosal&quot;</span><span class="p">,</span> <span class="s2">&quot;bleeding_skin&quot;</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">]</span>
+ <span class="n">data_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;plt&quot;</span><span class="p">,</span> <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span> <span class="s2">&quot;body_temperature&quot;</span><span class="p">]</span>
+
+
+ <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">data_feat</span><span class="p">]</span>
+ <span class="n">info</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">info_feat</span><span class="p">]</span>
+ <span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+ <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+ <span class="n">colours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;pastel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">as_hex</span><span class="p">())</span>
+ <span class="n">labels</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;shock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<section id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+ <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+ <span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+ <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+     <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+     <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">([])</span>
+ <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">]:</span>
+     <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+ <span class="n">tsne_points</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">TSNE_POINTS_PATH</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+ <span class="n">clustering</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">DBSCAN_eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">DBSCAN_min_samples</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tsne_points</span><span class="p">)</span>
+ <span class="n">outliers</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">clustering</span><span class="o">.</span><span class="n">labels_</span>
+ <span class="n">clusters</span> <span class="o">=</span> <span class="n">clustering</span><span class="o">.</span><span class="n">labels_</span>
+
+ <span class="n">before_mapping</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">clusters</span>
+
+ <span class="k">if</span> <span class="n">outliers</span><span class="p">:</span>
+     <span class="n">before_mapping</span> <span class="o">=</span> <span class="n">before_mapping</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">before_mapping</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+ <span class="n">N_CLUSTERS</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">))</span>
+ <span class="n">colours</span> <span class="o">=</span> <span class="n">colours</span><span class="p">[:</span><span class="n">N_CLUSTERS</span><span class="p">]</span>
+
+
+ <span class="k">if</span> <span class="n">outliers</span><span class="p">:</span>
+     <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Outliers&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_CLUSTERS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+ <span class="k">else</span><span class="p">:</span>
+     <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_CLUSTERS</span><span class="p">)]</span>
+
+ <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+ <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_feat</span><span class="p">):</span>
+     <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">feat</span><span class="p">,</span>
+                      <span class="n">data</span><span class="o">=</span><span class="n">before_mapping</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">)</span>
+     <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">([])</span>
+     <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="n">label_mapping</span><span class="p">[</span><span class="n">feat</span><span class="p">],</span> <span class="n">ylabel</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+         <span class="n">c1</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster 1&#39;</span><span class="p">)</span>
+         <span class="n">c2</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cluster 2&#39;</span><span class="p">)</span>
+         <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+ <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">info_feat</span><span class="p">):</span>
+     <span class="k">if</span> <span class="n">feat</span> <span class="o">!=</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span>
+         <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">feat</span><span class="p">,</span>
+                          <span class="n">data</span><span class="o">=</span><span class="n">before_mapping</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">)</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">feat</span><span class="p">,</span>
+                          <span class="n">data</span><span class="o">=</span><span class="n">before_mapping</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;muted&quot;</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+         <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">feat</span><span class="p">,</span>
+                          <span class="n">data</span><span class="o">=</span><span class="n">before_mapping</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">)</span>
+         <span class="n">g</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+         <span class="n">g</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+         <span class="n">g</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+         <span class="n">g</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+
+     <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">([])</span>
+     <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="n">label_mapping</span><span class="p">[</span><span class="n">feat</span><span class="p">],</span> <span class="n">ylabel</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">11</span> <span class="k">else</span> <span class="mi">2</span>
+
+ <span class="c1"># fig.savefig(&quot;tsne_cluster_stats.pdf&quot;, bbox_inches=&#39;tight&#39;)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="plot tsne clusters" class="sphx-glr-single-img" src="../../../_images/sphx_glr_plot_tsne_clusters_001.png" />
+</section>
+<section id="t-sne-dbscan-clustering">
+<h2>t-SNE DBSCAN Clustering<a class="headerlink" href="#t-sne-dbscan-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">colours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;pastel&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+ <span class="n">colours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">colours</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;#737373&quot;</span><span class="p">)</span>
+ <span class="n">colours</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">colours</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">colours</span><span class="p">))</span>
+
+ <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+ <span class="n">ind_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="mi">5000</span><span class="p">)</span>
+ <span class="n">tsne_points_sampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">tsne_points</span><span class="p">,</span> <span class="n">ind_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+ <span class="n">clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span> <span class="n">ind_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+ <span class="n">scatter</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tsne_points_sampled</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">tsne_points_sampled</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+                           <span class="n">hue</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">colours</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                           <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+ <span class="n">handles</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span>  <span class="n">scatter</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+
+ <span class="n">scatter</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">borderpad</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+ <span class="c1"># plt.savefig(&quot;tsne_dbscan.pdf&quot;, bbox_inches=&#39;tight&#39;)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="plot tsne clusters" class="sphx-glr-single-img" src="../../../_images/sphx_glr_plot_tsne_clusters_002.png" />
+</section>
+<section id="t-sne-sheppard-diagram">
+<h2>t-SNE Sheppard Diagram<a class="headerlink" href="#t-sne-sheppard-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">_</span><span class="p">,</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">distance_metrics</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">tsne_points</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+ <span class="c1"># fig.savefig(&quot;tsne_sheppard.png&quot;, bbox_inches=&#39;tight&#39;, dpi=300)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="plot tsne clusters" class="sphx-glr-single-img" src="../../../_images/sphx_glr_plot_tsne_clusters_003.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  28.602 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-report-figures-tsne-figures-plot-tsne-clusters-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/9d2e890c7f1bc9012b314edb53d4589e/plot_tsne_clusters.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_tsne_clusters.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/b159ed0b9958e811fbec392d96d6b841/plot_tsne_clusters.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tsne_clusters.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_tsne_perplexity.html" class="btn btn-neutral float-right" title="Effect of perplexity on t-SNE results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../som_figures/plot_som_dimensions.html" class="btn btn-neutral float-left" title="SOM dimension analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Oliver Stiff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

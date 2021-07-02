@@ -1,0 +1,250 @@
+:orphan:
+
+
+
+.. _sphx_glr__examples_report_figures:
+
+Dissertation figures
+====================
+
+Below is a gallery of examples
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Clustering method comparison">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/images/thumb/sphx_glr_plot_clustering_methods_thumb.png
+     :alt: Clustering method comparison
+
+     :ref:`sphx_glr__examples_report_figures_plot_clustering_methods.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/plot_clustering_methods
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="SOM neighbourhood functions">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/images/thumb/sphx_glr_plot_som_nh_functions_thumb.png
+     :alt: SOM neighbourhood functions
+
+     :ref:`sphx_glr__examples_report_figures_plot_som_nh_functions.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/plot_som_nh_functions
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Spearman&#x27;s Rank Correlation Coefficient">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/images/thumb/sphx_glr_plot_spearman_rank_coef_thumb.png
+     :alt: Spearman's Rank Correlation Coefficient
+
+     :ref:`sphx_glr__examples_report_figures_plot_spearman_rank_coef.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/plot_spearman_rank_coef
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr__examples_report_figures_ae_figures:
+
+Autoencoder experiment dissertation figures
+===========================================
+
+Below is a gallery of examples
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Activation functions">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/ae_figures/images/thumb/sphx_glr_plot_activation_functions_thumb.png
+     :alt: Activation functions
+
+     :ref:`sphx_glr__examples_report_figures_ae_figures_plot_activation_functions.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/ae_figures/plot_activation_functions
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Autoencoder experiment figures">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/ae_figures/images/thumb/sphx_glr_plot_ae_clusters_thumb.png
+     :alt: Autoencoder experiment figures
+
+     :ref:`sphx_glr__examples_report_figures_ae_figures_plot_ae_clusters.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/ae_figures/plot_ae_clusters
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr__examples_report_figures_som_figures:
+
+SOM experiment dissertation figures
+===========================================
+
+Below is a gallery of examples
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="SOM experiment figures">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/som_figures/images/thumb/sphx_glr_plot_som_clusters_thumb.png
+     :alt: SOM experiment figures
+
+     :ref:`sphx_glr__examples_report_figures_som_figures_plot_som_clusters.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/som_figures/plot_som_clusters
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Results of analysis of SOM dimensions on metrics.">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/som_figures/images/thumb/sphx_glr_plot_som_dimensions_thumb.png
+     :alt: SOM dimension analysis
+
+     :ref:`sphx_glr__examples_report_figures_som_figures_plot_som_dimensions.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/som_figures/plot_som_dimensions
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr__examples_report_figures_tsne_figures:
+
+t-SNE experiment dissertation figures
+===========================================
+
+Below is a gallery of examples
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="t-SNE Experiment figures">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/tsne_figures/images/thumb/sphx_glr_plot_tsne_clusters_thumb.png
+     :alt: t-SNE Experiment figures
+
+     :ref:`sphx_glr__examples_report_figures_tsne_figures_plot_tsne_clusters.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/tsne_figures/plot_tsne_clusters
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Effect of perplexity on t-SNE results">
+
+.. only:: html
+
+ .. figure:: /_examples/report_figures/tsne_figures/images/thumb/sphx_glr_plot_tsne_perplexity_thumb.png
+     :alt: Effect of perplexity on t-SNE results
+
+     :ref:`sphx_glr__examples_report_figures_tsne_figures_plot_tsne_perplexity.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /_examples/report_figures/tsne_figures/plot_tsne_perplexity
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_
