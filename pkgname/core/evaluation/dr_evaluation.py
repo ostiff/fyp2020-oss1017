@@ -81,20 +81,11 @@ def distance_metrics(original_data, reduced_data, n_points, method_name, verbose
     original_dist = cdist(original_data, original_data).flatten()
     new_dist = cdist(reduced_data, reduced_data).flatten()
 
-    rows = 1
-    cols = 1
-
-    # fig = plt.figure(figsize=(4,4), dpi=300)
-    # fig.tight_layout()
-
     # Sheppard Diagram
-    # plt.subplot(rows, cols, 1)
     fig = plt.figure()
     sns.scatterplot(x=new_dist, y=original_dist, color=".3", linewidth=0, s=1)
-    # plt.scatter(new_dist, original_dist, s=1)
     plt.xlabel("Encoded points distance")
     plt.ylabel("Original distance (scaled data)")
-    # plt.title(f"Sheppard diagram ({method_name})")
 
     # Correlation old vs new distances
     pearson = pearsonr(original_dist, new_dist)

@@ -148,7 +148,7 @@ def diff_graph_hex(som, show=False, printout=True, disp_axes=False, dpi=300,
     ax_cb = divider.new_horizontal(size="5%", pad=pad)
     colorbar.ColorbarBase(ax_cb, cmap=cm.viridis, orientation='vertical')
 
-    # plt.suptitle('Distance from neurons in the neighbourhood', fontsize=24)
+    plt.suptitle('Distance from neurons in the neighbourhood', fontsize=24)
     plt.gcf().add_axes(ax_cb)
 
     if printout:
