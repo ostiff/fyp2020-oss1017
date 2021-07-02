@@ -9,11 +9,11 @@ import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use("pgf")
+# matplotlib.use("pgf")
 matplotlib.rcParams.update({
-    "pgf.texsystem": "pdflatex",
+    # "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
+    # 'text.usetex': True,
     'font.size': 18,
     'pgf.rcfonts': False
 })
@@ -69,5 +69,5 @@ axes[2].set_title(r'Mexican hat')
 sns.lineplot(ax=axes[3], x=x, y=triangle(x,0,1), color=".3")
 axes[3].set_title(r'Triangle')
 
-fig.savefig("som_nh_functions.pdf", bbox_inches='tight')
+# fig.savefig("som_nh_functions.pdf", bbox_inches='tight')
 plt.show()
