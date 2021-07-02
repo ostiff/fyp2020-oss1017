@@ -1,0 +1,176 @@
+<!doctype html>
+<html class="fixed">
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+
+    <title>Patient trace</title>
+    <meta name="keywords" content="HTML5 application" />
+    <meta name="description" content="Patient trace - Interactive examples">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css">
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.min.css" />
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.min.css" />
+    <link rel="stylesheet" href="assets/custom/styles/style.css">
+
+    <!-- Head Libs -->
+    <script src="assets/vendor/modernizr/modernizr.min.js"></script>
+
+</head>
+<body>
+<section class="body">
+    <div class="inner-wrapper">
+        <!-- start: sidebar -->
+        <aside id="sidebar-left" class="sidebar-left" style="top: 0px">
+
+            <div class="sidebar-header">
+                <div class="sidebar-title" style="color: #FFFFFF">
+                    Navigation
+                </div>
+                <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
+
+            <div class="nano">
+                <div class="nano-content">
+                    <nav id="menu" class="nav-main" role="navigation">
+                        <ul class="nav nav-main">
+                            <li>
+                                <a href="/">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-parent nav-expanded nav-active">
+                                <a>
+                                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                                    <span>Applications</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a href="similarity-retrieval">
+                                            Similarity retrieval
+                                        </a>
+                                    </li>
+                                    <li class="nav-active">
+                                        <a href="trace">
+                                            Patient trace
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </aside>
+        <!-- end: sidebar -->
+
+        <section role="main" class="content-body">
+            <header class="page-header" style="top: 0px">
+                <h2>Patient trace</h2>
+            </header>
+
+            <!-- start: page -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div id='scatterPlot'></div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="dateSlider" class="mt-lg mb-lg slider-primary" data-plugin-slider data-plugin-options='{ "value": 1, "range": "min", "min":1, "max": 1 }' data-plugin-slider-output="#listenSlider">
+                                        <input id="listenSlider" type="hidden" value="1" />
+                                    </div>
+                                    <p id="dispDate" class="output">Date: <b></b></p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="studynoForm" action="javascript:submitForm()" class="form-horizontal">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        <h2 class="panel-title">Patient search</h2>
+                                        <p class="panel-subtitle">
+                                            Display a patient's trace using their <code>study_no</code>.
+                                        </p>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Study number <span class="required">*</span></label>
+                                                <input type="text" name="form_studyno" class="form-control" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <footer class="panel-footer">
+                                        <button class="btn btn-primary">Submit </button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </footer>
+                                </section>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="fa fa-caret-down"></a>
+                                        <a href="#" class="fa fa-times"></a>
+                                    </div>
+
+                                    <h2 class="panel-title">Random search</h2>
+                                    <p class="panel-subtitle">Display a random patient trace or select the example trace <code>06dx-06DXA249</code></p>
+                                </header>
+                                <div class="panel-body">
+                                    <button type="button" class="mb-xs mt-xs mr-xs btn btn-default btn-lg btn-block" onclick="updateTrace();">Randomise</button>
+                                    <button type="button" class="mb-xs mt-xs mr-xs btn btn-default btn-lg btn-block" onclick="updateTrace('06dx-06DXA249');">06dx-06DXA249</button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: page -->
+        </section>
+    </div>
+</section>
+
+<!--Page script-->
+<script src='assets/custom/script/patient_trace.min.js'></script>
+
+<!-- Vendor -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js" integrity="sha512-Z1AU18k/qc1YyEkZkh+pTQ2I95w76DTli3cpFe03jaYTyX+Rsmvh5ZnTmi4Zg8gBc1QGbcwgpN0o1t9b9L1B2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="assets/javascripts/theme.min.js"></script>
+<script src="assets/javascripts/theme.init.min.js"></script>
+
+</body>
+</html>
