@@ -1,3 +1,9 @@
+"""
+t-SNE Experiment figures
+========================
+
+"""
+
 import os
 import sys
 import pickle
@@ -165,7 +171,13 @@ for feat in sorted(info_feat):
 
     i += 1 if i != 11 else 2
 
-fig.savefig("tsne_cluster_stats.pdf", bbox_inches='tight')
+# fig.savefig("tsne_cluster_stats.pdf", bbox_inches='tight')
+plt.show()
+
+
+# %%
+# t-SNE DBSCAN Clustering
+# -----------------------
 
 colours = np.array(sns.color_palette("pastel", as_cmap=True))
 colours = np.insert(colours, 0, "#737373")
@@ -181,8 +193,14 @@ scatter = sns.scatterplot(x=tsne_points_sampled[:, 0], y=tsne_points_sampled[:, 
 handles, _  =  scatter.get_legend_handles_labels()
 
 scatter.legend(handles, labels, loc='lower right', borderpad=0.2,labelspacing=0.2)
-plt.savefig("tsne_dbscan.pdf", bbox_inches='tight')
+# plt.savefig("tsne_dbscan.pdf", bbox_inches='tight')
+plt.show()
 
+
+# %%
+# t-SNE Sheppard Diagram
+# ----------------------
 
 _, fig = distance_metrics(scaled, tsne_points, 6000, '', verbose=False)
-fig.savefig("tsne_sheppard.png", bbox_inches='tight', dpi=300)
+# fig.savefig("tsne_sheppard.png", bbox_inches='tight', dpi=300)
+plt.show()

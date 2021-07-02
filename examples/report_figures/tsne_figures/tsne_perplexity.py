@@ -1,3 +1,9 @@
+"""
+Effect of perplexity on t-SNE results
+=====================================
+
+"""
+
 import os
 import sys
 import pickle
@@ -14,11 +20,11 @@ from definitions import ROOT_DIR
 
 sys.path.insert(0, os.path.abspath('.'))
 
-mpl.use("pgf")
+# mpl.use("pgf")
 mpl.rcParams.update({
-    "pgf.texsystem": "pdflatex",
+    # "pgf.texsystem": "pdflatex",
     'font.family': 'serif',
-    'text.usetex': True,
+    # 'text.usetex': True,
     'font.size': 18,
 })
 
@@ -114,4 +120,5 @@ for i, (path, perp) in enumerate(paths):
     axes[i].set_title(f'Perplexity: {perp}')
 
 plt.legend(title='Shock', loc='upper right',borderpad=0.2,labelspacing=0.2)
-fig.savefig("tsne_diff_perp.pdf", bbox_inches='tight')
+# fig.savefig("tsne_diff_perp.pdf", bbox_inches='tight')
+plt.show()
