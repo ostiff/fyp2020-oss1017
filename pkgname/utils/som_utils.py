@@ -129,7 +129,7 @@ def diff_graph_hex(som, show=False, printout=True, disp_axes=False, dpi=300,
 
     umatrix = som.distance_map()
 
-    f = plt.figure(figsize=(10, 10))
+    f = plt.figure(figsize=(15, 4))
     ax = f.add_subplot(111)
 
     create_hex_plt(som, ax, umatrix)
@@ -211,7 +211,7 @@ def feature_map(som, colnum=0, show=False, printout=True, disp_axes=False, dpi=3
 
     weights = som.get_weights()[:, :, colnum]
 
-    f = plt.figure(figsize=(10, 10))
+    f = plt.figure(figsize=(15, 4))
     ax = f.add_subplot(111)
 
     create_hex_plt(som, ax, weights)
