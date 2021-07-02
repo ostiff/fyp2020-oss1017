@@ -17,7 +17,7 @@ import matplotlib.patches as mpatches
 from sklearn import preprocessing
 from seaborn import color_palette
 
-from core.evaluation.dr_evaluation import distance_metrics
+from pkgname.core.evaluation.dr_evaluation import distance_metrics
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from definitions import ROOT_DIR
 from sklearn.cluster import DBSCAN
@@ -101,9 +101,8 @@ colours = np.array(color_palette('pastel').as_hex())
 labels = info['shock'].to_numpy().astype(int)
 
 # %%
-# t-SNE
-# -------
-
+# Plotting
+# --------
 
 fig, axes = plt.subplots(4, 4, figsize=(15, 15))
 fig.tight_layout()
@@ -125,9 +124,6 @@ before_mapping['cluster'] = clusters
 if outliers:
     before_mapping = before_mapping.loc[before_mapping['cluster'] != -1]
 
-# %%
-# Plotting
-# --------
 
 N_CLUSTERS = len(set(clusters))
 colours = colours[:N_CLUSTERS]

@@ -17,7 +17,7 @@ import matplotlib.patches as mpatches
 from sklearn import preprocessing
 from seaborn import color_palette
 
-from core.evaluation.dr_evaluation import distance_metrics
+from pkgname.core.evaluation.dr_evaluation import distance_metrics
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from definitions import ROOT_DIR
 from sklearn.cluster import DBSCAN, KMeans
@@ -104,8 +104,8 @@ colours = np.array(color_palette('pastel').as_hex())
 labels = info['shock'].to_numpy().astype(int)
 
 # %%
-# SOM
-# -------
+# Cluster analysis
+# ----------------
 
 
 fig, axes = plt.subplots(4, 4, figsize=(15, 15))
@@ -124,9 +124,7 @@ clusters = KMeans(n_clusters=3, random_state=SEED).fit_predict(som_points)
 before_mapping['cluster'] = clusters
 
 
-# %%
-# Plotting
-# --------
+
 
 N_CLUSTERS = len(set(clusters))
 colours = colours[:N_CLUSTERS]

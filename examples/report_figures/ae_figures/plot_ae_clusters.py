@@ -19,12 +19,12 @@ from sklearn.model_selection import train_test_split
 from tableone import TableOne
 from torch.utils.data import DataLoader
 
-from core.evaluation.dr_evaluation import distance_metrics
+from pkgname.core.evaluation.dr_evaluation import distance_metrics
 from pkgname.utils.data_loader import load_dengue, IQR_rule
 from definitions import ROOT_DIR
 from sklearn.cluster import DBSCAN, KMeans
 
-from utils.plot_utils import plot_results, formatTable
+from pkgname.utils.plot_utils import plot_results, formatTable
 
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -107,8 +107,8 @@ ae_points = model.encode_inputs(loader)
 colours = np.array(color_palette('pastel').as_hex())
 
 # %%
-# AE
-# -------
+# Cluster analysis
+# ----------------
 
 # OVERALL CLUSTER COMP.
 fig, axes = plt.subplots(4, 4, figsize=(15, 15))
@@ -129,9 +129,7 @@ clusters_k_means = KMeans(n_clusters=3, random_state=SEED).fit_predict(ae_points
 
 before_mapping['cluster'] = clusters
 
-# %%
-# Plotting
-# --------
+
 
 N_CLUSTERS = len(set(clusters))
 colours = colours[:N_CLUSTERS]
