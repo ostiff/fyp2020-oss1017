@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:29.659** total execution time for **_examples_report_figures_ae_figures** files:
+**00:29.665** total execution time for **_examples_report_figures_ae_figures** files:
 
 +---------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_report_figures_ae_figures_plot_ae_clusters.py` (``plot_ae_clusters.py``)                   | 00:29.501 | 0.0 MB |
+| :ref:`sphx_glr__examples_report_figures_ae_figures_plot_ae_clusters.py` (``plot_ae_clusters.py``)                   | 00:29.507 | 0.0 MB |
 +---------------------------------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr__examples_report_figures_ae_figures_plot_activation_functions.py` (``plot_activation_functions.py``) | 00:00.158 | 0.0 MB |
 +---------------------------------------------------------------------------------------------------------------------+-----------+--------+

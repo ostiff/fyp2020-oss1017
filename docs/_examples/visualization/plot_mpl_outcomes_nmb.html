@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Outcomes (numbers) &mdash; pkgname 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Trajectories" href="plot_mpl_trajectories.html" />
+    <link rel="prev" title="Outcomes (boolean)" href="plot_mpl_outcomes_bool.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pkgname
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Example Galleries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../data_analysis/index.html">Dataset analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tsne/index.html">The manifold TSNE gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../som/index.html">The self-organising map gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autoencoder/index.html">Auto-encoders for dimensionality reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/index.html">Other DR techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../result_analysis/index.html">Result analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html">Dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#autoencoder-experiment-dissertation-figures">Autoencoder experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#som-experiment-dissertation-figures">SOM experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#t-sne-experiment-dissertation-figures">t-SNE experiment dissertation figures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The visualizations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_examples_all.html">Kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_examples_hist2d.html">KDE - Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_01.html">Categories (exhaustive)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_02.html">Categories (Damien)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_cmp.html">Kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_outcomes_bool.html">Outcomes (boolean)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Outcomes (numbers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_trajectories.html">Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_sns_categories_01.html">Seaborn (incomplete!)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">The Widgets’ gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pkgname</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The visualizations</a> &raquo;</li>
+        
+      <li>Outcomes (numbers)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/_examples/visualization/plot_mpl_outcomes_nmb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-visualization-plot-mpl-outcomes-nmb-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="outcomes-numbers">
+<span id="sphx-glr-examples-visualization-plot-mpl-outcomes-nmb-py"></span><h1>Outcomes (numbers)<a class="headerlink" href="#outcomes-numbers" title="Permalink to this headline">¶</a></h1>
+<p>This script is useful to understand the distribution
+over the 2D projected space of the different numeric
+features and/or outcomes.</p>
+<img alt="age (10146), weight (10140), plt (10146), haematocrit_percent (10137), body_temperature (9511), ast (10146), alt (9144)" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_mpl_outcomes_nmb_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Adding...                     ast | max
+Adding...                     alt | max
+
+Data:
+       Unnamed: 0       study_no       date abdominal_pain abdominal_tenderness abscess   age   aids  ...  rales_right  rct respiratory_distress_description transfer_hospital transfer_reason  diagnosis_final medication_regular rur_urb
+409           409  01nva-003-... 2020-07-14           True          False           NaN  16.0    NaN  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+415           415  01nva-003-... 2020-07-28           True           True         False  17.0  False  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+435           435  01nva-003-... 2020-08-11           True          False           NaN  17.0  False  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+536           536  01nva-003-... 2020-10-07           True          False           NaN  16.0  False  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+581           581  01nva-003-... 2020-11-03           True          False         False  18.0  False  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+...           ...            ...        ...            ...            ...           ...   ...    ...  ...          ...  ...            ...                              ...               ...             ...              ...         ...
+90856        5230         fl-731 2008-08-25           True            NaN           NaN  17.0    NaN  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+90865        5239         fl-733 2008-09-15           True            NaN           NaN  17.0    NaN  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+90872        5246         fl-734 2008-10-07           True            NaN           NaN  18.0    NaN  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+90874        5248         fl-734 2008-10-09          False            NaN           NaN  18.0    NaN  ...          NaN  NaN            NaN                              NaN               NaN             NaN              NaN         NaN
+90921        5295         fl-740 2008-11-12           True            NaN           NaN  15.0    NaN  ...        False  NaN            NaN                       BV CHO RAY     XHTH KHONG ON             NaN              NaN         NaN
+
+[10146 rows x 420 columns]
+Unnamed: 0                      int64
+study_no                       object
+date                    datetime64...
+abdominal_pain                 object
+abdominal_tenderness           object
+                            ...
+transfer_hospital              object
+transfer_reason                object
+diagnosis_final                object
+medication_regular             object
+rur_urb                        object
+Length: 420, dtype: object
+10146
+alt                     9144
+body_temperature        9511
+haematocrit_percent    10137
+weight                 10140
+age                    10146
+plt                    10146
+ast                    10146
+dtype: int64
+
+Model:
+Autoencoder(
+  (encoder): Sequential(
+    (0): Linear(in_features=5, out_features=3, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=3, out_features=2, bias=True)
+    (3): Sigmoid()
+  )
+  (decoder): Sequential(
+    (0): Linear(in_features=2, out_features=3, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=3, out_features=5, bias=True)
+    (3): Sigmoid()
+  )
+)
+
+Encoded:
+[[0.14902477 0.7655889 ]
+ [0.26561728 0.6817843 ]
+ [0.23622908 0.7446488 ]
+ ...
+ [       nan        nan]
+ [       nan        nan]
+ [       nan        nan]]
+
+Data:
+       Unnamed: 0       study_no       date abdominal_pain abdominal_tenderness abscess   age   aids  ...  respiratory_distress_description transfer_hospital transfer_reason diagnosis_final medication_regular  rur_urb       x       y
+409           409  01nva-003-... 2020-07-14           True          False           NaN  16.0    NaN  ...            NaN                               NaN               NaN             NaN             NaN          NaN  0.1490  0.7656
+415           415  01nva-003-... 2020-07-28           True           True         False  17.0  False  ...            NaN                               NaN               NaN             NaN             NaN          NaN  0.2656  0.6818
+435           435  01nva-003-... 2020-08-11           True          False           NaN  17.0  False  ...            NaN                               NaN               NaN             NaN             NaN          NaN  0.2362  0.7446
+536           536  01nva-003-... 2020-10-07           True          False           NaN  16.0  False  ...            NaN                               NaN               NaN             NaN             NaN          NaN  0.0760  0.7366
+581           581  01nva-003-... 2020-11-03           True          False         False  18.0  False  ...            NaN                               NaN               NaN             NaN             NaN          NaN  0.1045  0.7024
+...           ...            ...        ...            ...            ...           ...   ...    ...  ...            ...                               ...               ...             ...             ...          ...     ...     ...
+90856        5230         fl-731 2008-08-25           True            NaN           NaN  17.0    NaN  ...            NaN                               NaN               NaN             NaN             NaN          NaN     NaN     NaN
+90865        5239         fl-733 2008-09-15           True            NaN           NaN  17.0    NaN  ...            NaN                               NaN               NaN             NaN             NaN          NaN     NaN     NaN
+90872        5246         fl-734 2008-10-07           True            NaN           NaN  18.0    NaN  ...            NaN                               NaN               NaN             NaN             NaN          NaN     NaN     NaN
+90874        5248         fl-734 2008-10-09          False            NaN           NaN  18.0    NaN  ...            NaN                               NaN               NaN             NaN             NaN          NaN     NaN     NaN
+90921        5295         fl-740 2008-11-12           True            NaN           NaN  15.0    NaN  ...            NaN                        BV CHO RAY     XHTH KHONG ON             NaN             NaN          NaN     NaN     NaN
+
+[10146 rows x 422 columns]
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># Library</span>
+ <span class="kn">import</span> <span class="nn">pickle</span>
+ <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+ <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+
+ <span class="c1"># Specific</span>
+ <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+ <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+ <span class="c1"># Specific</span>
+ <span class="kn">from</span> <span class="nn">pkgname.core.AE.autoencoder</span> <span class="kn">import</span> <span class="n">get_device</span><span class="p">,</span> <span class="n">set_seed</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.data_loader</span> <span class="kn">import</span> <span class="n">load_dengue</span><span class="p">,</span> <span class="n">IQR_rule</span>
+
+ <span class="c1"># Local</span>
+ <span class="kn">import</span> <span class="nn">_utils</span>
+
+
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Constants</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load constants</span>
+ <span class="n">features</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">features</span>
+ <span class="n">others</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">others</span>
+ <span class="n">mappings</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">mappings</span>
+ <span class="n">aggregation</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">aggregation</span>
+ <span class="n">cmaps</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">cmaps</span>
+
+ <span class="c1"># Define outcomes</span>
+ <span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;plt&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;body_temperature&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ast&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;alt&quot;</span>
+ <span class="p">]</span>
+
+ <span class="c1"># Ensure all outcomes are in aggregation</span>
+ <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">outcomes</span><span class="p">:</span>
+     <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">aggregation</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding... </span><span class="si">%23s</span><span class="s2"> | max&quot;</span> <span class="o">%</span> <span class="n">c</span><span class="p">)</span>
+         <span class="n">aggregation</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;max&#39;</span>
+
+ <span class="c1"># Define rows and columns</span>
+ <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span>
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load data</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load data</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+
+ <span class="c1"># Filter data (age, iqr, ...)</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">)]</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">plt</span> <span class="o">&lt;</span> <span class="mi">50000</span><span class="p">]</span> <span class="c1"># extreme outlier</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">ast</span> <span class="o">&lt;</span> <span class="mi">1500</span><span class="p">]</span>  <span class="c1"># extreme outlier</span>
+
+ <span class="c1"># Filter outliers</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">IQR_rule</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span>
+     <span class="s1">&#39;plt&#39;</span><span class="p">,</span>
+     <span class="c1">#&#39;haematocrit_percent&#39;,</span>
+     <span class="c1">#&#39;body_temperature&#39;</span>
+ <span class="p">])</span>
+
+ <span class="c1"># Show data</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">outcomes</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load Model</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load model</span>
+ <span class="n">model</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">load_model</span><span class="p">()</span>
+
+ <span class="c1"># Show</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Projections</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># .. note: Ideally the method to preprocess</span>
+ <span class="c1">#          data should be included in the</span>
+ <span class="c1">#          model (like a sklearn pipeline)</span>
+ <span class="c1"># Features</span>
+ <span class="n">datap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Scale first</span>
+ <span class="n">datap</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">datap</span><span class="p">)</span>
+
+ <span class="c1"># Encode</span>
+ <span class="n">encoded</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span> \
+     <span class="n">DataLoader</span><span class="p">(</span><span class="n">datap</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+ <span class="c1"># Include in original dataset</span>
+ <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">encoded</span>
+
+ <span class="c1"># Show</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Encoded:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Visualization</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Libraries</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+ <span class="c1"># Figure with hexbins</span>
+ <span class="n">f3</span><span class="p">,</span> <span class="n">axes3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">,</span>
+     <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Loop</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+     <span class="c1"># Plot hexbin</span>
+     <span class="n">m</span> <span class="o">=</span> <span class="n">axes3</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+         <span class="n">C</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+         <span class="n">cmap</span><span class="o">=</span><span class="n">cmaps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s1">&#39;Reds&#39;</span><span class="p">))</span>
+     <span class="c1"># Configure</span>
+     <span class="n">axes3</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()))</span>
+     <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes3</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+ <span class="c1"># Configure</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+ <span class="c1"># Show</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.107 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-visualization-plot-mpl-outcomes-nmb-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/03ea7f99c25b079bd54f9376aa00ac34/plot_mpl_outcomes_nmb.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_mpl_outcomes_nmb.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/922a0f330b1079d40f177b77b58b58b2/plot_mpl_outcomes_nmb.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_mpl_outcomes_nmb.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_mpl_trajectories.html" class="btn btn-neutral float-right" title="Trajectories" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_mpl_outcomes_bool.html" class="btn btn-neutral float-left" title="Outcomes (boolean)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Oliver Stiff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

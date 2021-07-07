@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>The visualizations &mdash; pkgname 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Utils" href="_utils.html" />
+    <link rel="prev" title="Effect of perplexity on t-SNE results" href="../report_figures/tsne_figures/plot_tsne_perplexity.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pkgname
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Example Galleries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../data_analysis/index.html">Dataset analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tsne/index.html">The manifold TSNE gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../som/index.html">The self-organising map gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autoencoder/index.html">Auto-encoders for dimensionality reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/index.html">Other DR techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../result_analysis/index.html">Result analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html">Dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#autoencoder-experiment-dissertation-figures">Autoencoder experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#som-experiment-dissertation-figures">SOM experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#t-sne-experiment-dissertation-figures">t-SNE experiment dissertation figures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The visualizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_examples_all.html">Kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_examples_hist2d.html">KDE - Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_01.html">Categories (exhaustive)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_02.html">Categories (Damien)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_cmp.html">Kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_outcomes_bool.html">Outcomes (boolean)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_outcomes_nmb.html">Outcomes (numbers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_trajectories.html">Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_sns_categories_01.html">Seaborn (incomplete!)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">The Widgets’ gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pkgname</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>The visualizations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/_examples/visualization/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="the-visualizations">
+<span id="sphx-glr-examples-visualization"></span><h1>The visualizations<a class="headerlink" href="#the-visualizations" title="Permalink to this headline">¶</a></h1>
+<p>Below is a gallery of examples</p>
+<div class="sphx-glr-thumbcontainer" tooltip="Utils"><figure class="align-default" id="id1">
+<img alt="Utils" src="../../_images/sphx_glr__utils_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="_utils.html#sphx-glr-examples-visualization-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Kde"><figure class="align-default" id="id2">
+<img alt="Kde" src="../../_images/sphx_glr_plot_examples_all_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_examples_all.html#sphx-glr-examples-visualization-plot-examples-all-py"><span class="std std-ref">Kde</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This script is useful to explore the regions in which each of the clinical outcomes (e.g. shock..."><figure class="align-default" id="id3">
+<img alt="KDE - Outcomes" src="../../_images/sphx_glr_plot_examples_hist2d_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_examples_hist2d.html#sphx-glr-examples-visualization-plot-examples-hist2d-py"><span class="std std-ref">KDE - Outcomes</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This script is useful to understand the distribution over the 2D projected space of the differe..."><figure class="align-default" id="id4">
+<img alt="Categories (exhaustive)" src="../../_images/sphx_glr_plot_mpl_categories_01_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_mpl_categories_01.html#sphx-glr-examples-visualization-plot-mpl-categories-01-py"><span class="std std-ref">Categories (exhaustive)</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This script is useful to understand the distribution over the 2D projected space of the differe..."><figure class="align-default" id="id5">
+<img alt="Categories (Damien)" src="../../_images/sphx_glr_plot_mpl_categories_02_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_mpl_categories_02.html#sphx-glr-examples-visualization-plot-mpl-categories-02-py"><span class="std std-ref">Categories (Damien)</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Kde"><figure class="align-default" id="id6">
+<img alt="Kde" src="../../_images/sphx_glr_plot_mpl_categories_cmp_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_mpl_categories_cmp.html#sphx-glr-examples-visualization-plot-mpl-categories-cmp-py"><span class="std std-ref">Kde</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This script is useful to understand the distribution over the 2D projected space of the differe..."><figure class="align-default" id="id7">
+<img alt="Outcomes (boolean)" src="../../_images/sphx_glr_plot_mpl_outcomes_bool_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_mpl_outcomes_bool.html#sphx-glr-examples-visualization-plot-mpl-outcomes-bool-py"><span class="std std-ref">Outcomes (boolean)</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This script is useful to understand the distribution over the 2D projected space of the differe..."><figure class="align-default" id="id8">
+<img alt="Outcomes (numbers)" src="../../_images/sphx_glr_plot_mpl_outcomes_nmb_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_mpl_outcomes_nmb.html#sphx-glr-examples-visualization-plot-mpl-outcomes-nmb-py"><span class="std std-ref">Outcomes (numbers)</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Trajectories"><figure class="align-default" id="id9">
+<img alt="Trajectories" src="../../_images/sphx_glr_plot_mpl_trajectories_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_mpl_trajectories.html#sphx-glr-examples-visualization-plot-mpl-trajectories-py"><span class="std std-ref">Trajectories</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Trying to display things with seaborn."><figure class="align-default" id="id10">
+<img alt="Seaborn (incomplete!)" src="../../_images/sphx_glr_plot_sns_categories_01_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plot_sns_categories_01.html#sphx-glr-examples-visualization-plot-sns-categories-01-py"><span class="std std-ref">Seaborn (incomplete!)</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div><p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_utils.html" class="btn btn-neutral float-right" title="Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../report_figures/tsne_figures/plot_tsne_perplexity.html" class="btn btn-neutral float-left" title="Effect of perplexity on t-SNE results" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Oliver Stiff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

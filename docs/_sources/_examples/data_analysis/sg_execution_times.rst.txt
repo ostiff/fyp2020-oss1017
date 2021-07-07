@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:12.681** total execution time for **_examples_data_analysis** files:
+**00:12.593** total execution time for **_examples_data_analysis** files:
 
 +-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_data_analysis_plot_data_summary_dengue_grouped.py` (``plot_data_summary_dengue_grouped.py``) | 00:05.363 | 0.0 MB |
+| :ref:`sphx_glr__examples_data_analysis_plot_data_summary_dengue_grouped.py` (``plot_data_summary_dengue_grouped.py``) | 00:05.308 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_data_analysis_plot_data_summary_dengue_raw.py` (``plot_data_summary_dengue_raw.py``)         | 00:04.853 | 0.0 MB |
+| :ref:`sphx_glr__examples_data_analysis_plot_data_summary_dengue_raw.py` (``plot_data_summary_dengue_raw.py``)         | 00:04.877 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_data_analysis_plot_dengue_correlation.py` (``plot_dengue_correlation.py``)                   | 00:02.465 | 0.0 MB |
+| :ref:`sphx_glr__examples_data_analysis_plot_dengue_correlation.py` (``plot_dengue_correlation.py``)                   | 00:02.408 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------------------+-----------+--------+

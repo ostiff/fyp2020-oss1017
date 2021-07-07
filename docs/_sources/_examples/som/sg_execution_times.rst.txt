@@ -5,20 +5,20 @@
 
 Computation times
 =================
-**06:50.417** total execution time for **_examples_som** files:
+**06:47.042** total execution time for **_examples_som** files:
 
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_dengue_clustering.py` (``plot_som_dengue_clustering.py``) | 02:49.465 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_dengue_clustering.py` (``plot_som_dengue_clustering.py``) | 02:50.149 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_day_labels_06.py` (``plot_som_day_labels_06.py``)         | 02:01.302 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_day_labels_06.py` (``plot_som_day_labels_06.py``)         | 02:02.071 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``)                 | 01:48.406 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_sample_01.py` (``plot_som_sample_01.py``)                 | 01:43.501 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_minisom_utils_03.py` (``plot_som_minisom_utils_03.py``)   | 00:08.381 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_minisom_utils_03.py` (``plot_som_minisom_utils_03.py``)   | 00:08.473 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_single_patient_05.py` (``plot_som_single_patient_05.py``) | 00:01.177 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_labels_04.py` (``plot_som_labels_04.py``)                 | 00:01.143 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_labels_04.py` (``plot_som_labels_04.py``)                 | 00:01.086 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_single_patient_05.py` (``plot_som_single_patient_05.py``) | 00:01.127 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_som_plot_som_sample_02.py` (``plot_som_sample_02.py``)                 | 00:00.599 | 0.0 MB |
+| :ref:`sphx_glr__examples_som_plot_som_sample_02.py` (``plot_som_sample_02.py``)                 | 00:00.578 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------+-----------+--------+

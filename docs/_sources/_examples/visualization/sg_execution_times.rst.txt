@@ -1,0 +1,30 @@
+
+:orphan:
+
+.. _sphx_glr__examples_visualization_sg_execution_times:
+
+Computation times
+=================
+**00:27.816** total execution time for **_examples_visualization** files:
+
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_mpl_trajectories.py` (``plot_mpl_trajectories.py``)     | 00:27.816 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization__utils.py` (``_utils.py``)                                   | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_examples_all.py` (``plot_examples_all.py``)             | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_examples_hist2d.py` (``plot_examples_hist2d.py``)       | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_mpl_categories_01.py` (``plot_mpl_categories_01.py``)   | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_mpl_categories_02.py` (``plot_mpl_categories_02.py``)   | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_mpl_categories_cmp.py` (``plot_mpl_categories_cmp.py``) | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_mpl_outcomes_bool.py` (``plot_mpl_outcomes_bool.py``)   | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_mpl_outcomes_nmb.py` (``plot_mpl_outcomes_nmb.py``)     | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr__examples_visualization_plot_sns_categories_01.py` (``plot_sns_categories_01.py``)   | 00:00.000 | 0.0 MB |
++-----------------------------------------------------------------------------------------------------+-----------+--------+

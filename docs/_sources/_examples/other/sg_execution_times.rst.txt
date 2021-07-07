@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**01:36.974** total execution time for **_examples_other** files:
+**01:36.486** total execution time for **_examples_other** files:
 
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_other_plot_pca_dengue.py` (``plot_pca_dengue.py``) | 01:34.272 | 0.0 MB |
+| :ref:`sphx_glr__examples_other_plot_pca_dengue.py` (``plot_pca_dengue.py``) | 01:33.797 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_other_plot_lda_dengue.py` (``plot_lda_dengue.py``) | 00:02.445 | 0.0 MB |
+| :ref:`sphx_glr__examples_other_plot_lda_dengue.py` (``plot_lda_dengue.py``) | 00:02.406 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_other_plot_pca_vs_lda.py` (``plot_pca_vs_lda.py``) | 00:00.257 | 0.0 MB |
+| :ref:`sphx_glr__examples_other_plot_pca_vs_lda.py` (``plot_pca_vs_lda.py``) | 00:00.283 | 0.0 MB |
 +-----------------------------------------------------------------------------+-----------+--------+

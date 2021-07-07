@@ -1,0 +1,1995 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Kde &mdash; pkgname 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="KDE - Outcomes" href="plot_examples_hist2d.html" />
+    <link rel="prev" title="Utils" href="_utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pkgname
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">Example Galleries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../data_analysis/index.html">Dataset analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tsne/index.html">The manifold TSNE gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../som/index.html">The self-organising map gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autoencoder/index.html">Auto-encoders for dimensionality reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/index.html">Other DR techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../result_analysis/index.html">Result analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html">Dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#autoencoder-experiment-dissertation-figures">Autoencoder experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#som-experiment-dissertation-figures">SOM experiment dissertation figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../report_figures/index.html#t-sne-experiment-dissertation-figures">t-SNE experiment dissertation figures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The visualizations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="_utils.html">Utils</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_examples_hist2d.html">KDE - Outcomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_01.html">Categories (exhaustive)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_02.html">Categories (Damien)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_categories_cmp.html">Kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_outcomes_bool.html">Outcomes (boolean)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_outcomes_nmb.html">Outcomes (numbers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_mpl_trajectories.html">Trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_sns_categories_01.html">Seaborn (incomplete!)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">The Widgets’ gallery</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pkgname</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The visualizations</a> &raquo;</li>
+        
+      <li>Kde</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/_examples/visualization/plot_examples_all.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-visualization-plot-examples-all-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="kde">
+<span id="sphx-glr-examples-visualization-plot-examples-all-py"></span><h1>Kde<a class="headerlink" href="#kde" title="Permalink to this headline">¶</a></h1>
+<ul class="sphx-glr-horizontal">
+<li><img alt="All patients (12862) - sqr, All patients (12862) - hex" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_examples_all_001.png" />
+</li>
+<li><img alt="Overview - hexbin, shock (569), sd_leak (608), sd_bleed (128), sd_organ (1831), gender (7193), severe (569)" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_examples_all_002.png" />
+</li>
+<li><img alt="Overview - kdes, shock (569), sd_leak (608), sd_bleed (128), sd_organ (1831), gender (7193), severe (569), Warning (5868), Mild (6944)" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_examples_all_003.png" />
+</li>
+<li><img alt="Overview - kdes, shock (569), sd_leak (608), sd_bleed (128), sd_organ (1831), gender (7193), severe (569), Warning (5868), Mild (6944)" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_examples_all_004.png" />
+</li>
+<li><img alt="Severe (569), Mild (6944)" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_examples_all_005.png" />
+</li>
+<li><img alt="01nva-003-2008, 01nva-003-2009, 01nva-003-2012, 01nva-003-2024, 01nva-003-2028, 01nva-003-2033, 01nva-003-2108, 01nva-003-2110, 01nva-003-2201, 01nva-003-2202, 01nva-003-2203, 01nva-003-2204, 01nva-003-2205, 01nva-003-2206, 01nva-003-2208, 01nva-003-2209, 01nva-003-2210, 01nva-003-2211, 01nva-003-2212, 01nva-003-2213, 01nva-003-2214, 01nva-003-2216, 01nva-003-2217, 01nva-003-2218, 01nva-003-2219, 01nva-003-2220, 01nva-003-2221, 01nva-003-2222, 01nva-003-2223, 01nva-003-2224, 01nva-003-2225, Severe - 01NVA agg" class="sphx-glr-multi-img" src="../../_images/sphx_glr_plot_examples_all_006.png" />
+</li>
+</ul>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Dtypes:
+Unnamed: 0                Int64
+study_no                 string
+date                     string
+abdominal_pain          boolean
+abdominal_tenderness    boolean
+                         ...
+sd_bleed                boolean
+sd_organ                 object
+warning                 boolean
+severe                  boolean
+mild                    boolean
+Length: 426, dtype: object
+
+Data:
+               dsource   age  weight    plt  haematocrit_percent  body_temperature  gender  shock  sd_leak  sd_bleed sd_organ        date   mild  severe  warning
+study_no
+01nva-003-2008   01nva  16.0    72.0    8.0           54.0               37.075          1   True    False     False    False  2020-07-17  False    True     True
+01nva-003-2009   01nva  17.0    44.0    8.0        47.3333                 37.0          0   True     True     False    False  2020-07-29  False    True     True
+01nva-003-2012   01nva  17.0    48.0    9.0          49.15              37.1875          0   True     True     False    False  2020-08-15  False    True     True
+01nva-003-2024   01nva  16.0   114.0    9.0           49.1              37.1167          1   True     True     False    False  2020-10-09  False    True     True
+01nva-003-2028   01nva  18.0    82.0   18.0        42.9714                37.15          0   True     True     False    False  2020-11-07  False    True     True
+...                ...   ...     ...    ...            ...                  ...        ...    ...      ...       ...      ...         ...    ...     ...      ...
+md-994              md  13.0    53.0  160.0           37.5                 40.0          0  False    False     False    False  2003-07-21   True   False    False
+md-995              md   9.0    27.5  163.0           34.4                 39.0          0  False    False     False    False  2003-07-22   True   False    False
+md-996              md  10.0    33.0   75.0           37.5                 39.9          0  False    False     False    False  2003-07-22  False   False     True
+md-998              md  13.0    44.0   95.0           40.0                 38.5          1  False    False     False    False  2003-07-23  False   False     True
+md-999              md  15.0    49.0  130.0           38.0                 38.5          0  False    False     False    False  2003-07-23  False   False     True
+
+[12862 rows x 15 columns]
+12862
+shock        569
+sd_leak      608
+sd_bleed     128
+sd_organ    1831
+gender      7193
+severe       569
+dtype: object
+
+Model:
+Autoencoder(
+  (encoder): Sequential(
+    (0): Linear(in_features=5, out_features=3, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=3, out_features=2, bias=True)
+    (3): Sigmoid()
+  )
+  (decoder): Sequential(
+    (0): Linear(in_features=2, out_features=3, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=3, out_features=5, bias=True)
+    (3): Sigmoid()
+  )
+)
+
+Encoded:
+[[0.1520529  0.74539393]
+ [0.2646528  0.7333292 ]
+ [0.23637003 0.7385248 ]
+ ...
+ [0.45469382 0.5859988 ]
+ [0.28514162 0.559597  ]
+ [0.19750176 0.50580925]]
+
+Data:
+               dsource   age  weight    plt  haematocrit_percent  body_temperature  gender  shock  sd_leak  sd_bleed sd_organ        date   mild  severe  warning       x       y
+study_no
+01nva-003-2008   01nva  16.0    72.0    8.0           54.0               37.075          1   True    False     False    False  2020-07-17  False    True     True  0.1521  0.7454
+01nva-003-2009   01nva  17.0    44.0    8.0        47.3333                 37.0          0   True     True     False    False  2020-07-29  False    True     True  0.2647  0.7333
+01nva-003-2012   01nva  17.0    48.0    9.0          49.15              37.1875          0   True     True     False    False  2020-08-15  False    True     True  0.2364  0.7385
+01nva-003-2024   01nva  16.0   114.0    9.0           49.1              37.1167          1   True     True     False    False  2020-10-09  False    True     True  0.0784  0.7186
+01nva-003-2028   01nva  18.0    82.0   18.0        42.9714                37.15          0   True     True     False    False  2020-11-07  False    True     True  0.1081  0.6866
+...                ...   ...     ...    ...            ...                  ...        ...    ...      ...       ...      ...         ...    ...     ...      ...     ...     ...
+md-994              md  13.0    53.0  160.0           37.5                 40.0          0  False    False     False    False  2003-07-21   True   False    False  0.1914  0.4540
+md-995              md   9.0    27.5  163.0           34.4                 39.0          0  False    False     False    False  2003-07-22   True   False    False  0.4599  0.4492
+md-996              md  10.0    33.0   75.0           37.5                 39.9          0  False    False     False    False  2003-07-22  False   False     True  0.4547  0.5860
+md-998              md  13.0    44.0   95.0           40.0                 38.5          1  False    False     False    False  2003-07-23  False   False     True  0.2851  0.5596
+md-999              md  15.0    49.0  130.0           38.0                 38.5          0  False    False     False    False  2003-07-23  False   False     True  0.1975  0.5058
+
+[12862 rows x 17 columns]
+         age  weight    plt  haematocrit_percent  body_temperature
+409     16.0    72.0    8.0           54.0                 37.0
+410     16.0    72.0   18.0           42.0                 37.1
+411     16.0    72.0   33.0           39.1                 37.2
+412     16.0    72.0  103.0           39.5                 37.0
+415     17.0    44.0    8.0           36.3                 37.0
+...      ...     ...    ...            ...                  ...
+124836  13.0    53.0  160.0           37.5                 40.0
+124846   9.0    27.5  163.0           34.4                 39.0
+124857  10.0    33.0   75.0           37.5                 39.9
+124877  13.0    44.0   95.0           40.0                 38.5
+124888  15.0    49.0  130.0           38.0                 38.5
+
+[19516 rows x 5 columns]
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+409          409  01nva-003-...  2020-07-14           True           False            &lt;NA&gt;  16.0   &lt;NA&gt;  62.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.1520  0.7533
+410          410  01nva-003-...  2020-07-15           True            &lt;NA&gt;            &lt;NA&gt;  16.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1541  0.6842
+411          411  01nva-003-...  2020-07-16           True            &lt;NA&gt;           False  16.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1507  0.6502
+412          412  01nva-003-...  2020-07-17           True            &lt;NA&gt;            &lt;NA&gt;  16.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1380  0.5618
+415          415  01nva-003-...  2020-07-28           True            True           False  17.0  False  17.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.2679  0.6924
+...          ...            ...         ...            ...             ...             ...   ...    ...   ...            ...  ...            ...           ...      ...       ...       ...      ...     ...    ...     ...     ...
+1289        1289  01nva-003-...  2021-01-14          False            &lt;NA&gt;            &lt;NA&gt;   8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7304  0.6880
+1290        1290  01nva-003-...  2021-01-15          False            &lt;NA&gt;            &lt;NA&gt;   8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7332  0.6654
+1291        1291  01nva-003-...  2021-01-16          False            &lt;NA&gt;            &lt;NA&gt;   8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7291  0.6473
+1292        1292  01nva-003-...  2021-01-17          False            &lt;NA&gt;            &lt;NA&gt;   8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.6697  0.5531
+1296        1296  01nva-003-...  2021-01-19          False           False            &lt;NA&gt;  13.0   &lt;NA&gt;  20.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False   False   True  0.4591  0.7123
+
+[163 rows x 428 columns]
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+409         409  01nva-003-...  2020-07-14           True           False            &lt;NA&gt;  16.0  &lt;NA&gt;  62.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.1520  0.7533
+410         410  01nva-003-...  2020-07-15           True            &lt;NA&gt;            &lt;NA&gt;  16.0  &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1541  0.6842
+411         411  01nva-003-...  2020-07-16           True            &lt;NA&gt;           False  16.0  &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1507  0.6502
+412         412  01nva-003-...  2020-07-17           True            &lt;NA&gt;            &lt;NA&gt;  16.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1380  0.5618
+
+[4 rows x 428 columns]
+409    0
+410    1
+411    2
+412    3
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+415         415  01nva-003-...  2020-07-28           True            True           False  17.0  False  17.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.2679  0.6924
+416         416  01nva-003-...  2020-07-29           True            &lt;NA&gt;            &lt;NA&gt;  17.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2565  0.7357
+
+[2 rows x 428 columns]
+415    0
+416    1
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+435         435  01nva-003-...  2020-08-11           True           False            &lt;NA&gt;  17.0  False  21.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.2394  0.7403
+436         436  01nva-003-...  2020-08-12           True            &lt;NA&gt;            &lt;NA&gt;  17.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2361  0.7458
+437         437  01nva-003-...  2020-08-13           True            &lt;NA&gt;           False  17.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2263  0.7203
+439         439  01nva-003-...  2020-08-15           True            &lt;NA&gt;            &lt;NA&gt;  17.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1813  0.5592
+
+[4 rows x 428 columns]
+435    0
+436    1
+437    2
+439    4
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+536         536  01nva-003-...  2020-10-07           True           False            &lt;NA&gt;  16.0  False  101.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.0774  0.7293
+537         537  01nva-003-...  2020-10-08           True            &lt;NA&gt;           False  16.0   &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.0798  0.7026
+538         538  01nva-003-...  2020-10-09           True            &lt;NA&gt;            &lt;NA&gt;  16.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.0844  0.6265
+
+[3 rows x 428 columns]
+536    0
+537    1
+538    2
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+581         581  01nva-003-...  2020-11-03           True           False           False  18.0  False  62.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.1054  0.7028
+582         582  01nva-003-...  2020-11-04           True            &lt;NA&gt;            &lt;NA&gt;  18.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1073  0.6998
+585         585  01nva-003-...  2020-11-07           True            &lt;NA&gt;            &lt;NA&gt;  18.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1067  0.4257
+
+[3 rows x 428 columns]
+581    0
+582    1
+585    4
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+612         612  01nva-003-...  2021-01-12           True            True           False  17.0  False  189.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.2220  0.7245
+613         613  01nva-003-...  2021-01-13           True            &lt;NA&gt;            &lt;NA&gt;  17.0   &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2206  0.7144
+614         614  01nva-003-...  2021-01-14           True            &lt;NA&gt;            &lt;NA&gt;  17.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2037  0.6508
+
+[3 rows x 428 columns]
+612    0
+613    1
+614    2
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+703         703  01nva-003-...  2020-10-08           True           False           False  17.0  &lt;NA&gt;  114.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.1713  0.7079
+704         704  01nva-003-...  2020-10-09           True            &lt;NA&gt;            &lt;NA&gt;  17.0  &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1688  0.6654
+705         705  01nva-003-...  2020-10-10           True            &lt;NA&gt;            &lt;NA&gt;  17.0  &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1585  0.6475
+706         706  01nva-003-...  2020-10-11           True            &lt;NA&gt;            &lt;NA&gt;  17.0  &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1479  0.5820
+
+[4 rows x 428 columns]
+703    0
+704    1
+705    2
+706    3
+Name: day, dtype: int64
+     Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+719         719  01nva-003-...  2020-11-04           True           False            &lt;NA&gt;  17.0  &lt;NA&gt;  27.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.2287  0.7627
+720         720  01nva-003-...  2020-11-05           True            &lt;NA&gt;           False  17.0  &lt;NA&gt;  58.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2275  0.7677
+721         721  01nva-003-...  2020-11-06           True            &lt;NA&gt;            &lt;NA&gt;  17.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2106  0.6946
+722         722  01nva-003-...  2020-11-07           True            &lt;NA&gt;            &lt;NA&gt;  17.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1829  0.5812
+723         723  01nva-003-...  2020-11-08           True            &lt;NA&gt;            &lt;NA&gt;  17.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1582  0.4849
+
+[5 rows x 428 columns]
+719    0
+720    1
+721    2
+722    3
+723    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1061        1061  01nva-003-...  2020-06-05          False           False            &lt;NA&gt;  9.0  &lt;NA&gt;  57.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.5640  0.6907
+1062        1062  01nva-003-...  2020-06-06          False            &lt;NA&gt;           False  9.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5487  0.6564
+1063        1063  01nva-003-...  2020-06-07          False            &lt;NA&gt;            &lt;NA&gt;  9.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5224  0.5932
+
+[3 rows x 428 columns]
+1061    0
+1062    1
+1063    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1068        1068  01nva-003-...  2020-06-15          False            True           False  13.0  &lt;NA&gt;  267.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.2071  0.6812
+1069        1069  01nva-003-...  2020-06-16          False            &lt;NA&gt;            &lt;NA&gt;  13.0  &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.2073  0.7022
+1070        1070  01nva-003-...  2020-06-17          False            &lt;NA&gt;            &lt;NA&gt;  13.0  &lt;NA&gt;  146.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.2019  0.6532
+1072        1072  01nva-003-...  2020-06-19          False            &lt;NA&gt;            &lt;NA&gt;  13.0  &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.1863  0.5571
+
+[4 rows x 428 columns]
+1068    0
+1069    1
+1070    2
+1072    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1075        1075  01nva-003-...  2020-06-16           True           False            &lt;NA&gt;  10.0  &lt;NA&gt;  51.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.6026  0.6597
+1076        1076  01nva-003-...  2020-06-17           True            &lt;NA&gt;            &lt;NA&gt;  10.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.6426  0.7243
+1077        1077  01nva-003-...  2020-06-18           True            &lt;NA&gt;            &lt;NA&gt;  10.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.6401  0.6647
+1078        1078  01nva-003-...  2020-06-19           True            &lt;NA&gt;            &lt;NA&gt;  10.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.6071  0.6068
+
+[4 rows x 428 columns]
+1075    0
+1076    1
+1077    2
+1078    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1084        1084  01nva-003-...  2020-06-25           True            True            &lt;NA&gt;  13.0  False  60.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.1754  0.6672
+1085        1085  01nva-003-...  2020-06-26           True            &lt;NA&gt;           False  13.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.1773  0.6860
+1086        1086  01nva-003-...  2020-06-27           True            &lt;NA&gt;            &lt;NA&gt;  13.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.2096  0.4232
+
+[3 rows x 428 columns]
+1084    0
+1085    1
+1086    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1090        1090  01nva-003-...  2020-07-01          False           False            &lt;NA&gt;  13.0  False  37.5           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False    False    True  False  0.4622  0.6903
+1091        1091  01nva-003-...  2020-07-02          False            &lt;NA&gt;           False  13.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.4774  0.7166
+1092        1092  01nva-003-...  2020-07-03          False            &lt;NA&gt;            &lt;NA&gt;  13.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.4465  0.6562
+1093        1093  01nva-003-...  2020-07-04          False            &lt;NA&gt;            &lt;NA&gt;  13.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.4137  0.6122
+1094        1094  01nva-003-...  2020-07-05          False            &lt;NA&gt;            &lt;NA&gt;  13.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.3363  0.5241
+
+[5 rows x 428 columns]
+1090    0
+1091    1
+1092    2
+1093    3
+1094    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1097        1097  01nva-003-...  2020-07-08          False           False            &lt;NA&gt;  12.0  False  27.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False    False    True  False  0.3503  0.6081
+1098        1098  01nva-003-...  2020-07-09          False            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.4540  0.7297
+1099        1099  01nva-003-...  2020-07-10          False            &lt;NA&gt;           False  12.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.4517  0.6917
+1100        1100  01nva-003-...  2020-07-11          False            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.3983  0.6086
+
+[4 rows x 428 columns]
+1097    0
+1098    1
+1099    2
+1100    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1115        1115  01nva-003-...  2020-07-21           True           False            &lt;NA&gt;  12.0  False  40.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.3124  0.6388
+1116        1116  01nva-003-...  2020-07-22           True            &lt;NA&gt;           False  12.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.3525  0.6655
+
+[2 rows x 428 columns]
+1115    0
+1116    1
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1121        1121  01nva-003-...  2020-07-31          False            True            &lt;NA&gt;  10.0  &lt;NA&gt;  36.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.6242  0.6530
+1122        1122  01nva-003-...  2020-08-01          False            &lt;NA&gt;           False  10.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.5879  0.6435
+1123        1123  01nva-003-...  2020-08-02          False            &lt;NA&gt;            &lt;NA&gt;  10.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.5353  0.5295
+
+[3 rows x 428 columns]
+1121    0
+1122    1
+1123    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1128        1128  01nva-003-...  2020-08-05          False            True            &lt;NA&gt;  10.0  False  405.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False    False    True  False  0.4592  0.6851
+1129        1129  01nva-003-...  2020-08-06          False            &lt;NA&gt;            &lt;NA&gt;  10.0   &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.4436  0.6457
+
+[2 rows x 428 columns]
+1128    0
+1129    1
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1133        1133  01nva-003-...  2020-08-06           True           False            &lt;NA&gt;  9.0  False   8.5           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.6867  0.7356
+1134        1134  01nva-003-...  2020-08-07           True            &lt;NA&gt;            &lt;NA&gt;  9.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.6931  0.6943
+1135        1135  01nva-003-...  2020-08-08           True            &lt;NA&gt;            &lt;NA&gt;  9.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.6937  0.6809
+1136        1136  01nva-003-...  2020-08-09           True            &lt;NA&gt;            &lt;NA&gt;  9.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.6071  0.5541
+
+[4 rows x 428 columns]
+1133    0
+1134    1
+1135    2
+1136    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1141        1141  01nva-003-...  2020-08-21           True           False           False  11.0  False  39.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.4347  0.6849
+
+[1 rows x 428 columns]
+1141    0
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1147        1147  01nva-003-...  2020-08-22          False           False            &lt;NA&gt;  11.0  False  113.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.3406  0.6660
+1148        1148  01nva-003-...  2020-08-23          False            &lt;NA&gt;           False  11.0   &lt;NA&gt;  129.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.3662  0.6778
+1149        1149  01nva-003-...  2020-08-24          False            &lt;NA&gt;            &lt;NA&gt;  11.0   &lt;NA&gt;  115.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.3417  0.6401
+1150        1150  01nva-003-...  2020-08-25          False            &lt;NA&gt;            &lt;NA&gt;  11.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False    True  False  0.2906  0.5324
+
+[4 rows x 428 columns]
+1147    0
+1148    1
+1149    2
+1150    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1154        1154  01nva-003-...  2020-08-24           True           False           False  12.0  False  19.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True    True  False  0.5074  0.6810
+1155        1155  01nva-003-...  2020-08-25           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5123  0.7092
+1156        1156  01nva-003-...  2020-08-26           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.4973  0.6541
+1157        1157  01nva-003-...  2020-08-27           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.4609  0.6153
+
+[4 rows x 428 columns]
+1154    0
+1155    1
+1156    2
+1157    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1160        1160  01nva-003-...  2020-09-07           True            True            &lt;NA&gt;  14.0  False  12.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True   False  False  0.3222  0.7031
+1161        1161  01nva-003-...  2020-09-08           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3405  0.7258
+1162        1162  01nva-003-...  2020-09-09           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3367  0.6850
+1163        1163  01nva-003-...  2020-09-10           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3308  0.6581
+1164        1164  01nva-003-...  2020-09-11           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.2708  0.5571
+
+[5 rows x 428 columns]
+1160    0
+1161    1
+1162    2
+1163    3
+1164    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1168        1168  01nva-003-...  2020-09-09           True            True            &lt;NA&gt;  14.0  False   82.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True   False  False  0.3325  0.7095
+1169        1169  01nva-003-...  2020-09-10           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3471  0.6991
+1170        1170  01nva-003-...  2020-09-11           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;  117.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3456  0.6801
+1171        1171  01nva-003-...  2020-09-12           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3271  0.6198
+1172        1172  01nva-003-...  2020-09-13           True            &lt;NA&gt;            &lt;NA&gt;  14.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.2791  0.5503
+
+[5 rows x 428 columns]
+1168    0
+1169    1
+1170    2
+1171    3
+1172    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1175        1175  01nva-003-...  2020-09-14           True            True            &lt;NA&gt;  11.0  False  32.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5787  0.7280
+1176        1176  01nva-003-...  2020-09-15           True            &lt;NA&gt;            &lt;NA&gt;  11.0   &lt;NA&gt;  28.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5609  0.6945
+1177        1177  01nva-003-...  2020-09-16           True            &lt;NA&gt;            &lt;NA&gt;  11.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5497  0.6808
+
+[3 rows x 428 columns]
+1175    0
+1176    1
+1177    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1183        1183  01nva-003-...  2020-09-18           True            True            &lt;NA&gt;  12.0  &lt;NA&gt;  135.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4707  0.7127
+1184        1184  01nva-003-...  2020-09-19           True            &lt;NA&gt;            &lt;NA&gt;  12.0  &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4570  0.6888
+1185        1185  01nva-003-...  2020-09-20           True            &lt;NA&gt;            &lt;NA&gt;  12.0  &lt;NA&gt;  333.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4230  0.6383
+
+[3 rows x 428 columns]
+1183    0
+1184    1
+1185    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe  mild       x       y
+1190        1190  01nva-003-...  2020-09-25          False            True            &lt;NA&gt;  15.0  &lt;NA&gt;  109.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False    False   False  True  0.1877  0.7468
+1191        1191  01nva-003-...  2020-09-26          False            &lt;NA&gt;            &lt;NA&gt;  15.0  &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False   False  True  0.1899  0.6826
+1192        1192  01nva-003-...  2020-09-27          False            &lt;NA&gt;            &lt;NA&gt;  15.0  &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False   False  True  0.1703  0.6015
+
+[3 rows x 428 columns]
+1190    0
+1191    1
+1192    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1195        1195  01nva-003-...  2020-09-28           True            True            &lt;NA&gt;  12.0  False  36.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True   False  False  0.4060  0.7199
+1196        1196  01nva-003-...  2020-09-29           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4163  0.6501
+1197        1197  01nva-003-...  2020-09-30           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3769  0.5888
+
+[3 rows x 428 columns]
+1195    0
+1196    1
+1197    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1201        1201  01nva-003-...  2020-10-01           True            True            &lt;NA&gt;  8.0  False  38.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5851  0.6818
+1202        1202  01nva-003-...  2020-10-02           True            &lt;NA&gt;            &lt;NA&gt;  8.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5856  0.7984
+1203        1203  01nva-003-...  2020-10-03           True            &lt;NA&gt;            &lt;NA&gt;  8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5999  0.6591
+1204        1204  01nva-003-...  2020-10-04           True            &lt;NA&gt;            &lt;NA&gt;  8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5951  0.6078
+1205        1205  01nva-003-...  2020-10-05           True            &lt;NA&gt;            &lt;NA&gt;  8.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.5092  0.5002
+
+[5 rows x 428 columns]
+1201    0
+1202    1
+1203    2
+1204    3
+1205    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1208        1208  01nva-003-...  2020-10-07           True            True            &lt;NA&gt;  6.0  False  40.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7882  0.7130
+1209        1209  01nva-003-...  2020-10-08           True            &lt;NA&gt;            &lt;NA&gt;  6.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7872  0.7237
+1210        1210  01nva-003-...  2020-10-09           True            &lt;NA&gt;            &lt;NA&gt;  6.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7923  0.7077
+1212        1212  01nva-003-...  2020-10-11           True            &lt;NA&gt;            &lt;NA&gt;  6.0   &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7526  0.5946
+
+[4 rows x 428 columns]
+1208    0
+1209    1
+1210    2
+1212    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe  mild       x       y
+1216        1216  01nva-003-...  2020-10-08          False            True            &lt;NA&gt;  14.0  &lt;NA&gt;  54.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False   False  True  0.1350  0.6725
+1217        1217  01nva-003-...  2020-10-09          False            &lt;NA&gt;            &lt;NA&gt;  14.0  &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False   False  True  0.1476  0.6594
+1218        1218  01nva-003-...  2020-10-10          False            &lt;NA&gt;            &lt;NA&gt;  14.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0    False   False  True  0.1355  0.6546
+
+[3 rows x 428 columns]
+1216    0
+1217    1
+1218    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1222        1222  01nva-003-...  2020-10-09           True            True            &lt;NA&gt;  11.0  &lt;NA&gt;  110.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.3991  0.6789
+1223        1223  01nva-003-...  2020-10-10           True            &lt;NA&gt;            &lt;NA&gt;  11.0  &lt;NA&gt;   78.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.4237  0.6814
+1224        1224  01nva-003-...  2020-10-11           True            &lt;NA&gt;            &lt;NA&gt;  11.0  &lt;NA&gt;   67.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.4113  0.6593
+1225        1225  01nva-003-...  2020-10-12           True            &lt;NA&gt;            &lt;NA&gt;  11.0  &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.3755  0.5951
+
+[4 rows x 428 columns]
+1222    0
+1223    1
+1224    2
+1225    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1228        1228  01nva-003-...  2020-10-16           True            True            &lt;NA&gt;  12.0  False  51.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.5178  0.6648
+1229        1229  01nva-003-...  2020-10-17           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.5497  0.6880
+1230        1230  01nva-003-...  2020-10-18           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  43.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.5362  0.6545
+
+[3 rows x 428 columns]
+1228    0
+1229    1
+1230    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1233        1233  01nva-003-...  2020-10-22           True            True            &lt;NA&gt;  12.0  False  175.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4012  0.6938
+1234        1234  01nva-003-...  2020-10-23           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4048  0.6901
+1235        1235  01nva-003-...  2020-10-24           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;  121.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4066  0.6833
+1236        1236  01nva-003-...  2020-10-25           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3733  0.6841
+1237        1237  01nva-003-...  2020-10-26           True            &lt;NA&gt;            &lt;NA&gt;  12.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.3319  0.6028
+
+[5 rows x 428 columns]
+1233    0
+1234    1
+1235    2
+1236    3
+1237    4
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1241        1241  01nva-003-...  2020-10-23           True            True            &lt;NA&gt;  8.0  False  149.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.6564  0.7000
+1242        1242  01nva-003-...  2020-10-24           True            &lt;NA&gt;            &lt;NA&gt;  8.0   &lt;NA&gt;   79.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.6581  0.7222
+1243        1243  01nva-003-...  2020-10-25           True            &lt;NA&gt;            &lt;NA&gt;  8.0   &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True    True  False  0.6549  0.6832
+
+[3 rows x 428 columns]
+1241    0
+1242    1
+1243    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1250        1250  01nva-003-...  2020-11-02           True            True            &lt;NA&gt;  11.0  &lt;NA&gt;  51.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4939  0.6815
+1251        1251  01nva-003-...  2020-11-03           True            &lt;NA&gt;            &lt;NA&gt;  11.0  &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4833  0.6647
+1252        1252  01nva-003-...  2020-11-04           True            &lt;NA&gt;            &lt;NA&gt;  11.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4694  0.6740
+
+[3 rows x 428 columns]
+1250    0
+1251    1
+1252    2
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age   aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1255        1255  01nva-003-...  2020-11-23           True            True            &lt;NA&gt;  10.0  False  78.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4417  0.6545
+1256        1256  01nva-003-...  2020-11-24           True            &lt;NA&gt;            &lt;NA&gt;  10.0   &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4960  0.6822
+
+[2 rows x 428 columns]
+1255    0
+1256    1
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1262        1262  01nva-003-...  2020-12-02           True            True            &lt;NA&gt;  9.0  &lt;NA&gt;  69.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True   False  False  0.5155  0.6582
+1263        1263  01nva-003-...  2020-12-03           True            &lt;NA&gt;           False  9.0  &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.5467  0.6913
+1264        1264  01nva-003-...  2020-12-04           True            &lt;NA&gt;            &lt;NA&gt;  9.0  &lt;NA&gt;  72.0          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.5307  0.6468
+1265        1265  01nva-003-...  2020-12-05           True            &lt;NA&gt;            &lt;NA&gt;  9.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.4539  0.5277
+
+[4 rows x 428 columns]
+1262    0
+1263    1
+1264    2
+1265    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age  aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1269        1269  01nva-003-...  2020-12-16          False           False           False  9.0  &lt;NA&gt;   47.5           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False     False     True    True  False  0.6159  0.6661
+1270        1270  01nva-003-...  2020-12-17          False            &lt;NA&gt;            &lt;NA&gt;  9.0  &lt;NA&gt;   93.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.6617  0.7312
+1271        1271  01nva-003-...  2020-12-18          False            &lt;NA&gt;            &lt;NA&gt;  9.0  &lt;NA&gt;  155.0          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.6436  0.6654
+1272        1272  01nva-003-...  2020-12-19          False            &lt;NA&gt;            &lt;NA&gt;  9.0  &lt;NA&gt;   &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;     True     False         0     True    True  False  0.5704  0.5876
+
+[4 rows x 428 columns]
+1269    0
+1270    1
+1271    2
+1272    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age   aids    alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1274        1274  01nva-003-...  2020-12-29           True            True            &lt;NA&gt;  6.0  False  250.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True   False  False  0.7616  0.7211
+1275        1275  01nva-003-...  2020-12-30           True            &lt;NA&gt;           False  6.0   &lt;NA&gt;   &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7671  0.7080
+
+[2 rows x 428 columns]
+1274    0
+1275    1
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess   age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1281        1281  01nva-003-...  2021-01-05           True            True            &lt;NA&gt;  13.0  &lt;NA&gt;  36.5           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False     False     True   False  False  0.2597  0.7295
+1282        1282  01nva-003-...  2021-01-06           True            &lt;NA&gt;           False  13.0  &lt;NA&gt;  &lt;NA&gt;           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.2449  0.7032
+1283        1283  01nva-003-...  2021-01-07           True            &lt;NA&gt;            &lt;NA&gt;  13.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.2531  0.6807
+1284        1284  01nva-003-...  2021-01-08           True            &lt;NA&gt;            &lt;NA&gt;  13.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.2193  0.5474
+
+[4 rows x 428 columns]
+1281    0
+1282    1
+1283    2
+1284    3
+Name: day, dtype: int64
+      Unnamed: 0       study_no        date  abdominal_pain  abdominal_tenderness  abscess  age  aids   alt  antibiotic_iv  ...  medication_regular  rur_urb  sd_leak  sd_bleed  sd_organ  warning  severe   mild       x       y
+1287        1287  01nva-003-...  2021-01-12          False           False            &lt;NA&gt;  8.0  &lt;NA&gt;  35.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7055  0.6756
+1288        1288  01nva-003-...  2021-01-13          False            &lt;NA&gt;           False  8.0  &lt;NA&gt;  41.0           &lt;NA&gt;  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7277  0.7213
+1289        1289  01nva-003-...  2021-01-14          False            &lt;NA&gt;            &lt;NA&gt;  8.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7304  0.6880
+1290        1290  01nva-003-...  2021-01-15          False            &lt;NA&gt;            &lt;NA&gt;  8.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7332  0.6654
+1291        1291  01nva-003-...  2021-01-16          False            &lt;NA&gt;            &lt;NA&gt;  8.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.7291  0.6473
+1292        1292  01nva-003-...  2021-01-17          False            &lt;NA&gt;            &lt;NA&gt;  8.0  &lt;NA&gt;  &lt;NA&gt;          False  ...           &lt;NA&gt;          &lt;NA&gt;    False     False         0     True   False  False  0.6697  0.5531
+
+[6 rows x 428 columns]
+1287    0
+1288    1
+1289    2
+1290    3
+1291    4
+1292    5
+Name: day, dtype: int64
+
+&quot;\nfrom sklearn.neighbors import KernelDensity\nX = data[[&#39;x&#39;, &#39;y&#39;]]\nkde = KernelDensity(kernel=&#39;gaussian&#39;, bandwidth=0.2).fit(X)\nscores = kde.score_samples(X)\n\nprint(scores)\n&quot;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># Library</span>
+ <span class="kn">import</span> <span class="nn">pickle</span>
+ <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+ <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+ <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+
+ <span class="c1"># Specific</span>
+ <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+ <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+ <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KDTree</span>
+ <span class="kn">from</span> <span class="nn">tableone</span> <span class="kn">import</span> <span class="n">TableOne</span>
+
+ <span class="c1"># Specific</span>
+ <span class="kn">from</span> <span class="nn">pkgname.core.AE.autoencoder</span> <span class="kn">import</span> <span class="n">get_device</span><span class="p">,</span> <span class="n">set_seed</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.data_loader</span> <span class="kn">import</span> <span class="n">load_dengue</span><span class="p">,</span> <span class="n">IQR_rule</span>
+ <span class="kn">from</span> <span class="nn">pkgname.utils.plot_utils</span> <span class="kn">import</span>  <span class="n">format_table_bootstrap</span>
+ <span class="kn">from</span> <span class="nn">definitions</span> <span class="kn">import</span> <span class="n">ROOT_DIR</span>
+
+ <span class="c1"># ----------------------------</span>
+ <span class="c1"># set basic configuration</span>
+ <span class="c1"># ----------------------------</span>
+ <span class="c1"># Matplotlib options</span>
+ <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+ <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+ <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+ <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+ <span class="c1"># Set pandas configuration.</span>
+ <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+ <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+ <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.precision&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Constants</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;plt&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;haematocrit_percent&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;body_temperature&quot;</span>
+ <span class="p">]</span>
+
+ <span class="n">outcomes</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s2">&quot;shock&quot;</span><span class="p">,</span>
+     <span class="c1">#&quot;ascites&quot;,</span>
+     <span class="c1">#&quot;overload&quot;,</span>
+     <span class="c1">#&quot;oedema_pulmonary&quot;,</span>
+     <span class="c1">#&quot;respiratory_distress&quot;,</span>
+     <span class="c1">#&quot;ventilation&quot;,</span>
+     <span class="c1">#&quot;diuretics&quot;,</span>
+     <span class="c1">#&quot;bleeding_gi&quot;,</span>
+     <span class="c1">#&quot;bleeding_urine&quot;,</span>
+     <span class="c1">#&quot;bleeding_severe&quot;,</span>
+     <span class="c1">#&quot;bleeding_mucosal&quot;,</span>
+     <span class="c1">#&quot;bleeding_skin&quot;,</span>
+     <span class="c1">#&quot;vomiting&quot;, # is this vomiting blood?</span>
+     <span class="c1">#&quot;abdominal_pain&quot;,</span>
+     <span class="c1">#&quot;cns_abnormal&quot;,</span>
+     <span class="s2">&quot;sd_leak&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;sd_bleed&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;sd_organ&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;gender&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;severe&quot;</span><span class="p">]</span>
+
+ <span class="n">others</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s1">&#39;study_no&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;dsource&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;date&#39;</span>
+ <span class="p">]</span>
+
+ <span class="n">mappings</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s1">&#39;Female&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+         <span class="s1">&#39;Male&#39;</span><span class="p">:</span> <span class="mi">1</span>
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="n">aggregation</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="s1">&#39;dsource&#39;</span><span class="p">:</span> <span class="s1">&#39;last&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;plt&#39;</span><span class="p">:</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;haematocrit_percent&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;body_temperature&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;shock&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;sd_leak&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;sd_bleed&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;sd_organ&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;last&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;mild&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;severe&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;warning&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span>
+     <span class="c1">#&#39;bleeding_gi&#39;: &#39;max&#39;,</span>
+     <span class="c1">#&#39;bleeding_urine&#39;: &#39;max&#39;,</span>
+     <span class="c1">#&#39;vomiting&#39;: &#39;max&#39;,</span>
+     <span class="c1">#&#39;abdominal_pain&#39;: &#39;max&#39;,</span>
+     <span class="c1">#&#39;bleeding_mucosal&#39;: &#39;max&#39;,</span>
+     <span class="c1">#&#39;bleeding_skin&#39;: &#39;max&#39;</span>
+ <span class="p">}</span>
+
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load data</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load data</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;resources/datasets/combined_tidy_v0.0.10.csv&#39;</span><span class="p">)</span>
+
+ <span class="c1"># Select columns</span>
+ <span class="c1">#data = data[features + outcomes + others]</span>
+
+ <span class="c1"># Create features</span>
+ <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sd_leak&#39;</span><span class="p">]</span> <span class="o">=</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">ascites</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">overload</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">oedema_pulmonary</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">respiratory_distress</span>
+
+ <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sd_bleed&#39;</span><span class="p">]</span> <span class="o">=</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">bleeding_gi</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">bleeding_urine</span>
+
+ <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sd_organ&#39;</span><span class="p">]</span> <span class="o">=</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">cns_abnormal</span>
+
+ <span class="n">data</span><span class="p">[</span><span class="s1">&#39;warning&#39;</span><span class="p">]</span><span class="o">=</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">abdominal_pain</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">vomiting</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">ascites</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">pleural_effusion</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">bleeding_mucosal</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">restlessness</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">lethargy</span>
+     <span class="c1">#data.agitated | \</span>
+
+ <span class="n">data</span><span class="p">[</span><span class="s1">&#39;severe&#39;</span><span class="p">]</span> <span class="o">=</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">sd_bleeding</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">sd_leakage</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">sd_organ_impairment</span> <span class="o">|</span> \
+     <span class="n">data</span><span class="o">.</span><span class="n">shock</span>
+
+ <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mild&#39;</span><span class="p">]</span> <span class="o">=</span> \
+     <span class="o">~</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">severe</span> <span class="o">|</span> <span class="n">data</span><span class="o">.</span><span class="n">warning</span><span class="p">)</span>
+
+
+ <span class="c1"># Filter data (age, iqr, ...)</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">)]</span>
+ <span class="c1">#data = data.fillna(&#39;ffill&#39;) # no need if keeping max/min</span>
+ <span class="c1">#data = data.fillna(&#39;bfill&#39;) # no need if keeping max/min</span>
+
+ <span class="c1"># Filter outliers</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">IQR_rule</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span>
+     <span class="s1">&#39;plt&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;haematocrit_percent&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;body_temperature&#39;</span>
+ <span class="p">])</span>
+
+ <span class="c1"># Fill empty values</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span>
+     <span class="s1">&#39;sd_leak&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s1">&#39;sd_bleed&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s1">&#39;sd_organ&#39;</span><span class="p">:</span> <span class="mi">0</span>
+ <span class="p">})</span>
+
+ <span class="c1"># Convert dtypes</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">convert_dtypes</span><span class="p">()</span>
+
+ <span class="c1"># Rename</span>
+ <span class="c1"># .. note: Done after convert_dtypes so that</span>
+ <span class="c1">#          it remains 0 or 1, otherwise it will</span>
+ <span class="c1">#          be transformed to boolean feature.</span>
+ <span class="c1">#          (its ok too).</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">mappings</span><span class="p">)</span>
+
+ <span class="n">data_full</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Drop nan</span>
+ <span class="c1">#data = data.dropna(how=&#39;any&#39;,</span>
+ <span class="c1">#   subset=features + outcomes)</span>
+
+ <span class="c1"># Show dtypes</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dtypes:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+
+ <span class="c1"># Get worst state for patient</span>
+ <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;study_no&quot;</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
+     <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">aggregation</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+ <span class="c1"># Show data</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">outcomes</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load Model</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Load model</span>
+ <span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;resources/models/ae_sig_3&#39;</span>
+ <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+ <span class="c1"># Show</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Projections</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># .. note: The scaling method should have also been</span>
+ <span class="c1">#          saved when training the model.</span>
+ <span class="c1"># Features</span>
+ <span class="n">datap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Scale first</span>
+ <span class="n">datap</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">datap</span><span class="p">)</span>
+
+ <span class="c1"># Encode</span>
+ <span class="n">encoded</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span> \
+     <span class="n">DataLoader</span><span class="p">(</span><span class="n">datap</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+ <span class="c1"># Show</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Encoded:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+
+ <span class="c1"># Include in original dataset</span>
+ <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">encoded</span>
+
+ <span class="c1"># Show</span>
+ <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data:&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Visualization</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Libraries</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+ <span class="c1"># Specific</span>
+ <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gaussian_kde</span>
+
+
+ <span class="k">def</span> <span class="nf">kde_mpl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+     <span class="sd">&quot;&quot;&quot;Plot gaussian kde matplotlib</span>
+
+<span class="sd">     Parameters</span>
+<span class="sd">     ----------</span>
+<span class="sd">     x, y: arrays</span>
+<span class="sd">         Numpy arrays with the 2D values.</span>
+
+<span class="sd">     Returns</span>
+<span class="sd">     -------</span>
+
+<span class="sd">     &quot;&quot;&quot;</span>
+     <span class="k">try</span><span class="p">:</span>
+         <span class="c1"># Plot density</span>
+         <span class="n">kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
+
+         <span class="c1"># Parameters</span>
+         <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+         <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+         <span class="c1"># evaluate on a regular grid</span>
+         <span class="n">xgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+         <span class="n">ygrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+         <span class="n">Xgrid</span><span class="p">,</span> <span class="n">Ygrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid</span><span class="p">)</span>
+         <span class="n">zgrid</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
+             <span class="n">Xgrid</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
+             <span class="n">Ygrid</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+         <span class="p">]))</span>
+         <span class="n">Zgrid</span> <span class="o">=</span> <span class="n">zgrid</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Xgrid</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+         <span class="c1"># Plot the result as an image</span>
+         <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Zgrid</span><span class="p">,</span>
+             <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+             <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">],</span>
+             <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+
+         <span class="c1"># Plot contour</span>
+         <span class="k">if</span> <span class="n">contour</span><span class="p">:</span>
+             <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid</span><span class="p">,</span> <span class="n">Zgrid</span><span class="p">,</span>
+                 <span class="n">levels</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+             <span class="n">cntr</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">ygrid</span><span class="p">,</span> <span class="n">Zgrid</span><span class="p">,</span>
+                 <span class="n">levels</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+             <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cntr</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+             <span class="c1">#cb.set_label(&#39;density&#39;)</span>
+
+         <span class="k">return</span> <span class="n">ax</span>
+     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception! </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+         <span class="k">return</span> <span class="n">ax</span>
+
+
+ <span class="c1"># Plot individual</span>
+ <span class="n">INDIVIDUAL</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+ <span class="c1"># ---------------------</span>
+ <span class="c1"># Show all points in 2D</span>
+ <span class="c1"># ---------------------</span>
+ <span class="c1"># Create figure</span>
+ <span class="n">f1</span><span class="p">,</span> <span class="n">axes1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+     <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Show 2D histogram and hexbin</span>
+ <span class="n">f11</span> <span class="o">=</span> <span class="n">axes1</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+     <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+ <span class="n">f12</span> <span class="o">=</span> <span class="n">axes1</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+     <span class="n">gridsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+
+ <span class="c1"># Titles</span>
+ <span class="n">axes1</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;All patients (</span><span class="si">%s</span><span class="s1">) - sqr&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="n">axes1</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;All patients (</span><span class="si">%s</span><span class="s1">) - hex&#39;</span> <span class="o">%</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+ <span class="c1"># Configuration</span>
+ <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes1</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+     <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+     <span class="c1">#cb = plt.colorbar(f, cax=ax)</span>
+     <span class="c1">#ax.yaxis.tick_right()</span>
+     <span class="c1">#ax.yaxis.set_tick_params(labelright=False)</span>
+     <span class="c1">#cb.set_label(&#39;counts in bin (sqr)&#39;)</span>
+
+
+ <span class="c1"># --------------------------------</span>
+ <span class="c1"># Show interesting outcomes (hist)</span>
+ <span class="c1"># --------------------------------</span>
+ <span class="c1"># Figure with hexbins</span>
+ <span class="n">f3</span><span class="p">,</span> <span class="n">axes3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+     <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Loop</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+     <span class="c1"># Select dataset</span>
+     <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="c1"># Plot hexbin</span>
+     <span class="n">axes3</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+         <span class="n">gridsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+     <span class="c1"># Configure</span>
+     <span class="n">axes3</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+     <span class="k">if</span> <span class="n">INDIVIDUAL</span><span class="p">:</span>
+         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+         <span class="n">plt</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">)</span>
+         <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+         <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;counts in bin (hex)&#39;</span><span class="p">)</span>
+         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">c</span><span class="p">)</span>
+
+ <span class="c1"># Configure</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Overview - hexbin&#39;</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">w_pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h_pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+ <span class="c1"># --------------------------------</span>
+ <span class="c1"># Show interesting outcomes (KDE)</span>
+ <span class="c1"># --------------------------------</span>
+ <span class="c1"># Figure with kdes</span>
+ <span class="n">f4</span><span class="p">,</span> <span class="n">axes4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+     <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Loop</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+     <span class="c1"># Select dataset</span>
+     <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="c1"># Plot kde</span>
+     <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes4</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">contour</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+     <span class="c1"># Configure</span>
+     <span class="n">axes4</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="c1"># Plot rest</span>
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">mild</span><span class="p">]</span>
+ <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes4</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+ <span class="n">axes4</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="c1"># Plot warning</span>
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">warning</span><span class="p">]</span>
+ <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes4</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Oranges&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+ <span class="n">axes4</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Warning&#39;</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="c1"># Configure</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Overview - kdes&#39;</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">w_pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h_pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+
+ <span class="c1"># ------------------------------------</span>
+ <span class="c1"># Show interesting outcomes (contours)</span>
+ <span class="c1"># ------------------------------------</span>
+ <span class="c1"># Figure with kdes</span>
+ <span class="n">f5</span><span class="p">,</span> <span class="n">axes5</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+     <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Loop</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outcomes</span><span class="p">):</span>
+     <span class="c1"># Select dataset</span>
+     <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+     <span class="c1"># Plot kde</span>
+     <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes5</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+         <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+     <span class="c1"># Configure</span>
+     <span class="n">axes5</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="c1"># Plot rest</span>
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">mild</span><span class="p">]</span>
+ <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes5</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="n">axes5</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="c1"># Plot warning</span>
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">warning</span><span class="p">]</span>
+ <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes5</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Oranges&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="n">axes5</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Warning&#39;</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+
+ <span class="c1"># Configure</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Overview - kdes&#39;</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">w_pad</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h_pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+ <span class="k">def</span> <span class="nf">to_studyno</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+     <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;01nva-003-</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+
+ <span class="n">developed</span> <span class="o">=</span> <span class="n">to_studyno</span><span class="p">([</span><span class="mi">2162</span><span class="p">])</span>
+ <span class="n">nonsevere</span> <span class="o">=</span> <span class="n">to_studyno</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2151</span><span class="p">,</span> <span class="mi">2196</span><span class="p">)))</span>
+ <span class="n">severe</span> <span class="o">=</span> <span class="n">to_studyno</span><span class="p">(</span>\
+     <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2101</span><span class="p">,</span> <span class="mi">2112</span><span class="p">))</span> <span class="o">+</span> \
+     <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2201</span><span class="p">,</span> <span class="mi">2236</span><span class="p">))</span> <span class="o">+</span> \
+     <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="mi">2034</span><span class="p">)))</span>
+
+
+ <span class="n">groups</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">dsource</span> <span class="o">==</span> <span class="s1">&#39;01nva&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="c1">#groups = groups.reset_index()</span>
+ <span class="n">groups</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+ <span class="n">groups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">developed</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;developed&#39;</span>
+ <span class="n">groups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nonsevere</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nonsevere&#39;</span>
+ <span class="n">groups</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">severe</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;severe&#39;</span>
+
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># Projections</span>
+ <span class="c1"># ------------------------------</span>
+ <span class="c1"># .. note: The scaling method should have also been</span>
+ <span class="c1">#          saved when training the model.</span>
+ <span class="c1"># Features</span>
+ <span class="n">dataf</span> <span class="o">=</span> <span class="n">data_full</span> \
+     <span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+     <span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+ <span class="n">datap</span> <span class="o">=</span> <span class="n">dataf</span><span class="p">[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">datap</span><span class="p">)</span>
+
+ <span class="c1"># Scale first</span>
+ <span class="n">datap</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">datap</span><span class="p">)</span>
+
+ <span class="c1"># Encode</span>
+ <span class="n">encoded</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_inputs</span><span class="p">(</span> \
+     <span class="n">DataLoader</span><span class="p">(</span><span class="n">datap</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+ <span class="c1"># Include in original dataset</span>
+ <span class="n">dataf</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">encoded</span>
+
+ <span class="n">data_aux</span> <span class="o">=</span> <span class="n">dataf</span><span class="p">[</span><span class="n">dataf</span><span class="o">.</span><span class="n">dsource</span> <span class="o">==</span> <span class="s1">&#39;01nva&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">data_aux</span><span class="p">)</span>
+
+ <span class="c1"># ------------------------------------</span>
+ <span class="c1"># Show interesting outcomes (contours)</span>
+ <span class="c1"># ------------------------------------</span>
+ <span class="c1"># Figure with kdes</span>
+ <span class="n">f6</span><span class="p">,</span> <span class="n">axes6</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+     <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Plot rest</span>
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">severe</span><span class="p">]</span>
+ <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Severe&#39;</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="n">sev</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># Plot rest</span>
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">mild</span><span class="p">]</span>
+ <span class="n">kde_mpl</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+     <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span> <span class="n">aux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+ <span class="n">mild</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+ <span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">groups</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">groups</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+ <span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_aux</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data_aux</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+ <span class="n">aux</span> <span class="o">=</span> <span class="n">data_aux</span><span class="p">[</span><span class="n">data_aux</span><span class="o">.</span><span class="n">study_no</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">severe</span><span class="p">)]</span>
+
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="n">aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">):</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+     <span class="n">g</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">date</span><span class="p">)</span>
+     <span class="n">g</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">date</span> <span class="o">-</span> <span class="n">g</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+     <span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">day</span><span class="p">):</span>
+         <span class="n">axes6</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+
+ <span class="c1"># -------------------------------------</span>
+ <span class="c1"># Individual trajectories</span>
+ <span class="c1"># -------------------------------------</span>
+ <span class="c1"># Create figure</span>
+ <span class="n">f7</span><span class="p">,</span> <span class="n">axes7</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+     <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+ <span class="c1"># For each patient</span>
+ <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">g</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;study_no&#39;</span><span class="p">)):</span>
+     <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">31</span><span class="p">:</span>
+         <span class="k">continue</span>
+     <span class="c1"># Compute days</span>
+     <span class="n">g</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">date</span><span class="p">)</span>
+     <span class="n">g</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">date</span> <span class="o">-</span> <span class="n">g</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+     <span class="c1"># Plot contours</span>
+     <span class="n">kde_mpl</span><span class="p">(</span><span class="n">sev</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">sev</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes7</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">c</span><span class="p">],</span>
+         <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">contour</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+     <span class="c1"># Plot markers</span>
+     <span class="n">axes7</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+     <span class="n">axes7</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+     <span class="c1"># Plot numbers</span>
+     <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">day</span><span class="p">):</span>
+         <span class="n">axes7</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+
+ <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+ <span class="c1">#p = data_aux[data_aux.study_no.isin([&#39;01nva-003-2028&#39;])]</span>
+ <span class="c1">#print(p)</span>
+ <span class="c1">#axes6.flat[2].scatter(p.x, p.y, s=2, c=&#39;k&#39;)</span>
+ <span class="c1">#axes6.flat[2].plot(p.x, p.y, c=&#39;k&#39;,</span>
+ <span class="c1">#    marker=&#39;o&#39;, markersize=2, linewidth=0.5)</span>
+
+ <span class="c1">#for i, v in enumerate([1,2,3,4]):</span>
+ <span class="c1">#    axes6.flat[2].text(i, v+0.25, &quot;%d&quot; %v, ha=&quot;center&quot;)</span>
+ <span class="c1">#for v,(i,j) in enumerate(zip(p.x, p.y)):</span>
+ <span class="c1">#    axes6.flat[2].annotate(str(v), xy=(i,j))</span>
+
+
+
+ <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Severe - 01NVA agg&quot;</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+ <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> from sklearn.neighbors import KernelDensity</span>
+<span class="sd"> X = data[[&#39;x&#39;, &#39;y&#39;]]</span>
+<span class="sd"> kde = KernelDensity(kernel=&#39;gaussian&#39;, bandwidth=0.2).fit(X)</span>
+<span class="sd"> scores = kde.score_samples(X)</span>
+
+<span class="sd"> print(scores)</span>
+<span class="sd"> &quot;&quot;&quot;</span>
+ <span class="c1"># Show</span>
+ <span class="c1">#plt.show()</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  29.427 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-visualization-plot-examples-all-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/8372d5f78dcb5d19550f6ccbf7413130/plot_examples_all.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_examples_all.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/fd24f1f7969c6a8bac1c138e426c0165/plot_examples_all.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_examples_all.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_examples_hist2d.html" class="btn btn-neutral float-right" title="KDE - Outcomes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_utils.html" class="btn btn-neutral float-left" title="Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Oliver Stiff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

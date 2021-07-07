@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:31.057** total execution time for **_examples_report_figures_tsne_figures** files:
+**00:30.953** total execution time for **_examples_report_figures_tsne_figures** files:
 
 +-------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_report_figures_tsne_figures_plot_tsne_clusters.py` (``plot_tsne_clusters.py``)     | 00:28.602 | 0.0 MB |
+| :ref:`sphx_glr__examples_report_figures_tsne_figures_plot_tsne_clusters.py` (``plot_tsne_clusters.py``)     | 00:28.555 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr__examples_report_figures_tsne_figures_plot_tsne_perplexity.py` (``plot_tsne_perplexity.py``) | 00:02.455 | 0.0 MB |
+| :ref:`sphx_glr__examples_report_figures_tsne_figures_plot_tsne_perplexity.py` (``plot_tsne_perplexity.py``) | 00:02.398 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------------+-----------+--------+

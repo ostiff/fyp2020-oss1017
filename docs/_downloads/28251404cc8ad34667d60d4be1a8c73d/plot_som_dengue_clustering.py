@@ -11,7 +11,9 @@ Attributes used in cluster comparison: `bleeding`, `shock`, `bleeding_gum`,
 `abdominal_pain`, `ascites`, `bleeding_mucosal`, `bleeding_skin`.
 
 """
-
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
 import warnings
 import pandas as pd
 import numpy as np
