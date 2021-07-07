@@ -90,7 +90,8 @@ sphinx_gallery_conf = {
                       '../../examples/data_analysis',
                       '../../examples/result_analysis',
                       '../../examples/other',
-                      '../../examples/report_figures'],
+                      '../../examples/report_figures',
+                      '../../examples/visualization'],
     # path to where to save gallery generated output
     'gallery_dirs': ['../source/_examples/tsne',
                      '../source/_examples/widgets',
@@ -99,7 +100,8 @@ sphinx_gallery_conf = {
                      '../source/_examples/data_analysis',
                      '../source/_examples/result_analysis',
                      '../source/_examples/other',
-                     '../source/_examples/report_figures'],
+                     '../source/_examples/report_figures',
+                     '../source/_examples/visualization'],
     # Other
     'line_numbers': True,
     'download_all_examples': False,
