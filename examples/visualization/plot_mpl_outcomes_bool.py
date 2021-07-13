@@ -84,7 +84,8 @@ outcomes = [
     "lethargy",
     "alt>1000",
     "ast>1000",
-    "liver>2"
+    "liver>2",
+    "pcr_dengue_load"
 ]
 
 # Ensure all outcomes are in aggregation
@@ -100,6 +101,11 @@ nrows, ncols = 5, 8
 # ------------------------------
 # Load data
 data = _utils.load_data()
+
+#
+print(data.convert_dtypes().select_dtypes(include=['bool']).sum(axis=0).sort_values())
+
+data.convert_dtypes().select_dtypes(include=['bool']).sum(axis=0).sort_values().to_csv('aux.csv')
 
 # Conditions
 data['ast>1000'] = data.ast.fillna(0) >= 1000
@@ -168,6 +174,11 @@ data['mild'] = ~(data.severe | data.warning)
 #          boolean features, usually containing
 #          1 when an unusual event happens. Thus
 #          filling with 0 (e.g. shock).
+#
+# .. note: What if the information was not
+#          collected in the whole study? We are
+#          only plotting kde for True (1) value
+#          so no problem for zeros.
 # Fill empty values
 for c in outcomes:
     data[c] = data[c].fillna(0)
@@ -175,13 +186,15 @@ for c in outcomes:
 # Filter data (age, iqr, ...)
 data = data[data.age.between(0.0, 18.0)]
 data = data[data.plt < 50000] # extreme outlier
+#data = data[data.ast < 1500]  # extreme outlier
 
 # Filter outliers
 data = IQR_rule(data, [
     'plt',
-    #'haematocrit_percent',
-    #'body_temperature'
 ])
+
+# Needs all features for projection
+data = data.dropna(how='any', subset=features)
 
 # Rename
 # .. note: Done after convert_dtypes so that
@@ -201,7 +214,13 @@ print("\nData:")
 print(data)
 print(data.dtypes)
 print(data.index.nunique())
-print(data[outcomes].sum().sort_values())
+print(data[outcomes].sum() \
+    .sort_values(ascending=False))
+
+print("\nCount:")
+print(data.convert_dtypes() \
+    .select_dtypes('bool').sum() \
+    .sort_values(ascending=False).to_string())
 
 
 # ------------------------------
@@ -251,80 +270,143 @@ from _utils import kde_mpl_compute
 from _utils import kde_mpl
 
 ####################################################
-# Display using hexbin
-# --------------------
-
-# --------------------------------
-# Show interesting outcomes (hex)
-# --------------------------------
-# Figure with hexbins
-f3, axes3 = plt.subplots(nrows, ncols,
-    figsize=(15, 8), sharex=True, sharey=True)
-
-# Loop
-for i, c in enumerate(outcomes):
-    # Select dataset
-    aux = data[data[c] == 1]
-    # Plot hexbin
-    axes3.flat[i].hexbin(aux.x, aux.y, label=c,
-        gridsize=30, cmap=cmaps.get(c, 'Reds'))
-    # Configure
-    axes3.flat[i].set(aspect='equal',
-        title='%s (%s)' % (c, aux.shape[0]))
-
-# Configure
-plt.tight_layout()
-
-####################################################
-# Display using KDE
-# -----------------
-
-# --------------------------------
-# Show interesting outcomes (KDE)
-# --------------------------------
-# Figure with kdes
-f4, axes4 = plt.subplots(nrows, ncols,
-    figsize=(15, 8), sharex=True, sharey=True)
-
-# Loop
-for i, c in enumerate(outcomes):
-    # Select dataset
-    aux = data[data[c] == 1]
-    # Plot kde
-    kde_mpl(aux.x, aux.y, ax=axes4.flat[i],
-        contour=False, cmap=cmaps.get(c, 'Reds'),
-        xlim=(data.x.min(), data.x.max()),
-        ylim=(data.y.min(), data.y.max()))
-    # Configure
-    axes4.flat[i].set(aspect='equal',
-        title='%s (%s)' % (c, aux.shape[0]))
-
-# Configure
-plt.tight_layout()
+# Display configuration
+# ---------------------
 
 ####################################################
 # Display using contours
 # ----------------------
+# Define rows and columns
+nrows, ncols = 3, 5
+
+# Titles
+titles = {
+    'cns_abnormal': 'CNS Abnormal',
+    'pcr_dengue_load': 'PCR Dengue Load'
+}
+
 
 # ------------------------------------
 # Show interesting outcomes (contours)
 # ------------------------------------
-# Figure with kdes
-f5, axes5 = plt.subplots(nrows, ncols,
-    figsize=(15, 8), sharex=True, sharey=True)
+# For each outcome
+for i, o in enumerate(outcomes):
 
-# Loop
-for i, c in enumerate(outcomes):
+    # Compute idx
+    idx = i % (nrows*ncols)
+
+    # Create figure
+    if (idx == 0):
+        # Adjust axes
+        if i>0:
+            plt.tight_layout()
+        # Create figure
+        f, axes = plt.subplots(nrows, ncols,
+             figsize=(ncols * 3.15, nrows * 2.5),
+             sharex=True, sharey=True)
+
     # Select dataset
-    aux = data[data[c] == 1]
+    aux = data[data[o] == 1]
     # Plot kde
-    kde_mpl(aux.x, aux.y, ax=axes5.flat[i],
-        contour=True, cmap=cmaps.get(c, 'Reds'),
+    kde_mpl(aux.x, aux.y, ax=axes.flat[idx],
+        contour=True, cmap=cmaps.get(o, 'Reds'),
         xlim=(data.x.min(), data.x.max()),
         ylim=(data.y.min(), data.y.max()))
     # Configure
-    axes5.flat[i].set(aspect='equal',
-        title='%s (%s)' % (c, aux.shape[0]))
+    axes.flat[idx].set(aspect='equal',
+        xlim=(data.x.min(), data.x.max()),
+        ylim=(data.y.min(), data.y.max()),
+        title='%s (%s)' % (titles.get(o, o) \
+            .replace('_', ' ').title(),
+            aux[o].shape[0]))
+
+# Configure
+plt.tight_layout()
+
+
+####################################################
+# Display using hexbins
+# ----------------------
+
+# -----------------------------------
+# Show interesting outcomes (hexbins)
+# -----------------------------------
+# For each outcome
+for i, o in enumerate(outcomes):
+
+    # Compute idx
+    idx = i % (nrows*ncols)
+
+    # Create figure
+    if (idx == 0):
+        # Adjust axes
+        if i>0:
+            plt.tight_layout()
+        # Create figure
+        f, axes = plt.subplots(nrows, ncols,
+             figsize=(ncols * 3.15, nrows * 2.5),
+             sharex=True, sharey=True)
+
+    # Select dataset
+    aux = data[data[o] == 1]
+    # Plot hexbin
+    m = axes.flat[idx].hexbin(aux.x, aux.y,
+        label=o, gridsize=30, marginals=False,
+        cmap=cmaps.get(o, 'Reds'))
+    # Configure
+    axes.flat[idx].set(aspect='equal',
+        xlim=(data.x.min(), data.x.max()),
+        ylim=(data.y.min(), data.y.max()),
+        title='%s (%s)' % (titles.get(o, o) \
+            .replace('_', ' ').title(),
+            aux[o].shape[0]))
+    # Colorbar
+    plt.colorbar(m, ax=axes.flat[idx])
+
+# Configure
+plt.tight_layout()
+
+
+
+####################################################
+# Display using hexbins
+# ----------------------
+
+# -----------------------------------
+# Show interesting outcomes (hexbins)
+# -----------------------------------
+# For each outcome
+for i, o in enumerate(outcomes):
+
+    # Compute idx
+    idx = i % (nrows*ncols)
+
+    # Create figure
+    if (idx == 0):
+        # Adjust axes
+        if i>0:
+            plt.tight_layout()
+        # Create figure
+        f, axes = plt.subplots(nrows, ncols,
+             figsize=(ncols * 3.15, nrows * 2.5),
+             sharex=True, sharey=True)
+
+    # Select dataset
+    aux = data[data[o] == 1]
+    # Plot kde
+    kde_mpl(aux.x, aux.y, ax=axes.flat[idx],
+            contour=False, cmap=cmaps.get(o, 'Reds'),
+            xlim=(data.x.min(), data.x.max()),
+            ylim=(data.y.min(), data.y.max()))
+    # Configure
+    axes.flat[idx].set(aspect='equal',
+        xlim=(data.x.min(), data.x.max()),
+        ylim=(data.y.min(), data.y.max()),
+        title='%s (%s)' % (titles.get(o, o) \
+            .replace('_', ' ').title(),
+            aux[o].sum()))
+    # Colorbar
+    plt.colorbar(m, ax=axes.flat[idx])
 
 # Configure
 plt.tight_layout()

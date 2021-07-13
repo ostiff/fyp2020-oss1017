@@ -82,6 +82,14 @@ def_model = 'resources/models/ae_sig_3'
 # ------------------------------
 # Methods
 # ------------------------------
+def latexify():
+    """Resize text"""
+    # Latexify
+    mpl.rc('font', size=10)
+    mpl.rc('legend', fontsize=6)
+    mpl.rc('xtick', labelsize=10)
+    mpl.rc('ytick', labelsize=10)
+
 def load_data(path=def_data):
     """Load dataset"""
     return pd.read_csv(path,
@@ -160,7 +168,7 @@ def kde_mpl_plot(xgrid, ygrid, Zgrid, cmap='Reds',
     -------
     """
     # Plot the result as an image
-    ax.imshow(Zgrid.T,
+    ax.imshow(Zgrid, #.T,
               origin='lower', aspect='auto',
               extent=[min(xgrid),
                       max(xgrid),

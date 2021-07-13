@@ -1,6 +1,11 @@
 """
 Trajectories
 ============
+
+This script is useful to understand how the latent space
+can be used to visualise the progression (trajectories)
+of patients over time.
+
 """
 
 # Library
@@ -286,8 +291,9 @@ scaler = MinMaxScaler().fit(data_f[features])
 
 # Convert dtypes
 data = data.convert_dtypes()
+
 # Select all 01nva data and clean
-data = raw[raw.dsource == '01nva'] \
+data = raw[raw.dsource.isin(['01nva', '06dx'])] \
     .copy(deep=True) \
     .dropna(how='any', subset=features) \
     .sort_values(by=['study_no',
@@ -326,10 +332,15 @@ xgrid, ygrid, Zgrid = kde_mpl_compute(aux.x, aux.y,
 print("\nPatients:")
 print(data.study_no.nunique())
 
+##############################################
+# Plot specific patients
+# ----------------------
+
 # -------------------------
 # Plot interesting patients
 # -------------------------
 # Lets define the patients
+
 patients = [
     1105,
     2012, # 2 shocks
@@ -349,10 +360,19 @@ patients = [
     2209, # 2 shocks
 ]
 
+p1 = ['01nva-003-%s' % n for n in patients]
+p2 = ['06dx-06dxa249']
+
+patients = p1 + p2
+
+print(sorted(data[data.dsource=='06dx'].study_no.unique()))
+
 # Plot graph for each patient
 for p in patients:
     # Get data
-    aux = data[data.study_no.str.endswith(str(p))]
+    #aux = data[data.study_no.str.endswith(str(p))]
+
+    aux = data[data.study_no.str.lower().str.contains(p)]
 
     if aux.shape[0] == 0:
         continue
@@ -392,9 +412,20 @@ for p in patients:
     #print(aux[features + others + ['shock', 'event_shock']])
 
 
+plt.show()
+
+import sys
+sys.exit()
+####################################################
+# Plot all trajectories
+# ---------------------
+
 # -------------------------
 # Plot ALL patients
 # -------------------------
+# Define rows and columns
+nrows, ncols = 3, 5
+
 # Filter more than length n
 v = data.study_no.value_counts()
 aux = data[data.study_no.isin(v.index[v.gt(0)])]
@@ -402,24 +433,31 @@ aux = data[data.study_no.isin(v.index[v.gt(0)])]
 # Create groups
 groups = aux.groupby('study_no')
 
+# Define rows and columns
+nrows, ncols = 3, 5
+
 # For each patient
-for c, (n,g) in enumerate(groups):
+for i, (n,g) in enumerate(groups):
 
-    if c % 15 == 0:
-        # Tight previous figure
-        plt.tight_layout()
+    # Compute idx
+    idx = i % (nrows*ncols)
+
+    # Create figure
+    if (idx == 0):
+        # Adjust axes
+        if i > 0:
+            plt.tight_layout()
         # Create figure
-        f2, axes2 = plt.subplots(3, 5,
-            figsize=(15, 9), sharex=True, sharey=True)
+        f, axes = plt.subplots(nrows, ncols,
+            figsize=(ncols * 3.15, nrows * 2.5),
+            sharex=True, sharey=True)
 
-    #if c > len(axes2.flat) - 1:
-    #    break
     # Get axes
-    ax = axes2.flat[c % 15]
+    ax = axes.flat[idx]
 
     # Plot KDE (data aggregated)
     kde_mpl_plot(xgrid, ygrid, Zgrid, ax=ax,
-            contour=True, cbar=False, cmap='Reds')
+        contour=True, cbar=True, cmap='Reds')
 
     # Plot line and markers
     ax.plot(g.x, g.y, c='k', label=n,
@@ -437,15 +475,13 @@ for c, (n,g) in enumerate(groups):
             s=10, linewidth=0.5, zorder=10)
 
     # Plot numbers
-    for i,j,v in zip(g.x, g.y, g.day_from_admission):
-        ax.annotate(str(int(v)), xy=(i+0.05, j))
-    # Show legend
-    #ax.legend(loc="lower right")
+    for k,j,v in zip(g.x, g.y, g.day_from_admission):
+        ax.annotate(str(int(v)), xy=(k+0.05, j))
     # Hide the right and top spines
     ax.spines.right.set_visible(False)
     ax.spines.top.set_visible(False)
-
-
+    # Show legend
+    #ax.legend(loc="lower right")
 
 # Configure
 plt.tight_layout()
